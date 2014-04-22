@@ -1,0 +1,22 @@
+create table model(
+model_id serial,
+name varchar(50),
+
+primary key(model_id)
+);
+
+
+create table report(
+report_id serial unique,
+model_id serial,
+report_date date,
+client varchar(50),
+address varchar(50),
+contactNo varchar(50),
+term varchar(50),
+remarks varchar(250),
+
+primary key(report_id, model_id),
+foreign key(model_id) references model(model_id)
+);
+

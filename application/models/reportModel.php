@@ -1,0 +1,67 @@
+<?php
+
+
+class ReportModel extends CI_Model {
+
+    var $report_date = '';
+    var $client = '';
+    var $address = '';
+    var $contactno = '';
+    var $term = '';
+    var $remarks = '';
+
+    function __construct()
+    {
+        // Call the Model constructor
+        parent::__construct();
+    }
+    
+    function get_last_ten_entries()
+    {
+        $query = $this->db->get('report', 100);
+        return $query->result();
+    }
+    function get($report_id){
+        echo $report_id;
+        $sql = "SELECT * FROM report WHERE report_id = ?";
+
+        $query =$this->db->query($sql, array($report_id)); 
+       
+         echo $this->db->last_query();
+        return $query->result();
+    }
+
+    function insert_entry()
+    {
+        $this->report_date = $_POST['report_date']; // please read the below note
+        $this->client = $_POST['client'];
+        $this->address = $_POST['address'];
+        $this->contactno = $_POST['contactno'];
+        $this->model = $_POST['model'];
+        $this->term = $_POST['term'];
+        $this->remarks = $_POST['remarks'];
+        
+        $this->db->insert('report', $this);
+    }
+
+    function update_entry()
+    {
+        $this->report_date = $_POST['report_date']; // please read the below note
+        $this->client = $_POST['client'];
+        $this->address = $_POST['address'];
+        $this->contactno = $_POST['contactno'];
+        $this->model = $_POST['model'];
+        $this->term = $_POST['term'];
+        $this->remarks = $_POST['remarks'];
+
+        $this->db->update('report', $this, array('report_id' => $_POST['report_id']));
+    }
+    function delete_entry($report_id)
+    {
+         
+
+        $this->db->delete('report', array('report_id' => $report_id));
+    }
+
+}
+?>
