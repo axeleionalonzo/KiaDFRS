@@ -40,7 +40,7 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         $this->ReportModel->update_entry();
                 
-                $reports=$this->ReportModel->get_last_ten_entries();
+        $reports=$this->ReportModel->get_last_ten_entries();
         $this->load->view('report/reportlist',array('reports'=>$reports));
                            
     }

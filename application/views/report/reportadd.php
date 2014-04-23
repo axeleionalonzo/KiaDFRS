@@ -4,7 +4,7 @@
 </head>
 <body>
     <h1>Report add</h1><a href="/KiaDFRS/index.php">list</a>
-   	<form name="add"   method="POST" action="insert">
+<form name="add"   method="POST" action="insert">
 <table border="1">
 
 <tr>
@@ -21,8 +21,8 @@
 <td><input type="text" name="contactno"/></td>
 <tr>
 <th>model</th>
-<td><select id="model_id" name="model_id">
-	<option value="model_id"></option>
+<td><select id="model" name="model">
+	<option value="model">4</option>
 	</select>
 	</td>
 <tr>
