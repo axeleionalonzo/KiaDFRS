@@ -9,7 +9,10 @@
 
 <tr>
 <th>report_date</th>
-<td><input type="text" name="report_date"/></td>
+<?php
+$date = date('Y-m-d');
+?>
+<td><input type="text" value="<?php echo $date;?>" name="report_date"/></td>
 <tr>
 <th>client</th>
 <td><input type="text" name="client"/></td>
