@@ -21,13 +21,17 @@ class ReportModel extends CI_Model {
         $query = $this->db->get('report', 100);
         return $query->result();
     }
-    function get($report_id){
-        echo $report_id;
-        $sql = "SELECT * FROM report WHERE report_id = ?";
 
+    function get($report_id){
+        $sql = "SELECT * FROM report WHERE report_id = ?";
         $query =$this->db->query($sql, array($report_id)); 
        
-         echo $this->db->last_query();
+        return $query->result();
+    }
+
+    
+    function getModel(){
+        $query = $this->db->get('model');
         return $query->result();
     }
 
@@ -37,7 +41,7 @@ class ReportModel extends CI_Model {
         $this->client = $_POST['client'];
         $this->address = $_POST['address'];
         $this->contactno = $_POST['contactno'];
-        $this->model = $_POST['model'];
+        $this->model_name = $_POST['model_name'];
         $this->term = $_POST['term'];
         $this->remarks = $_POST['remarks'];
         
@@ -50,7 +54,7 @@ class ReportModel extends CI_Model {
         $this->client = $_POST['client'];
         $this->address = $_POST['address'];
         $this->contactno = $_POST['contactno'];
-        $this->model = $_POST['model'];
+        $this->model_name = $_POST['model_name'];
         $this->term = $_POST['term'];
         $this->remarks = $_POST['remarks'];
 

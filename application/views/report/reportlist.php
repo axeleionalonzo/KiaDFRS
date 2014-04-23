@@ -12,14 +12,13 @@
 <th>client</th>
 <th>address</th>
 <th>contactno</th>
-<th>model_id</th>
+<th>model_name</th>
 <th>term </th>
 <th>remarks </th>
 <th>edit </th>
 <th>delete </th>
 </tr>
 <?php
-//print_r($reports);
 for($i=0; $i<count($reports);$i++) {
 ?>
 <tr>
@@ -27,7 +26,7 @@ for($i=0; $i<count($reports);$i++) {
 <td><?php echo $reports[$i]->client;?></td>
 <td><?php echo $reports[$i]->address;?></td>
 <td><?php echo $reports[$i]->contactno;?></td>
-<td><?php echo $reports[$i]->model_id;?></td>
+<td><?php echo $reports[$i]->model_name;?></td>
 <td><?php echo $reports[$i]->term;?></td>
 <td><?php echo $reports[$i]->remarks;?></td>
 <td><a href="/KiaDFRS/index.php/report/edit/<?php echo $reports[$i]->report_id;?>">edit</a></td>

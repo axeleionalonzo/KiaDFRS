@@ -12,15 +12,16 @@ class Report extends CI_Controller {
     {
         $this->load->database();
         $this->load->model('ReportModel');
-        $reports=$this->ReportModel->get_last_ten_entries();
-        $this->load->view('report/reportadd',array('reports'=>$reports));
+        $models=$this->ReportModel->getModel();
+        $this->load->view('report/reportadd',array('models'=>$models));
     }
     public function edit($report_id)
     {
-                $this->load->database();
-                $this->load->model('ReportModel');
-                $report=$this->ReportModel->get($report_id);
-        $this->load->view('report/reportedit',array('report'=>$report));
+        $this->load->database();
+        $this->load->model('ReportModel');
+        $report=$this->ReportModel->get($report_id);
+        $models=$this->ReportModel->getModel();
+        $this->load->view('report/reportedit',array('models'=>$models,'report'=>$report));
     }
     public function insert()
     {
@@ -29,7 +30,7 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         $this->ReportModel->insert_entry();
                 
-                $reports=$this->ReportModel->get_last_ten_entries();
+        $reports=$this->ReportModel->get_last_ten_entries();
         $this->load->view('report/reportlist',array('reports'=>$reports));
                            
     }

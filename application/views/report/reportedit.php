@@ -21,7 +21,16 @@
 <td><input type="text" name="contactno" value="<?php echo $report[0]->contactno;?>"/></td>
 <tr>
 <th>model</th>
-<td><select id="model_id" name="model" value="<?php echo $report[0]->model_id;?>"/></td>
+<td>
+<select name="model_name">
+<option value="<?php echo $report[0]->model_name;?>"><?php echo $report[0]->model_name;?></option>
+<?php
+for($i=0; $i<count($models);$i++) {
+?>
+<option value="<?php echo $models[$i]->name;?>"><?php echo $models[$i]->name;?></option>
+<?php }?>
+</select>
+</td>
 <tr>
 <th>term</th>
 <td><input type="text" name="term" value="<?php echo $report[0]->term;?>"/></td>

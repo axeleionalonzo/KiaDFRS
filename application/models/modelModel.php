@@ -16,13 +16,11 @@ class ModelModel extends CI_Model {
         $query = $this->db->get('model', 100);
         return $query->result();
     }
+    
     function get($model_id){
-        echo $model_id;
         $sql = "SELECT * FROM model WHERE model_id = ?";
-
         $query =$this->db->query($sql, array($model_id)); 
-       
-         echo $this->db->last_query();
+
         return $query->result();
     }
 

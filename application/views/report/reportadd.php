@@ -21,10 +21,16 @@
 <td><input type="text" name="contactno"/></td>
 <tr>
 <th>model</th>
-<td><select id="model" name="model">
-	<option value="model">4</option>
-	</select>
-	</td>
+<td>
+<select name="model_name">
+<option value=""></option>
+<?php
+for($i=0; $i<count($models);$i++) {
+?>
+<option value="<?php echo $models[$i]->name;?>"><?php echo $models[$i]->name;?></option>
+<?php }?>
+</select>
+</td>
 <tr>
 <th>term</th>
 <td><input type="text" name="term"/></td>
@@ -40,3 +46,4 @@
 </table> 
 </body>
 </html>
+

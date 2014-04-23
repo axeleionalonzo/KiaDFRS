@@ -1,9 +1,9 @@
 <html>
 <head>
-<title>report add</title>
+<title>model add</title>
 </head>
 <body>
-    <h1>Report add</h1><a href="/KiaDFRS/index.php/model">list</a>
+    <h1>Model add</h1><a href="/KiaDFRS/index.php/model">list</a>
    	<form name="add"   method="POST" action="insert">
 <table border="1">
 
