@@ -24,7 +24,11 @@ class ReportModel extends CI_Model {
 
     function search($report)
     {
-        return $this->db->query("SELECT * FROM report WHERE client LIKE '%$report%';");
+        $sql = "SELECT * FROM report WHERE client LIKE ('%$report%') ";
+        echo $report;
+        $query =$this->db->query($sql, array($report)); 
+       
+        return $query->result();
     }
 
     function get($report_id){

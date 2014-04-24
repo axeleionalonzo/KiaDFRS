@@ -7,9 +7,10 @@ class Report extends CI_Controller {
         $this->load->database();
         $this->load->model('ReportModel');
         if (isset($_POST['report']))
-            $reports=$this->ReportModel->search(strtolower($_POST['report']));
+            $reports=$this->ReportModel->search($_POST['report']); 
         else
-        $reports=$this->ReportModel->get_last_ten_entries();
+            $reports=$this->ReportModel->get_last_ten_entries();
+        
         $models=$this->ReportModel->getModel();
         $this->load->view('report/reportlist',array('reports'=>$reports,'models'=>$models));
     }
@@ -39,18 +40,16 @@ class Report extends CI_Controller {
         $this->load->view('report/reportlist',array('reports'=>$reports));
                            
     }
-        public function update()
+    public function update()
     {
 
         $this->load->database();
         $this->load->model('ReportModel');
         $this->ReportModel->update_entry();
-                
-        $reports=$this->ReportModel->get_last_ten_entries();
-        $this->load->view('report/reportlist',array('reports'=>$reports));
-                           
+
+        $this->index();                  
     }
-          public function delete($report_id)
+    public function delete($report_id)
     {
 
         $this->load->database();
