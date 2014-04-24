@@ -2,11 +2,16 @@
 class Report extends CI_Controller {
 
     public function index()
-    {
+    {   
+
         $this->load->database();
         $this->load->model('ReportModel');
+        if (isset($_POST['report']))
+            $reports=$this->ReportModel->search(strtolower($_POST['report']));
+        else
         $reports=$this->ReportModel->get_last_ten_entries();
-        $this->load->view('report/reportlist',array('reports'=>$reports));
+        $models=$this->ReportModel->getModel();
+        $this->load->view('report/reportlist',array('reports'=>$reports,'models'=>$models));
     }
     public function add()
     {
