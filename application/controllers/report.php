@@ -12,14 +12,16 @@ class Report extends CI_Controller {
             $reports=$this->ReportModel->get_last_ten_entries();
         
         $models=$this->ReportModel->getModel();
-        $this->load->view('report/reportlist',array('reports'=>$reports,'models'=>$models));
+        $terms=$this->ReportModel->getTerm();
+        $this->load->view('report/reportlist',array('reports'=>$reports,'terms'=>$terms,'models'=>$models));
     }
     public function add()
     {
         $this->load->database();
         $this->load->model('ReportModel');
         $models=$this->ReportModel->getModel();
-        $this->load->view('report/reportadd',array('models'=>$models));
+        $terms=$this->ReportModel->getTerm();
+        $this->load->view('report/reportadd',array('models'=>$models,'terms'=>$terms));
     }
     public function edit($report_id)
     {
@@ -27,7 +29,17 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         $report=$this->ReportModel->get($report_id);
         $models=$this->ReportModel->getModel();
-        $this->load->view('report/reportedit',array('models'=>$models,'report'=>$report));
+        $terms=$this->ReportModel->getTerm();
+        $this->load->view('report/reportedit',array('models'=>$models,'terms'=>$terms,'report'=>$report));
+    }
+    public function view($report_id)
+    {
+        $this->load->database();
+        $this->load->model('ReportModel');
+        $report=$this->ReportModel->get($report_id);
+        $models=$this->ReportModel->getModel();
+        $reports=$this->ReportModel->get_last_ten_entries();
+        $this->load->view('report/reportview',array('models'=>$models,'report'=>$report));
     }
     public function insert()
     {
@@ -37,7 +49,9 @@ class Report extends CI_Controller {
         $this->ReportModel->insert_entry();
                 
         $reports=$this->ReportModel->get_last_ten_entries();
-        $this->load->view('report/reportlist',array('reports'=>$reports));
+        $models=$this->ReportModel->getModel();
+        $terms=$this->ReportModel->getTerm();
+        $this->load->view('report/reportlist',array('models'=>$models,'terms'=>$terms,'reports'=>$reports));
                            
     }
     public function update()
@@ -47,6 +61,8 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         $this->ReportModel->update_entry();
 
+        $terms=$this->ReportModel->getTerm();
+
         $this->index();                  
     }
     public function delete($report_id)
@@ -55,9 +71,10 @@ class Report extends CI_Controller {
         $this->load->database();
         $this->load->model('ReportModel');
         $this->ReportModel->delete_entry($report_id);
-                
-                $reports=$this->ReportModel->get_last_ten_entries();
-        $this->load->view('report/reportlist',array('reports'=>$reports));
+        $models=$this->ReportModel->getModel();
+        $reports=$this->ReportModel->get_last_ten_entries();
+
+        $this->load->view('report/reportlist',array('models'=>$models,'reports'=>$reports));
                            
     }
 }

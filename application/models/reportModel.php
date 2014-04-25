@@ -44,6 +44,11 @@ class ReportModel extends CI_Model {
         return $query->result();
     }
 
+    function getTerm(){
+        $query = $this->db->get('term');
+        return $query->result();
+    }
+
     function insert_entry()
     {
         $this->report_date = $_POST['report_date']; // please read the below note
@@ -51,6 +56,7 @@ class ReportModel extends CI_Model {
         $this->address = $_POST['address'];
         $this->contactno = $_POST['contactno'];
         $this->model_name = $_POST['model_name'];
+        $this->sales_consultant = $_POST['sales_consultant'];
         $this->term = $_POST['term'];
         $this->remarks = $_POST['remarks'];
         

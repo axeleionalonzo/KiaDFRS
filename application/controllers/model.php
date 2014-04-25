@@ -27,10 +27,13 @@ class Model extends CI_Controller {
 
         $this->load->database();
         $this->load->model('ModelModel');
+        $this->load->model('ReportModel');
         $this->ModelModel->insert_entry();
-                
+
+        
+        $reports=$this->ReportModel->get_last_ten_entries();        
         $models=$this->ModelModel->get_last_ten_entries();
-        $this->load->view('model/modellist',array('models'=>$models));
+        $this->load->view('report/reportlist',array('reports'=>$reports,'models'=>$models));
                            
     }
         public function update()
