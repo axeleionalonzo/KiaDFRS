@@ -4,7 +4,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Full Report</h4>
                   </div>
-          <form name="add" class="form-horizontal" method="POST" action="/KiaDFRS/index.php/report/update">
+          <form name="add" class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/report/update">
             <input type="hidden" name="report_id" value="<?php echo $report[0]->report_id?>">
               <fieldset>
                 <legend></legend>
@@ -66,8 +66,8 @@
               </fieldset>
 
               <div class="modal-footer">
-                <a href="/KiaDFRS/index.php/report/delete/<?php echo $report[0]->report_id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-                <a href="/KiaDFRS/index.php/report/edit/<?php echo $report[0]->report_id;?>" data-toggle="modal" data-target="#myModaledit" type="button" class="btn btn-primary">Edit Report</a>
+                <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $report[0]->report_id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
+                <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $report[0]->report_id;?>" data-toggle="modal" data-target="#myModaledit" type="button" class="btn btn-primary">Edit Report</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                 </form>

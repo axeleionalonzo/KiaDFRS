@@ -58,7 +58,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="http://localhost/KiaDFRS/index.php" class="navbar-brand">K I A</a>
+          <a href="<?php echo base_url();?>index.php" class="navbar-brand">K I A</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -82,10 +82,10 @@
                     <li><a href="#"><small><?php echo $models[$i]->name;?></small></a></li>
                     <?php }?>
                 <li class="divider"></li>
-                <li><a href="/KiaDFRS/index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
+                <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
               </ul>
             </li>
-            <li><form action="http://localhost/KiaDFRS/index.php" method="post" class="navbar-form navbar-left" role="search">
+            <li><form action="<?php echo base_url();?>" method="post" class="navbar-form navbar-left" role="search">
               <div class="form-group">
                   <input type="text" name="report" class="form-control" placeholder="Client Name">
               </div>
@@ -150,7 +150,7 @@
                     <td><?php echo $reports[$i]->model_name;?></td>
                     <td><?php echo $reports[$i]->term;?></td>
                     <td><?php echo $reports[$i]->remarks;?></td>
-                    <td><a href="/KiaDFRS/index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="modal" data-target="#myModalView">View Full Report</a></td>
+                    <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="modal" data-target="#myModalView">View Full Report</a></td>
                     </tr>
                     <?php }?>
                 </tbody>
@@ -168,7 +168,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               <h4 class="modal-title" id="myModalLabel">Make a Report</h4>
             </div>
-            <form name="add" class="form-horizontal" method="POST" action="report/insert">
+            <form name="add" class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/report/insert">
               <fieldset>
                 <legend></legend>
                 <div class="form-group">
@@ -198,7 +198,8 @@
                 <div class="form-group">
                   <label for="address" class="col-lg-2 control-label">Address</label>
                   <div class="col-lg-10">
-                    <a href="#" data-toggle="modal" data-target="#myModalViewMap"><input name="address" type="text" class="form-control" id="address" placeholder="Click here to view Map" value=""></a>
+                    <a href="#" data-toggle="modal" data-target="#myModalViewMap">
+                    <input name="address" type="text" class="form-control" id="address" placeholder="Click here to view Map" value="asd"></a>
                   </div>
                 </div>
                  <div class="form-group">
