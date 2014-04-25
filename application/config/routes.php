@@ -33,7 +33,7 @@
 |
 |	$route['404_override'] = 'errors/page_missing';
 |
-| This route will tell the Router what URI segments to use if those provided
+| This route will tell the Router what URI segments to use sif those provided
 | in the URL cannot be matched to a valid route.
 |
 */

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Report List</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <!--<link rel="stylesheet" href="./assets/css/bootswatch.min.css">-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -26,6 +26,7 @@
      })();
 
     </script>
+
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -236,7 +237,7 @@
 
 
  
-    <script src="<?php echo base_url();?>js/sjquery-1.10.2.min.js"></script>
+    <script src="<?php echo base_url();?>js/jquery-1.10.2.min.js"></script>
     <script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootswatch.js"></script>
 
