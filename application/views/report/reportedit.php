@@ -27,7 +27,9 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="address" class="col-lg-2 control-label">Address</label>
+                  <label for="address" class="col-lg-2 control-label">
+                    <a href="#" type="button" class="nav nav-pills" onclick="toggleFullScreen()" data-toggle="modal" data-target="#myModalViewMap">Address</a>
+                  </label>
                   <div class="col-lg-10">
                   	<input name="address" type="text" class="form-control" id="address" value="<?php echo $report[0]->address;?>">
                   </div>

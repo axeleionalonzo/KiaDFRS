@@ -27,20 +27,34 @@
      })();
 
     </script>
-<style>
+    <style>
       #map_canvas {
         width: 100%;
         height: 400px;
       }
     </style>
+    <script type="text/javascript">
+    function toggleFullScreen() {
+      if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+          if (document.documentElement.requestFullScreen) {  
+          document.documentElement.requestFullScreen();  
+            } else if (document.documentElement.mozRequestFullScreen) {  
+            document.documentElement.mozRequestFullScreen();  
+            } else if (document.documentElement.webkitRequestFullScreen) {  
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+        }  
+      }
+    } 
+    </script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
 
       function initialize() {
         var map_canvas = document.getElementById('map_canvas');
         var map_options = {
-          center: new google.maps.LatLng(44.5403, -78.5463),
-          zoom: 8,
+          center: new google.maps.LatLng(8.1336, 124.1430),
+          zoom: 10,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         var map = new google.maps.Map(map_canvas, map_options)
@@ -82,7 +96,7 @@
             </li>
             <li><form action="<?php echo base_url();?>" method="post" class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                  <input type="text" name="report" class="form-control" placeholder="Client Name">
+                  <input type="text" name="report" class="form-control" placeholder="Keyword Here">
               </div>
               <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Search</button>
           </form></li>
@@ -101,7 +115,18 @@
       <!-- Navbar
       ================================================== -->
 
+      <?php
+      $orderBy = array('type', 'description', 'recorded_date', 'added_date');
 
+      $order = 'type';
+      if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
+          $order = $_GET['orderBy'];
+      }
+
+      $query = 'SELECT * FROM report ORDER BY '.$order;
+
+      // retrieve and show the data :)
+      ?>
 
       <!-- Tables
       ================================================== -->
@@ -117,7 +142,7 @@
               <table class="table table-striped table-hover ">
                 <thead>
                   <tr>
-                    <th>Report Date</th>
+                    <th><a href="<?php echo base_url();?>?orderBy=recorded_date">Report Date</a></th>
                     <th>Client</th>
                     <th>Address</th>
                     <th>Contact #</th>
@@ -185,7 +210,7 @@
                 </div>
                 <div class="form-group">
                   <label for="address" class="col-lg-2 control-label">
-                  <a href="#" type="button" class="nav nav-pills" data-toggle="modal" data-target="#myModalViewMap">Address</a>
+                  <a href="#" type="button" class="nav nav-pills" onclick="toggleFullScreen()" data-toggle="modal" data-target="#myModalViewMap">Address</a>
                   </label>
                   <div class="col-lg-10">
                     <input name="address" type="text" class="form-control" id="address" placeholder="Click Address to view Map" value="">
@@ -255,14 +280,19 @@
           <div class="modal fade" id="myModalViewMap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-
-             <div id="map_canvas"></div>
-                <div class="modal-footer">
-                      <button href="<?php echo base_url();?>index.php/report/map" type="button" class="btn btn-primary">Full Map Please</button>
-                    </div>
-                </div>
+                <div id="map_canvas"></div>
                 </div>
               </div>
+            </div>
+
+          <!-- Modal Edit -->
+          <div data-focus-on="input:first" class="modal fade" id="myModaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  
+                </div>
+            </div>
+          </div>
 
                 
 

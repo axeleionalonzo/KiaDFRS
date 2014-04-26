@@ -24,8 +24,7 @@ class ReportModel extends CI_Model {
 
     function search($report)
     {
-        $sql = "SELECT * FROM report WHERE client LIKE ('%$report%') ";
-        echo $report;
+        $sql = "SELECT * FROM report WHERE client || report_date || sales_consultant || address || contactno || term || remarks LIKE ('%$report%') ";
         $query =$this->db->query($sql, array($report)); 
        
         return $query->result();

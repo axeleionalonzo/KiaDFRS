@@ -66,21 +66,12 @@
               </fieldset>
 
               <div class="modal-footer">
-                <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $report[0]->report_id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-                <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $report[0]->report_id;?>" data-toggle="modal" data-target="#myModaledit" type="button" class="btn btn-primary">Edit Report</a>
+                <?php $id = $report[0]->report_id;?>
+                <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
+                <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                 </form>
                 </div>
-
-
-           <!-- Modal Edit -->
-            <div data-focus-on="input:first" class="modal fade" id="myModaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  
-                </div>
-            </div>
-          </div>
 
          
