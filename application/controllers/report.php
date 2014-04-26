@@ -41,6 +41,10 @@ class Report extends CI_Controller {
         $reports=$this->ReportModel->get_last_ten_entries();
         $this->load->view('report/reportview',array('models'=>$models,'report'=>$report));
     }
+    public function map()
+    {
+        $this->load->view('report/reportmap');
+    }
     public function insert()
     {
 

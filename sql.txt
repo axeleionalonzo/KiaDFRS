@@ -29,3 +29,13 @@ primary key(report_id),
 foreign key(term_id) references term(term_id),
 foreign key(model_id) references model(model_id)
 );
+
+
+INSERT INTO term (term_name)
+VALUES ('COD');
+
+INSERT INTO term (term_name)
+VALUES ('Fin');
+
+INSERT INTO term (term_name)
+VALUES ('CED');

@@ -27,7 +27,7 @@
      })();
 
     </script>
-    <style>
+<style>
       #map_canvas {
         width: 100%;
         height: 400px;
@@ -46,11 +46,6 @@
         var map = new google.maps.Map(map_canvas, map_options)
       }
       google.maps.event.addDomListener(window, 'load', initialize);
-
-      $('#myModalViewMap').on('shown.bs.modal', function () {
-          google.maps.event.trigger(map, "resize");
-      });
-
 
   </script>
   </head>
@@ -105,13 +100,6 @@
 
       <!-- Navbar
       ================================================== -->
-
-
-
-            
-                  
-
-
 
 
 
@@ -196,10 +184,11 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="address" class="col-lg-2 control-label">Address</label>
+                  <label for="address" class="col-lg-2 control-label">
+                  <a href="#" type="button" class="nav nav-pills" data-toggle="modal" data-target="#myModalViewMap">Address</a>
+                  </label>
                   <div class="col-lg-10">
-                    <a href="#" data-toggle="modal" data-target="#myModalViewMap">
-                    <input name="address" type="text" class="form-control" id="address" placeholder="Click here to view Map" value="asd"></a>
+                    <input name="address" type="text" class="form-control" id="address" placeholder="Click Address to view Map" value="">
                   </div>
                 </div>
                  <div class="form-group">
@@ -262,7 +251,24 @@
               </div>
         </div>
 
+        <!-- Modal View Map -->
+          <div class="modal fade" id="myModalViewMap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
 
+             <div id="map_canvas"></div>
+                <div class="modal-footer">
+                      <button href="<?php echo base_url();?>index.php/report/map" type="button" class="btn btn-primary">Full Map Please</button>
+                    </div>
+                </div>
+                </div>
+              </div>
+
+                
+
+
+
+                  
           <!-- Modal Add Model -->
             <div class="modal fade" id="myModalAddModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -270,18 +276,7 @@
                   
                 </div>
             </div>
-          </div>
-
-          <!-- Modal View Map -->
-            <div data-focus-on="input:first" class="modal fade" id="myModalViewMap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div id="map_canvas"></div>
-                </div>
-              </div>
-            </div>
-          
-
+          </div>          
 
         <div class="row">
           <div class="col-lg-12">
