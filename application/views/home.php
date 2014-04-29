@@ -11,62 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <!--<link rel="stylesheet" href="./assets/css/bootswatch.min.css">-->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
-      <script src="../bower_components/respond/dest/respond.min.js"></script>
-    <![endif]-->
-    <script>
-
-     var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-23019901-1']);
-      _gaq.push(['_setDomainName', "bootswatch.com"]);
-        _gaq.push(['_setAllowLinker', true]);
-      _gaq.push(['_trackPageview']);
-
-     (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-     })();
-
-    </script>
-    <style>
-      #map_canvas {
-        width: 100%;
-        height: 400px;
-      }
-    </style>
-    <script type="text/javascript">
-    function toggleFullScreen() {
-      if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
-        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-          if (document.documentElement.requestFullScreen) {  
-          document.documentElement.requestFullScreen();  
-            } else if (document.documentElement.mozRequestFullScreen) {  
-            document.documentElement.mozRequestFullScreen();  
-            } else if (document.documentElement.webkitRequestFullScreen) {  
-            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
-        }  
-      }
-    } 
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript">
-
-      function initialize() {
-        var map_canvas = document.getElementById('map_canvas');
-        var map_options = {
-          center: new google.maps.LatLng(8.1336, 124.1430),
-          zoom: 10,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(map_canvas, map_options)
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-
-  </script>
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -100,7 +44,19 @@
 
     <div class="container">
 
-
+        <?php if ($this->session->flashdata('flashError')) { ?>
+            <?php echo "<div class=\"jumbotron\">
+              <h1>Oops..</h1>
+              <p>Looks like something went wrong with your <font color=\"red\">Username and Password Combination</font>. Please try again with the correct details.</p>
+              </div>"; ?>
+            <?php }?>
+        <?php if (form_error('username') || form_error('password') || form_error('passconf')) { ?>
+            <?php echo "<div class=\"jumbotron\">
+              <h1>Oops..</h1>
+              <p>Looks like something went wrong with your <font color=\"red\">Registration Details</font>. Please try again and provide the Required Information.</p>
+              </div>"; ?>
+            <?php }?>
+            
 
       <!-- Modal Add Consultant -->
       <div class="modal fade" id="myModalSignUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -155,27 +111,30 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               <h4 class="modal-title" id="myModalLabel">Sign in</h4>
             </div>
-            <form name="add" class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/report/validate_credentials">
+              <?php echo form_open('report/validate_credentials');?>
               <fieldset>
                 <legend></legend>
                 <div class="well well-sm">
                   <p><b>Sales Consultant</b></p>
                 </div>
-                <div class="paragraph paragraph-1 paragraph-2">
-                  <?php if ($this->session->flashdata('flashError')) { ?>
-                  <p><?php echo $this->session->flashdata('flashError'); ?></p>
-                  <?php } ?>
-                </div>
                 <div class="form-group">
                   <label for="username" class="col-lg-2 control-label">Full Name</label>
                   <div class="col-lg-10">
                     <input name="username" type="text" class="form-control" id="username" placeholder="Username">
+                    <span class="help-block">
+                      <font color="red">
+                        <?php if ($this->session->flashdata('flashError')) { ?>
+                        <?php echo $this->session->flashdata('flashError'); ?>
+                        <?php } ?>
+                      </font>
+                    </span>
                   </div>
                 </div>
                 <div class="form-group">
                 <label for="password" class="col-lg-2 control-label">Password</label>
                 <div class="col-lg-10">
                   <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                  <span class="help-block"><font color="red"><?php echo form_error('password');?></font></span>
                 </div>
               </div>
               </fieldset>
@@ -189,98 +148,11 @@
               </div>
         </div>
 
-        <!-- Modal View -->
-          <div class="modal fade" id="myModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                
-                </div>
-              </div>
-        </div>
-
-        <!-- Modal View Map -->
-          <div class="modal fade" id="myModalViewMap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div id="map_canvas"></div>
-                </div>
-              </div>
-            </div>
-
-          <!-- Modal Edit -->
-          <div data-focus-on="input:first" class="modal fade" id="myModaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  
-                </div>
-            </div>
-          </div>
-
-                
-
-
-
-                  
-          <!-- Modal Add Model -->
-            <div class="modal fade" id="myModalAddModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  
-                </div>
-            </div>
-          </div>          
-
-        <div class="row">
-        </div>
-
-
 
     <!-- bootstrap -->
     <script src="<?php echo base_url();?>js/jquery-1.10.2.min.js"></script>
     <script src="<?php echo base_url();?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootswatch.js"></script>
-
-    <!-- Date picker -->
-    <script type="text/javascript" src="<?php echo base_url();?>/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-
-    <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-            showMeridian: 1
-        });
-      $('.form_date').datetimepicker({
-            language:  'fr',
-            weekStart: 1,
-            todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-        });
-      $('.form_time').datetimepicker({
-            language:  'fr',
-            weekStart: 1,
-            todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0
-        });
-    </script>
-
-    
-
-    
 
   </body>
 </html>

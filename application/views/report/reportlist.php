@@ -123,7 +123,12 @@ $username=$query[0]['username'];
     </div>
 
     <div class="container">
-
+            <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno')) { ?>
+            <?php echo "<div class=\"jumbotron\">
+              <h1>Oops..</h1>
+              <p>Looks like something went wrong with the <font color=\"red\">Creation of your Report</font>. Please try again and provide the Required Information.</p>
+              </div>"; ?>
+            <?php }?>
     <div class="page-header" id="banner">
      
     </div>
@@ -163,7 +168,7 @@ $username=$query[0]['username'];
             <th>Contact #</th>
             <th>Model</th>
             <th>Term</th>
-            <th>Remarks</th>
+            <!-- <th>Remarks</th> -->
             </tr>
           </thead>
           <tbody>
@@ -177,8 +182,8 @@ $username=$query[0]['username'];
             <td><?php echo $reports[$i]->contactno;?></td>
             <td><?php echo $reports[$i]->model_name;?></td>
             <td><?php echo $reports[$i]->term;?></td>
-            <td><?php echo $reports[$i]->remarks;?></td>
-            <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="modal" data-target="#myModalView">View Full Report</a></td>
+            <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
+            <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>">View</a></td>
             </tr>
             <?php }?>
           </tbody>
@@ -196,7 +201,7 @@ $username=$query[0]['username'];
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">Make a Report</h4>
         </div>
-        <form name="add" class="form-horizontal" method="POST" action="<?php echo base_url();?>index.php/report/insert">
+        <?php echo form_open('report/insert');?>
           <fieldset>
           <legend></legend>
           <div class="form-group">
@@ -204,7 +209,9 @@ $username=$query[0]['username'];
               <div class="col-lg-10">
                 <?php if($is_logged_in) { ?>
                 <input name="sales_consultant" type="text" class="form-control" id="sales_consultant" disabled="" placeholder="This Area Here is non Editable" value="<?php echo $username;?>">
+                <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
                 <?php }?>
+                <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
               </div>
           </div>
           <div class="form-group">
@@ -216,6 +223,7 @@ $username=$query[0]['username'];
                 <input name="report_date" type="text" class="form-control" id="report_date" placeholder="Click to Pick Date" value="<?php echo $date;?>">
                 <span class="add-on"><i class="icon-remove"></i></span>
                 <span class="add-on"><i class="icon-th"></i></span>
+                <span class="help-block"><font color="red"><?php echo form_error('report_date');?></font></span>
               </div>
             <input type="hidden" id="dtp_input2" value="" /><br/>
           </div>
@@ -223,6 +231,7 @@ $username=$query[0]['username'];
             <label for="client" class="col-lg-2 control-label">Client</label>
               <div class="col-lg-10">
               <input name="client" type="text" class="form-control" id="client" value="">
+              <span class="help-block"><font color="red"><?php echo form_error('client');?></font></span>
               </div>
           </div>
           <div class="form-group">
@@ -231,12 +240,14 @@ $username=$query[0]['username'];
             </label>
             <div class="col-lg-10">
               <input name="address" type="text" class="form-control" id="address" placeholder="Click Address to view Map" value="">
+              <span class="help-block"><font color="red"><?php echo form_error('address');?></font></span>
             </div>
           </div>
           <div class="form-group">
             <label for="contactno" class="col-lg-2 control-label">Contact #</label>
             <div class="col-lg-10">
               <input name="contactno" type="text" class="form-control" id="contactno" value="">
+              <span class="help-block"><font color="red"><?php echo form_error('contactno');?></font></span>
             </div>
           </div>
           <div class="form-group">
@@ -250,6 +261,7 @@ $username=$query[0]['username'];
                   <option value="<?php echo $models[$i]->name;?>"><?php echo $models[$i]->name;?></option>
                 <?php }?>
               </select>
+              <span class="help-block"><font color="red"><?php echo form_error('model');?></font></span>
             </div>
           </div>
           <div class="form-group">
@@ -263,13 +275,14 @@ $username=$query[0]['username'];
                 <option value="<?php echo $terms[$i]->term_name;?>"><?php echo $terms[$i]->term_name;?></option>
               <?php }?>
               </select>
+              <span class="help-block"><font color="red"><?php echo form_error('term');?></font></span>
             </div>
           </div>
           <div class="form-group">
             <label for="remarks" class="col-lg-2 control-label">Remarks</label>
             <div class="col-lg-10">
               <input name="remarks" class="form-control" rows="3" id="remarks"></input>
-              <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+              <span class="help-block"><font color="red"><?php echo form_error('remarks');?></font></span>
             </div>
           </div>
           </fieldset>
@@ -297,15 +310,6 @@ $username=$query[0]['username'];
       <div class="modal-dialog">
         <div class="modal-content">
           <div id="map_canvas"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Edit -->
-    <div data-focus-on="input:first" class="modal fade" id="myModaledit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
         </div>
       </div>
     </div>

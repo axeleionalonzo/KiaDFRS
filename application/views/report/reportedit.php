@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<?php
+session_start();
+$username = $this->session->userdata('username');
+$is_logged_in = $this->session->userdata('is_logged_in');
+?>
+<html lang="en">
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">Edit a Report</h4>
@@ -80,3 +87,4 @@
       <button type="submit" class="btn btn-primary">Save changes</button>
     </div>
 </form>
+</html>

@@ -31,17 +31,9 @@ class Report extends CI_Controller {
     {
         $this->load->view('home');
     }
-
-    public function add()
-    {
-        $this->load->model('ReportModel');
-        $models=$this->ReportModel->getModel();
-        $terms=$this->ReportModel->getTerm();
-
-        $this->load->view('report/reportadd',array('models'=>$models,'terms'=>$terms));
-    }
     public function edit($report_id)
-    {
+    {   
+        $this->is_logged_in();
         $this->load->model('ReportModel');
         $report=$this->ReportModel->get($report_id);
         $models=$this->ReportModel->getModel();
@@ -51,22 +43,37 @@ class Report extends CI_Controller {
     }
     public function view($report_id)
     {
+        $this->is_logged_in();
         $this->load->model('ReportModel');
+        $this->load->model('ConsultantModel');
         $report=$this->ReportModel->get($report_id);
-        $models=$this->ReportModel->getModel();
-        $reports=$this->ReportModel->get_last_ten_entries();
 
-        $this->load->view('report/reportview',array('models'=>$models,'report'=>$report));
-    }
-    public function map()
-    {
-        $this->load->view('report/reportmap');
+        $username = $this->session->userdata('username');
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+
+        $data['data']=$data;
+        $data['report']=$report;
+        $this->load->view('report/reportview', $data);
     }
     public function insert()
-    {
+    {   
+        $this->is_logged_in();
         $this->load->model('ReportModel');
-        $this->ReportModel->insert_entry();
-        $this->index();
+        
+
+        $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required');
+        $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
+        $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            
+            $this->index();
+        } else {
+
+            $this->ReportModel->insert_entry();
+            $this->index();
+        }
     }
     public function update()
     {
@@ -78,12 +85,11 @@ class Report extends CI_Controller {
     }
     public function delete($report_id)
     {
+        $this->is_logged_in();
         $this->load->model('ReportModel');
         $this->ReportModel->delete_entry($report_id);
-        $models=$this->ReportModel->getModel();
-        $reports=$this->ReportModel->get_last_ten_entries();
 
-        $this->load->view('report/reportlist',array('models'=>$models,'reports'=>$reports));
+        $this->index();  
     }
     public function is_logged_in()
     {
@@ -91,7 +97,7 @@ class Report extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="index.php/report/home">Sign in</a>';
+            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Back</font></a>';
             die();
         }
     }
@@ -134,7 +140,6 @@ class Report extends CI_Controller {
             );
 
         $this->ReportModel->addConsultant($data);
-        echo 'success';
         redirect('report/home');
         }
     }
