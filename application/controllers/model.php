@@ -4,9 +4,19 @@ class Model extends CI_Controller {
     public function index()
     {
         $this->load->model('ModelModel');
-        $models=$this->ModelModel->get_last_ten_entries();
+        $this->load->model('ReportModel');
+        $this->load->model('ConsultantModel');
 
-        $this->load->view('model/modellist',array('models'=>$models));
+        $username = $this->session->userdata('username');
+        $reports=$this->ReportModel->get_last_ten_entries();
+        $models=$this->ModelModel->get_last_ten_entries();
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+
+        $data['data']=$data;
+        $data['reports']=$reports;
+        $data['models']=$models;
+        
+        $this->load->view('report/reportlist', $data);      
     }
     public function add()
     {
@@ -23,12 +33,40 @@ class Model extends CI_Controller {
         $this->load->view('model/modeledit',array('model'=>$model));
     }
     public function insert()
-    {
+    {   
+        $this->is_logged_in();
         $this->load->model('ModelModel');
         $this->load->model('ReportModel');
-        $this->ModelModel->insert_entry();
+        $this->load->model('ConsultantModel');
 
-        $this->load->view('report/reportlist',array('reports'=>$reports,'models'=>$models));              
+        $username = $this->session->userdata('username');
+        $reports=$this->ReportModel->get_last_ten_entries();
+        $models=$this->ModelModel->get_last_ten_entries();
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+
+        $this->form_validation->set_rules('name', 'Model Name', 'trim|required');
+
+        $data['data']=$data;
+        $data['reports']=$reports;
+        $data['models']=$models;
+        if ($this->form_validation->run() == FALSE) {
+            
+            $this->index();
+        } else {
+
+            $this->ModelModel->insert_entry();
+            $this->index(); 
+        }        
+    }
+    public function is_logged_in()
+    {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+
+        if(!isset($is_logged_in) || $is_logged_in != true)
+        {
+            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Back</font></a>';
+            die();
+        }
     }
         public function update()
     {

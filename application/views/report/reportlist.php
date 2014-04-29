@@ -73,7 +73,7 @@ $username=$query[0]['username'];
     <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
-    <a href="<?php echo base_url();?>index.php" class="navbar-brand">K I A</a>
+    <a href="<?php echo base_url();?>index.php" class="navbar-brand">Home</a>
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -83,7 +83,7 @@ $username=$query[0]['username'];
     <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav">
     <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Online Field Report Management System</span></a>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Online Prospect Management System</span></a>
     </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -127,6 +127,12 @@ $username=$query[0]['username'];
             <?php echo "<div class=\"jumbotron\">
               <h1>Oops..</h1>
               <p>Looks like something went wrong with the <font color=\"red\">Creation of your Report</font>. Please try again and provide the Required Information.</p>
+              </div>"; ?>
+            <?php }?>
+            <?php if (form_error('name')) { ?>
+            <?php echo "<div class=\"jumbotron\">
+              <h1>Oops..</h1>
+              <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. Please try again and provide the Required Information.</p>
               </div>"; ?>
             <?php }?>
     <div class="page-header" id="banner">

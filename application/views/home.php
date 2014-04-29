@@ -16,7 +16,7 @@
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="<?php echo base_url();?>index.php" class="navbar-brand">K I A</a>
+          <a href="<?php echo base_url();?>index.php" class="navbar-brand">Home</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -26,7 +26,7 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Online Field Report Management System</span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes"></span></a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -46,16 +46,32 @@
 
         <?php if ($this->session->flashdata('flashError')) { ?>
             <?php echo "<div class=\"jumbotron\">
-              <h1>Oops..</h1>
+              <font color=\"red\"><h1>Oops..</h1></font>
               <p>Looks like something went wrong with your <font color=\"red\">Username and Password Combination</font>. Please try again with the correct details.</p>
               </div>"; ?>
-            <?php }?>
-        <?php if (form_error('username') || form_error('password') || form_error('passconf')) { ?>
+            <?php } elseif (form_error('username') || form_error('password') || form_error('passconf')) {?>
             <?php echo "<div class=\"jumbotron\">
-              <h1>Oops..</h1>
+              <font color=\"red\"><h1>Oops..</h1></font>
               <p>Looks like something went wrong with your <font color=\"red\">Registration Details</font>. Please try again and provide the Required Information.</p>
               </div>"; ?>
+            <?php } else { ?>
+            <?php echo "<div class=\"jumbotron\">
+               <font color=\"CornflowerBlue\"><h1>Congratulations</h1></font>
+              <p>You just created you Consultant Account. Please proceed by <font color=\"CornflowerBlue\">Signing in with you Username.</font></p>
+              </div>"; ?>
             <?php }?>
+
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-6">
+            <h1>Kia</h1>
+            <p class="lead">Online Prospect Management System</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Project Description</h2>
+      <p>KIA Online Prospect Management System is an online report management simulator created to decrease human error writing reports on hand. It optimizes the organization of all the reports provided by various department. The primary goal of this system is to ease the work of sales consultant provided by the authorization of system administration.</p>
             
 
       <!-- Modal Add Consultant -->

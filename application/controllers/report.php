@@ -60,7 +60,6 @@ class Report extends CI_Controller {
         $this->is_logged_in();
         $this->load->model('ReportModel');
         
-
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
         $this->form_validation->set_rules('client', 'Client Name', 'trim|required');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
@@ -77,11 +76,22 @@ class Report extends CI_Controller {
     }
     public function update()
     {
+        $this->is_logged_in();
         $this->load->model('ReportModel');
-        $this->ReportModel->update_entry();
-        $terms=$this->ReportModel->getTerm();
 
-        $this->index();                  
+        $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required');
+        $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
+        $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            
+            $this->index();
+        } else {
+
+            $this->ReportModel->update_entry();
+            $this->index();
+        }               
     }
     public function delete($report_id)
     {
