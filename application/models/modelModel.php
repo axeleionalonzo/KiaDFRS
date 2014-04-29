@@ -14,6 +14,7 @@ class ModelModel extends CI_Model {
     function get_last_ten_entries()
     {
         $query = $this->db->get('model', 100);
+        
         return $query->result();
     }
     
@@ -27,22 +28,16 @@ class ModelModel extends CI_Model {
     function insert_entry()
     {
         $this->name = $_POST['name']; // please read the below note
-
-        
         $this->db->insert('model', $this);
     }
 
     function update_entry()
     {
         $this->name = $_POST['name']; // please read the below note
-
-
         $this->db->update('model', $this, array('model_id' => $_POST['model_id']));
     }
     function delete_entry($model_id)
     {
-         
-
         $this->db->delete('model', array('model_id' => $model_id));
     }
 

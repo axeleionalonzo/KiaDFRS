@@ -2,43 +2,60 @@
 class Report extends CI_Controller {
 
     public function index()
-    {   
-
-        $this->load->database();
+    {
+        $this->is_logged_in();
         $this->load->model('ReportModel');
-        if (isset($_POST['report']))
+        $this->load->model('ConsultantModel');
+
+        if (isset($_POST['report'])){
             $reports=$this->ReportModel->search($_POST['report']); 
-        else
+        } else {
             $reports=$this->ReportModel->get_last_ten_entries();
+        }
         
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
-        $this->load->view('report/reportlist',array('reports'=>$reports,'terms'=>$terms,'models'=>$models));
+
+        $username = $this->session->userdata('username');
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+
+        //$this->load->view('report/reportlist', $data);
+        //$this->load->view('report/reportlist', array('reports'=>$reports,'terms'=>$terms,'models'=>$models));
+        $data['data']=$data;
+        $data['reports']=$reports;
+        $data['terms']=$terms;
+        $data['models']=$models;
+        $this->load->view('report/reportlist', $data);
     }
+    public function home() 
+    {
+        $this->load->view('home');
+    }
+
     public function add()
     {
-        $this->load->database();
         $this->load->model('ReportModel');
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
+
         $this->load->view('report/reportadd',array('models'=>$models,'terms'=>$terms));
     }
     public function edit($report_id)
     {
-        $this->load->database();
         $this->load->model('ReportModel');
         $report=$this->ReportModel->get($report_id);
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
+
         $this->load->view('report/reportedit',array('models'=>$models,'terms'=>$terms,'report'=>$report));
     }
     public function view($report_id)
     {
-        $this->load->database();
         $this->load->model('ReportModel');
         $report=$this->ReportModel->get($report_id);
         $models=$this->ReportModel->getModel();
         $reports=$this->ReportModel->get_last_ten_entries();
+
         $this->load->view('report/reportview',array('models'=>$models,'report'=>$report));
     }
     public function map()
@@ -47,39 +64,92 @@ class Report extends CI_Controller {
     }
     public function insert()
     {
-
-        $this->load->database();
         $this->load->model('ReportModel');
         $this->ReportModel->insert_entry();
-                
-        $reports=$this->ReportModel->get_last_ten_entries();
-        $models=$this->ReportModel->getModel();
-        $terms=$this->ReportModel->getTerm();
-        $this->load->view('report/reportlist',array('models'=>$models,'terms'=>$terms,'reports'=>$reports));
-                           
+        $this->index();
     }
     public function update()
     {
-
-        $this->load->database();
         $this->load->model('ReportModel');
         $this->ReportModel->update_entry();
-
         $terms=$this->ReportModel->getTerm();
 
         $this->index();                  
     }
     public function delete($report_id)
     {
-
-        $this->load->database();
         $this->load->model('ReportModel');
         $this->ReportModel->delete_entry($report_id);
         $models=$this->ReportModel->getModel();
         $reports=$this->ReportModel->get_last_ten_entries();
 
         $this->load->view('report/reportlist',array('models'=>$models,'reports'=>$reports));
-                           
+    }
+    public function is_logged_in()
+    {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+
+        if(!isset($is_logged_in) || $is_logged_in != true)
+        {
+            echo 'You don\'t have permission to access this page. <a href="index.php/report/home">Sign in</a>';
+            die();
+        }
+    }
+    public  function validate_credentials() 
+    {
+        $this->load->model('ConsultantModel');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $query = $this->ConsultantModel->validate($username, $password);
+        
+        if($query) {
+            $data = array(
+                'username' => $this->input->post('username'),
+                'is_logged_in' => true
+            );
+            $this->session->set_userdata($data);
+            redirect('report');
+        }
+        else {
+            $this->session->set_flashdata('flashError', 'Incorrect Username/Password Combination');
+            redirect('report/home');
+        }
+    }
+
+    public function signup() 
+    {   
+        $this->load->model('ReportModel');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant.username]|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('home');
+        }
+        else {
+        $data = array(
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password'))
+            );
+
+        $this->ReportModel->addConsultant($data);
+        echo 'success';
+        redirect('report/home');
+        }
+    }
+
+    public function logout()  
+    {
+        $this->is_logged_in();
+        $user_data = $this->session->all_userdata();
+        foreach ($user_data as $key => $value) {
+            if ($key != 'session_id' && $key != 'ip_address' && $key != 'user_agent' && $key != 'last_activity') {
+                $this->session->unset_userdata($key);
+            }
+        }
+        $this->session->sess_destroy();
+        redirect('report/home');
     }
 }
 ?>

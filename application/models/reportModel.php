@@ -19,6 +19,7 @@ class ReportModel extends CI_Model {
     function get_last_ten_entries()
     {
         $query = $this->db->get('report', 100);
+
         return $query->result();
     }
 
@@ -37,14 +38,21 @@ class ReportModel extends CI_Model {
         return $query->result();
     }
 
-    
+    function addConsultant($data)
+    {
+        $this->db->insert('consultant', $data);
+        return;
+    }
+
     function getModel(){
         $query = $this->db->get('model');
+
         return $query->result();
     }
 
     function getTerm(){
         $query = $this->db->get('term');
+
         return $query->result();
     }
 
@@ -76,10 +84,7 @@ class ReportModel extends CI_Model {
     }
     function delete_entry($report_id)
     {
-         
-
         $this->db->delete('report', array('report_id' => $report_id));
     }
-
 }
 ?>

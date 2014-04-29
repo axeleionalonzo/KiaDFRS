@@ -5,6 +5,14 @@ name varchar(50),
 primary key(model_id)
 );
 
+create table consultant(
+consultant_id serial,
+username varchar(50) unique,
+password varchar(50),
+
+primary key(consultant_id)
+);
+
 create table term(
 term_id serial,
 term_name varchar(50),
@@ -15,6 +23,7 @@ primary key(term_id)
 create table report(
 report_id serial,
 model_id int,
+consultant_id int,
 term_id int,
 report_date date,
 model_name varchar(50),
@@ -27,7 +36,8 @@ remarks varchar(250),
 
 primary key(report_id),
 foreign key(term_id) references term(term_id),
-foreign key(model_id) references model(model_id)
+foreign key(model_id) references model(model_id),
+foreign key(consultant_id) references consultant(consultant_id)
 );
 
 
@@ -35,7 +45,13 @@ INSERT INTO term (term_name)
 VALUES ('COD');
 
 INSERT INTO term (term_name)
+VALUES ('CED');
+
+INSERT INTO term (term_name)
 VALUES ('Fin');
 
 INSERT INTO term (term_name)
-VALUES ('CED');
+VALUES ('CRS');
+
+INSERT INTO term (term_name)
+VALUES ('PO');
