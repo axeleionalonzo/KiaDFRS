@@ -1,22 +1,33 @@
-<html>
-<head>
-<title>model edit</title>
-</head>
-<body>
-    <h1>model edit</h1><a href="/KiaDFRS/index.php">list</a>
-    <form name="add"   method="POST" action="/KiaDFRS/index.php/model/update">
-        <input type="hidden" name="model_id" value="<?php echo $model[0]->model_id?>">
-<table border="1">
-<tr>
-<th>name</th>
-<td><input type="text" name="name" value="<?php echo $model[0]->name;?>"/></td>
-</tr>
-<tr>
-<td><input type="submit"></td>
-<td><input type="reset"></td>
-</tr>
-</form>
+<!DOCTYPE html>
+<?php
+session_start();
+$username = $this->session->userdata('username');
+$is_logged_in = $this->session->userdata('is_logged_in');
+?>
+<html lang="en">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="myModalLabel">Edit a model</h4>
+</div>
 
-</table> 
-</body>
+
+    <?php echo form_open('model/update');?>
+    <input type="hidden" name="model_id" value="<?php echo $model[0]->model_id?>">
+    <fieldset>
+      <legend>
+      </legend>
+      <div class="form-group">
+        <label for="name" class="col-lg-2 control-label">Model</label>
+        <div class="col-lg-10">
+          <input name="name" type="text" class="form-control" id="name" value="<?php echo $model[0]->name;?>">
+          <span class="help-block"><font color="red"><?php echo form_error('name');?></font></span>
+        </div>
+      </div>
+       
+    </fieldset>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
 </html>

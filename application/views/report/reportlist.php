@@ -89,13 +89,12 @@ $username=$query[0]['username'];
     <li class="">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cars <b class="caret"></b></a>
     <ul class="dropdown-menu">
-    <?php
-    for($i=0; $i<count($models);$i++) {
-    ?>
-    <li><a href="#"><small><?php echo $models[$i]->name;?></small></a></li>
-    <?php }?>
-    <li class="divider"></li>
-    <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
+      <?php for($i=0; $i<count($models);$i++) { ?>
+        <?php $id = $models[$i]->model_id;?>
+        <li><a href="<?php echo base_url();?>index.php/model/view/<?php echo $id?>"><small><?php echo $models[$i]->name;?></small></a></li>
+      <?php }?>
+        <li class="divider"></li>
+        <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
     </ul>
     </li>
     <li><form action="<?php echo base_url();?>index.php/" method="post" class="navbar-form navbar-left" role="search">
@@ -335,7 +334,7 @@ $username=$query[0]['username'];
       </div>
     </div>
 
-    <!-- Modal View -->
+    <!-- Modal View Report-->
     <div class="modal fade" id="myModalView" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
