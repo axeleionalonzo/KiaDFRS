@@ -17,10 +17,12 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 
   <div class="container">
             <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno')) { ?>
-            <?php echo "<div class=\"jumbotron\">
-              <h1>Oops..</h1>
+            <?php echo "
+            <center><div class=\"alert alert-dismissable alert-warning\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Oops..</h4>
               <p>Looks like something went wrong with the <font color=\"red\">Creation of your Report</font>. Please try again and provide the Required Information.</p>
-              </div>"; ?>
+            </div></center>"; ?>
             <?php }?>
   
 <div class="modal-header">
@@ -33,7 +35,11 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <legend>
         </legend>
         <div class="well well-sm">
+            <?php if (($report[0]->sales_consultant)=='Admin') { ?>
+          <p><center><Strong>Superuser: Admin</Strong></center></p>
+            <?php } else { ?>
           <p><center>Sales Consultant: <b><big><?php echo $report[0]->sales_consultant;?></big></b></center></p>
+            <?php } ?>
         </div>
         <div class="form-group">
           <label for="report_date" class="col-lg-2 control-label">Date</label>
@@ -113,6 +119,11 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } elseif (($query[0]['username'])==('Administrator')) {?>
+      <?php $id = $report[0]->report_id;?>
+      <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
+      <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <?php } elseif (($query[0]['username'])==('Axel Eion')) {?>
       <?php $id = $report[0]->report_id;?>
       <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>

@@ -122,7 +122,7 @@ $username=$query[0]['username'];
 
     <div class="container">
     <div class="alert alert-dismissable alert-warning"></div>
-            <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno')) { ?>
+            <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno') || form_error('status')) { ?>
             <?php echo "
             <center><div class=\"alert alert-dismissable alert-warning\">
               <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
@@ -191,14 +191,12 @@ $username=$query[0]['username'];
                 echo "<tr class=\"danger\">";
               }?>
               <td><?php echo $reports[$i]->report_date;?></td>
-              <td><?php echo $reports[$i]->client;?></td>
+              <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>"><?php echo $reports[$i]->client;?></a></td>
               <td><?php echo $reports[$i]->address;?></td>
               <td><?php echo $reports[$i]->contactno;?></td>
               <td><?php echo $reports[$i]->model_name;?></td>
               <td><?php echo $reports[$i]->term;?></td>
               <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
-              <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>">View</a></td>
-              </tr>
             <?php }?>
           </tbody>
           </table>
@@ -232,7 +230,13 @@ $username=$query[0]['username'];
             <label for="sales_consultant" class="col-lg-2 control-label"><small>Consultant</small></label>
               <div class="col-lg-10">
                 <input name="sales_consultant" type="text" class="form-control" id="sales_consultant" disabled="" placeholder="This Area Here is non Editable" value="<?php echo $username;?>">
-                <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
+                <?php if ($username=='Administrator') { ;?>
+                  <input type="hidden" name="sales_consultant" value="Admin">
+                <?php } elseif ($username=='Axel Eion') { ?>
+                  <input type="hidden" name="sales_consultant" value="Admin">
+                <?php } else { ?>
+                  <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
+                <?php }?>
                 <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
               </div>
           </div>
