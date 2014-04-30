@@ -17,7 +17,11 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <legend>
       </legend>
       <div class="well well-sm">
-        <p><b>Sales Consultant:</b> <?php echo $report[0]->sales_consultant;?></p>
+        <?php if (($report[0]->sales_consultant)=='Admin') { ?>
+          <p><center><Strong>Superuser: Admin</Strong></center></p>
+            <?php } else { ?>
+          <p><center>Sales Consultant: <b><big><?php echo $report[0]->sales_consultant;?></big></b></center></p>
+            <?php } ?>
       </div>
       <div class="form-group">
         <label for="report_date" class="col-lg-2 control-label">Date</label>

@@ -135,7 +135,7 @@ $username=$query[0]['username'];
             <center><div class=\"alert alert-dismissable alert-warning\">
               <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
               <h4>Oops..</h4>
-              <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. Please try again and provide the Required Information.</p>
+              <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. A car with that model has already been created. Please try again.</p>
             </div></center>"; ?>
             <?php }?>
 
@@ -226,27 +226,25 @@ $username=$query[0]['username'];
         <?php echo form_open('report/insert');?>
           <fieldset>
           <legend></legend>
-          <div class="form-group">
-            <label for="sales_consultant" class="col-lg-2 control-label"><small>Consultant</small></label>
-              <div class="col-lg-10">
-                <input name="sales_consultant" type="text" class="form-control" id="sales_consultant" disabled="" placeholder="This Area Here is non Editable" value="<?php echo $username;?>">
+          <div class="well well-sm">
                 <?php if ($username=='Administrator') { ;?>
-                  <input type="hidden" name="sales_consultant" value="Admin">
+              <p><center><Strong>Superuser: <?php echo $username;?></Strong></center></p>
+                <input type="hidden" name="sales_consultant" value="Admin">
                 <?php } elseif ($username=='Axel Eion') { ?>
-                  <input type="hidden" name="sales_consultant" value="Admin">
+              <p><center><Strong>Superuser: <?php echo $username;?></Strong></center></p>
+                <input type="hidden" name="sales_consultant" value="Admin">
                 <?php } else { ?>
-                  <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
-                <?php }?>
-                <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
-              </div>
-          </div>
+              <p><center>Sales Consultant: <Strong><?php echo $username;?></Strong></center></p>
+                <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
+                <?php } ?>
+          </div>  
           <div class="form-group">
             <?php
             $date = date('Y-m-d');
             ?>
             <label class="col-lg-2 control-label">Date </label>
               <div class="col-lg-10 controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                <input name="report_date" type="text" class="form-control" id="report_date" placeholder="Click to Pick Date" value="<?php echo $date;?>">
+                <input name="report_date" type="text" class="form-control" id="report_date" placeholder="Click to Pick a Date" value="<?php echo $date;?>">
                 <span class="add-on"><i class="icon-remove"></i></span>
                 <span class="add-on"><i class="icon-th"></i></span>
                 <span class="help-block"><font color="red"><?php echo form_error('report_date');?></font></span>
@@ -256,7 +254,7 @@ $username=$query[0]['username'];
           <div class="form-group">
             <label for="client" class="col-lg-2 control-label">Client</label>
               <div class="col-lg-10">
-              <input name="client" type="text" class="form-control" id="client" value="">
+              <input name="client" type="text" class="form-control" id="client" placeholder="Client Full Name" value="">
               <span class="help-block"><font color="red"><?php echo form_error('client');?></font></span>
               </div>
           </div>
@@ -272,7 +270,7 @@ $username=$query[0]['username'];
           <div class="form-group">
             <label for="contactno" class="col-lg-2 control-label">Contact #</label>
             <div class="col-lg-10">
-              <input name="contactno" type="text" class="form-control" id="contactno" value="">
+              <input name="contactno" type="text" class="form-control" id="contactno" placeholder="Client Contact Number" value="">
               <span class="help-block"><font color="red"><?php echo form_error('contactno');?></font></span>
             </div>
           </div>
@@ -307,7 +305,7 @@ $username=$query[0]['username'];
           <div class="form-group">
             <label for="remarks" class="col-lg-2 control-label">Remarks</label>
             <div class="col-lg-10">
-              <input name="remarks" class="form-control" rows="3" id="remarks"></input>
+              <input name="remarks" class="form-control" rows="3" id="remarks" placeholder="Remark Client" value=""></input>
               <span class="help-block"><font color="red"><?php echo form_error('remarks');?></font></span>
             </div>
           </div>
