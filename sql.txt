@@ -20,11 +20,20 @@ term_name varchar(50),
 primary key(term_id)
 );
 
+create table status(
+status_id serial,
+status_name varchar(50),
+
+primary key(status_id)
+);
+
 create table report(
 report_id serial,
-model_id int,
-consultant_id int,
 term_id int,
+model_id int,
+status_id int,
+consultant_id int,
+status varchar(50),
 report_date date,
 model_name varchar(50),
 sales_consultant varchar(50),
@@ -37,9 +46,16 @@ remarks varchar(250),
 primary key(report_id),
 foreign key(term_id) references term(term_id),
 foreign key(model_id) references model(model_id),
+foreign key(status_id) references status(status_id),
 foreign key(consultant_id) references consultant(consultant_id)
 );
 
+
+INSERT INTO status (status_name)
+VALUES ('Bought');
+
+INSERT INTO status (status_name)
+VALUES ('Under Observation');
 
 INSERT INTO term (term_name)
 VALUES ('COD');

@@ -38,22 +38,24 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 
 
     <div class="container">
-
+    <div class="alert alert-dismissable alert-warning"></div>
     <?php if ($this->session->flashdata('flashError')) { ?>
-      <?php echo "<div class=\"jumbotron\">
-      <font color=\"red\"><h1>Oops..</h1></font>
-      <p>Looks like something went wrong with your <font color=\"red\">Username and Password Combination</font>. Please try again with the correct details.</p>
-      </div>"; ?>
+      <?php echo "<center><div class=\"alert alert-dismissable alert-warning\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+        <h4>Oops..</h4>
+        <p>Looks like something went wrong with your <font color=\"red\">Username and Password Combination</font>. Please try again with the correct details.</p>
+      </div></center>"; ?>
     <?php } elseif (form_error('username') || form_error('password') || form_error('passconf')) {?>
-      <?php echo "<div class=\"jumbotron\">
-      <font color=\"red\"><h1>Oops..</h1></font>
-      <p>Looks like something went wrong with your <font color=\"red\">Registration Details</font>. Please try again and provide the Required Information.</p>
-      </div>"; ?>
+      <?php echo "<center><div class=\"alert alert-dismissable alert-warning\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+        <h4>Oops..</h4>
+        <p>Looks like something went wrong with your <font color=\"red\">Registration Details</font>. Please try again and provide the Required Information.</p>
+        </div></center>"; ?>
     <?php } else { ?>
-      <?php echo "<div class=\"jumbotron\">
-       <font color=\"CornflowerBlue\"><h1>Congratulations</h1></font>
-      <p>You just created your Consultant Account. Please proceed by <font color=\"CornflowerBlue\">Signing in with you Username.</font></p>
-      </div>"; ?>
+      <?php echo "<center><div class=\"alert alert-dismissable alert-success\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+        <h4>Well done!</h4> You successfully created your Consultant Account. Please proceed by <font color=\"CornflowerBlue\">Signing in with you Username.</font></p>
+      </div></center>"; ?>
     <?php }?>
 
     <div class="page-header" id="banner">

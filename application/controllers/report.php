@@ -15,6 +15,7 @@ class Report extends CI_Controller {
         
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
+        $all_status=$this->ReportModel->getStatus();
 
         $username = $this->session->userdata('username');
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
@@ -25,6 +26,7 @@ class Report extends CI_Controller {
         $data['reports']=$reports;
         $data['terms']=$terms;
         $data['models']=$models;
+        $data['all_status']=$all_status;
         $this->load->view('report/reportlist', $data);
     }
     public function home() 
@@ -38,8 +40,10 @@ class Report extends CI_Controller {
         $report=$this->ReportModel->get($report_id);
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
+        $all_status=$this->ReportModel->getStatus();
 
-        $this->load->view('report/reportedit',array('models'=>$models,'terms'=>$terms,'report'=>$report));
+
+        $this->load->view('report/reportedit',array('all_status'=>$all_status, 'models'=>$models,'terms'=>$terms,'report'=>$report));
     }
     public function view($report_id)
     {
@@ -61,9 +65,10 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
+        $this->form_validation->set_rules('status', 'Client Status', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             
@@ -80,9 +85,10 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
 
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
+        $this->form_validation->set_rules('status', 'Client Status', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             

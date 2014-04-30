@@ -70,7 +70,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <label for="term" class="col-lg-2 control-label">Term</label>
         <div class="col-lg-10">
           <select name="term" class="form-control" id="term">
-          <option value="<?php echo $report[0]->term;?>"><?php echo $report[0]->term;?></option>
+          <option value="<?php echo $report[0]->term;?>"><?php echo $report[0]->term;?></option>  
           <?php
             for($i=0; $i<count($terms);$i++) {
             ?>
@@ -86,6 +86,20 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <input name="remarks" class="form-control" rows="3" id="remarks" value="<?php echo $report[0]->remarks;?>"></input>
           <span class="help-block"><font color="red"><?php echo form_error('remarks');?></font></span>
         </div>
+      </div>
+      <div class="form-group">
+        <label for="status" class="col-lg-2 control-label">Status</label>
+        <div class="col-lg-10">
+          <select name="status" class="form-control" id="status">
+           <option value="<?php echo $report[0]->status;?>"><?php echo $report[0]->status;?></option>
+            <?php
+            for($i=0; $i<count($all_status);$i++) {
+             ?>
+             <option value="<?php echo $all_status[$i]->status_name;?>"><?php echo $all_status[$i]->status_name;?></option>
+            <?php }?>
+          </select>
+          <span class="help-block"><font color="red"><?php echo form_error('status');?></font></span>
+         </div>
       </div>
        
     </fieldset>

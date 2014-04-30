@@ -98,7 +98,7 @@ $username=$query[0]['username'];
     <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
     </ul>
     </li>
-    <li><form action="<?php echo base_url();?>" method="post" class="navbar-form navbar-left" role="search">
+    <li><form action="<?php echo base_url();?>index.php/" method="post" class="navbar-form navbar-left" role="search">
     <div class="form-group">
     <input type="text" name="report" class="form-control" placeholder="Keyword Here">
     </div>
@@ -121,21 +121,28 @@ $username=$query[0]['username'];
     </div>
 
     <div class="container">
+    <div class="alert alert-dismissable alert-warning"></div>
             <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno')) { ?>
-            <?php echo "<div class=\"jumbotron\">
-              <h1>Oops..</h1>
+            <?php echo "
+            <center><div class=\"alert alert-dismissable alert-warning\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Oops..</h4>
               <p>Looks like something went wrong with the <font color=\"red\">Creation of your Report</font>. Please try again and provide the Required Information.</p>
-              </div>"; ?>
+            </div></center>"; ?>
             <?php }?>
             <?php if (form_error('name')) { ?>
-            <?php echo "<div class=\"jumbotron\">
-              <h1>Oops..</h1>
+            <?php echo "
+            <center><div class=\"alert alert-dismissable alert-warning\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Oops..</h4>
               <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. Please try again and provide the Required Information.</p>
-              </div>"; ?>
+            </div></center>"; ?>
             <?php }?>
+
+    <!-- separates the heaven and earth
     <div class="page-header" id="banner">
-     
     </div>
+    -->
 
     <!-- Navbar
     ================================================== -->
@@ -177,25 +184,38 @@ $username=$query[0]['username'];
           </thead>
           <tbody>
             <?php
-            for($i=0; $i<count($reports);$i++) {
-            ?>
-            <tr class="danger">
-            <td><?php echo $reports[$i]->report_date;?></td>
-            <td><?php echo $reports[$i]->client;?></td>
-            <td><?php echo $reports[$i]->address;?></td>
-            <td><?php echo $reports[$i]->contactno;?></td>
-            <td><?php echo $reports[$i]->model_name;?></td>
-            <td><?php echo $reports[$i]->term;?></td>
-            <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
-            <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>">View</a></td>
-            </tr>
+            for($i=0; $i<count($reports);$i++) { ?>
+              <?php if(($reports[$i]->status)=='Bought') {
+                echo "<tr>";
+              } else {
+                echo "<tr class=\"danger\">";
+              }?>
+              <td><?php echo $reports[$i]->report_date;?></td>
+              <td><?php echo $reports[$i]->client;?></td>
+              <td><?php echo $reports[$i]->address;?></td>
+              <td><?php echo $reports[$i]->contactno;?></td>
+              <td><?php echo $reports[$i]->model_name;?></td>
+              <td><?php echo $reports[$i]->term;?></td>
+              <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
+              <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>">View</a></td>
+              </tr>
             <?php }?>
           </tbody>
-          </table> 
+          </table>
+          <center><ul class="pagination pagination-sm">
+            <li class="disabled"><a href="#">«</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+          </ul></center>
         </div>
         </div>
       </div>
     </div>
+
 
     <!-- Modal Add Report-->
     <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -211,10 +231,8 @@ $username=$query[0]['username'];
           <div class="form-group">
             <label for="sales_consultant" class="col-lg-2 control-label"><small>Consultant</small></label>
               <div class="col-lg-10">
-                <?php if($is_logged_in) { ?>
                 <input name="sales_consultant" type="text" class="form-control" id="sales_consultant" disabled="" placeholder="This Area Here is non Editable" value="<?php echo $username;?>">
                 <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
-                <?php }?>
                 <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
               </div>
           </div>
@@ -289,8 +307,23 @@ $username=$query[0]['username'];
               <span class="help-block"><font color="red"><?php echo form_error('remarks');?></font></span>
             </div>
           </div>
+          <div class="form-group">
+            <label for="status" class="col-lg-2 control-label">Status</label>
+            <div class="col-lg-10">
+              <select name="status" class="form-control" id="status">
+              <option value=""></option>
+              <?php
+                for($i=0; $i<count($all_status);$i++) {
+                ?>
+                <option value="<?php echo $all_status[$i]->status_name;?>"><?php echo $all_status[$i]->status_name;?></option>
+              <?php }?>
+              </select>
+              <span class="help-block"><font color="red"><?php echo form_error('status');?></font></span>
+            </div>
+          </div>
+
           </fieldset>
-        <div class="modal-footer">
+          <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Save changes</button>
         

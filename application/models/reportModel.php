@@ -25,7 +25,7 @@ class ReportModel extends CI_Model {
 
     function search($report)
     {
-        $sql = "SELECT * FROM report WHERE client || report_date || sales_consultant || address || contactno || term || remarks LIKE ('%$report%') ";
+        $sql = "SELECT * FROM report WHERE client || report_date || sales_consultant || address || contactno || term || remarks || status LIKE ('%$report%') ";
         $query =$this->db->query($sql, array($report)); 
        
         return $query->result();
@@ -56,6 +56,12 @@ class ReportModel extends CI_Model {
         return $query->result();
     }
 
+    function getStatus(){
+        $query = $this->db->get('status');
+
+        return $query->result();
+    }
+
     function insert_entry()
     {
         $this->report_date = $_POST['report_date']; // please read the below note
@@ -66,6 +72,7 @@ class ReportModel extends CI_Model {
         $this->sales_consultant = $_POST['sales_consultant'];
         $this->term = $_POST['term'];
         $this->remarks = $_POST['remarks'];
+        $this->status = $_POST['status'];
         
         $this->db->insert('report', $this);
     }
@@ -79,6 +86,7 @@ class ReportModel extends CI_Model {
         $this->model_name = $_POST['model_name'];
         $this->term = $_POST['term'];
         $this->remarks = $_POST['remarks'];
+        $this->status = $_POST['status'];
 
         $this->db->update('report', $this, array('report_id' => $_POST['report_id']));
     }
