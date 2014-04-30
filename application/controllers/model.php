@@ -44,7 +44,7 @@ class Model extends CI_Controller {
         $models=$this->ModelModel->get_last_ten_entries();
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
 
-        $this->form_validation->set_rules('name', 'Model Name', 'trim|required');
+        $this->form_validation->set_rules('name', 'Model Name', 'trim|required|is_unique[model.name]|xss_clean');
 
         $data['data']=$data;
         $data['reports']=$reports;

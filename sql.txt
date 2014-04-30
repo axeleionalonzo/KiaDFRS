@@ -55,3 +55,6 @@ VALUES ('CRS');
 
 INSERT INTO term (term_name)
 VALUES ('PO');
+
+INSERT INTO consultant (username, password)
+VALUES ('Administrator', 'kia2014');

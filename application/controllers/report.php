@@ -61,7 +61,7 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
 
@@ -80,7 +80,7 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
 
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
 

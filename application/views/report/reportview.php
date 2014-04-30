@@ -99,9 +99,14 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <?php } elseif (($query[0]['username'])==('Administrator' || 'Axel Eion')) {?>
+      <?php $id = $report[0]->report_id;?>
+      <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
+      <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } else {?>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
-      <?php }?>
+      <?php } ?>
     </div>
 </form>
 

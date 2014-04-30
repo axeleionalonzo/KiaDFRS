@@ -66,8 +66,6 @@ $username=$query[0]['username'];
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -339,6 +337,9 @@ $username=$query[0]['username'];
         <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
       </div>
     </div>
+
+    <!-- google map -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- bootstrap -->
     <script src="<?php echo base_url();?>js/jquery-1.10.2.min.js"></script>
