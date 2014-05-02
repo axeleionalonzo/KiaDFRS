@@ -52,10 +52,10 @@ foreign key(consultant_id) references consultant(consultant_id)
 
 
 INSERT INTO status (status_name)
-VALUES ('Bought');
+VALUES ('Car Released');
 
 INSERT INTO status (status_name)
-VALUES ('Under Observation');
+VALUES ('Waiting for Approval');
 
 INSERT INTO term (term_name)
 VALUES ('COD');

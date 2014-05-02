@@ -15,6 +15,7 @@ class Report extends CI_Controller {
         
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
+        $consultants=$this->ReportModel->getConsultant();
         $all_status=$this->ReportModel->getStatus();
 
         $username = $this->session->userdata('username');
@@ -26,6 +27,7 @@ class Report extends CI_Controller {
         $data['reports']=$reports;
         $data['terms']=$terms;
         $data['models']=$models;
+        $data['consultants']=$consultants;
         $data['all_status']=$all_status;
         $this->load->view('report/reportlist', $data);
     }
@@ -40,10 +42,11 @@ class Report extends CI_Controller {
         $report=$this->ReportModel->get($report_id);
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
+        $consultants=$this->ReportModel->getConsultant();
         $all_status=$this->ReportModel->getStatus();
 
 
-        $this->load->view('report/reportedit',array('all_status'=>$all_status, 'models'=>$models,'terms'=>$terms,'report'=>$report));
+        $this->load->view('report/reportedit',array('all_status'=>$all_status, 'consultants'=>$consultants, 'models'=>$models,'terms'=>$terms,'report'=>$report));
     }
     public function view($report_id)
     {
@@ -63,7 +66,8 @@ class Report extends CI_Controller {
     {   
         $this->is_logged_in();
         $this->load->model('ReportModel');
-        
+
+        $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
         $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
@@ -79,11 +83,22 @@ class Report extends CI_Controller {
             $this->index();
         }
     }
+    public function viewConsultant()
+    {
+        $this->is_logged_in();
+        $username = $this->session->userdata('username');
+        $this->load->model('ReportModel');
+
+        $data['query'] = $this->ReportModel->getConsultantData($username);
+
+        $this->load->view('consultant/consultantview', $data);
+    }
     public function update()
     {
         $this->is_logged_in();
         $this->load->model('ReportModel');
 
+        $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
         $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
@@ -98,6 +113,23 @@ class Report extends CI_Controller {
             $this->ReportModel->update_entry();
             $this->index();
         }               
+    }
+    public function deleteConsultant($consultant_id)
+    {
+        $this->load->model('ReportModel');
+        $this->ReportModel->deleteConsultant($consultant_id);
+
+        $this->logout();
+    }
+    public function editConsultant()
+    {
+        $this->is_logged_in();
+        $username = $this->session->userdata('username');
+        $this->load->model('ReportModel');
+
+        $data['query'] = $this->ReportModel->getConsultantData($username);
+
+        $this->load->view('consultant/consultantedit', $data);
     }
     public function delete($report_id)
     {

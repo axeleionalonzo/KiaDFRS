@@ -16,13 +16,42 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <fieldset>
       <legend>
       </legend>
-      <div class="well well-sm">
-        <?php if (($report[0]->sales_consultant)=='Admin') { ?>
-          <p><center><Strong>Superuser: Admin</Strong></center></p>
-            <?php } else { ?>
-          <p><center>Sales Consultant: <b><big><?php echo $report[0]->sales_consultant;?></big></b></center></p>
-            <?php } ?>
-      </div>
+          <?php if ($username=='Administrator') { ;?>
+            <div class="form-group">
+              <label for="sales_consultant" class="col-lg-2 control-label">Consultant</label>
+              <div class="col-lg-10">
+                <select name="sales_consultant" class="form-control" id="sales_consultant">
+                <option value="<?php echo $report[0]->sales_consultant;?>"><?php echo $report[0]->sales_consultant;?></option>
+                <?php
+                  for($i=0; $i<count($consultants);$i++) {
+                  ?>
+                  <option value="<?php echo $consultants[$i]->username;?>"><?php echo $consultants[$i]->username;?></option>
+                <?php }?>
+                </select>
+                <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
+              </div>
+            </div>
+          <?php } elseif ($username=='Axel Eion') { ?>
+            <div class="form-group">
+              <label for="sales_consultant" class="col-lg-2 control-label">Consultant</label>
+              <div class="col-lg-10">
+                <select name="sales_consultant" class="form-control" id="sales_consultant">
+                <option value="<?php echo $report[0]->sales_consultant;?>"><?php echo $report[0]->sales_consultant;?></option>
+                <?php
+                  for($i=0; $i<count($consultants);$i++) {
+                  ?>
+                  <option value="<?php echo $consultants[$i]->username;?>"><?php echo $consultants[$i]->username;?></option>
+                <?php }?>
+                </select>
+                <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
+              </div>
+            </div>
+          <?php } else { ?>
+            <div class="well well-sm">
+              <p><center>Sales Consultant: <Strong><?php echo $report[0]->sales_consultant;?></Strong></center></p>
+              <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
+            </div>
+          <?php } ?>
       <div class="form-group">
         <label for="report_date" class="col-lg-2 control-label">Date</label>
         <div class="col-lg-10 controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">

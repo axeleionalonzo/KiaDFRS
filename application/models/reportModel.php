@@ -25,7 +25,7 @@ class ReportModel extends CI_Model {
 
     function search($report)
     {
-        $sql = "SELECT * FROM report WHERE client || report_date || sales_consultant || address || contactno || term || remarks || status LIKE ('%$report%') order by report_date";
+        $sql = "SELECT * FROM report WHERE client || report_date || model_name || sales_consultant || address || contactno || term || remarks || status LIKE ('%$report%') order by report_date";
         $query =$this->db->query($sql, array($report)); 
        
         return $query->result();
@@ -35,6 +35,12 @@ class ReportModel extends CI_Model {
         $sql = "SELECT * FROM report WHERE report_id = ?";
         $query =$this->db->query($sql, array($report_id)); 
        
+        return $query->result();
+    }
+
+    function getConsultant(){
+        $query = $this->db->get('consultant');
+
         return $query->result();
     }
 
@@ -77,6 +83,20 @@ class ReportModel extends CI_Model {
         $this->db->insert('report', $this);
     }
 
+    function getConsultantData($username) 
+    {
+        $this->db->where('username', $username);
+        $query = $this->db->get('consultant');
+
+        return $query->result_array();
+    }
+
+    function deleteConsultant($consultant_id) 
+    {
+        $this->db->where('consultant_id', $consultant_id);
+        $this->db->delete('consultant');
+    }
+
     function update_entry()
     {
         $this->report_date = $_POST['report_date']; // please read the below note
@@ -84,6 +104,7 @@ class ReportModel extends CI_Model {
         $this->address = $_POST['address'];
         $this->contactno = $_POST['contactno'];
         $this->model_name = $_POST['model_name'];
+        $this->sales_consultant = $_POST['sales_consultant'];
         $this->term = $_POST['term'];
         $this->remarks = $_POST['remarks'];
         $this->status = $_POST['status'];

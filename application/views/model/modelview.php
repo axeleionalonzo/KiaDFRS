@@ -14,6 +14,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 
 </head>
 <body>
+<div class="container">
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">View Car Model</h4>
@@ -26,13 +27,12 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <legend>
       </legend>
       <div class="form-group">
-          <label for="model_name" class="col-lg-2 control-label">Model</label>
-          <div class="col-lg-10">
-          <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-           <li class="disabled"><a href="#"><?php echo $model[0]->name?></a></li>
-          </ul>
-          </div>
+        <label class="col-lg-2 control-label">Model</label>
+        <div class="col-lg-10">
+          <input disabled="" type="text" class="form-control" value="<?php echo $model[0]->name?>">
+          <span class="help-block"></font></span>
         </div>
+      </div>
 
     </fieldset>
     <div class="modal-footer">
@@ -51,6 +51,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <?php } ?>
     </div>
 </form>
+</div>
 
     <!-- Modal Edit Model -->
     <div data-focus-on="input:first" class="modal fade" id="myModalEditModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

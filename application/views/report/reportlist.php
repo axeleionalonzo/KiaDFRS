@@ -108,7 +108,7 @@ $username=$query[0]['username'];
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><?php echo $query[0]['username']; ?> <span class="caret"></span></a>
       <ul class="dropdown-menu" aria-labelledby="download">
-      <li><a href="#">Manage Profile</a></li>
+      <li><a href="<?php echo base_url();?>index.php/report/viewConsultant">Manage Profile</a></li>
       <li class="divider"></li>
       <li><a href="<?php echo base_url();?>index.php/report/logout">Log out</a></li>
       </ul>
@@ -184,7 +184,7 @@ $username=$query[0]['username'];
           <tbody>
             <?php
             for($i=0; $i<count($reports);$i++) { ?>
-              <?php if(($reports[$i]->status)=='Bought') {
+              <?php if(($reports[$i]->status)=='Car Released') {
                 echo "<tr>";
               } else {
                 echo "<tr class=\"danger\">";
@@ -225,18 +225,42 @@ $username=$query[0]['username'];
         <?php echo form_open('report/insert');?>
           <fieldset>
           <legend></legend>
-          <div class="well well-sm">
-                <?php if ($username=='Administrator') { ;?>
-              <p><center><Strong>Superuser: <?php echo $username;?></Strong></center></p>
-                <input type="hidden" name="sales_consultant" value="Admin">
-                <?php } elseif ($username=='Axel Eion') { ?>
-              <p><center><Strong>Superuser: <?php echo $username;?></Strong></center></p>
-                <input type="hidden" name="sales_consultant" value="Admin">
-                <?php } else { ?>
+          <?php if ($username=='Administrator') { ;?>
+            <div class="form-group">
+              <label for="sales_consultant" class="col-lg-2 control-label">Consultant</label>
+              <div class="col-lg-10">
+                <select name="sales_consultant" class="form-control" id="sales_consultant">
+                <option value=""></option>
+                <?php
+                  for($i=0; $i<count($consultants);$i++) {
+                  ?>
+                  <option value="<?php echo $consultants[$i]->username;?>"><?php echo $consultants[$i]->username;?></option>
+                <?php }?>
+                </select>
+                <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
+              </div>
+            </div>
+          <?php } elseif ($username=='Axel Eion') { ?>
+            <div class="form-group">
+              <label for="sales_consultant" class="col-lg-2 control-label">Consultant</label>
+              <div class="col-lg-10">
+                <select name="sales_consultant" class="form-control" id="sales_consultant">
+                <option value=""></option>
+                <?php
+                  for($i=0; $i<count($consultants);$i++) {
+                  ?>
+                  <option value="<?php echo $consultants[$i]->username;?>"><?php echo $consultants[$i]->username;?></option>
+                <?php }?>
+                </select>
+                <span class="help-block"><font color="red"><?php echo form_error('sales_consultant');?></font></span>
+              </div>
+            </div>
+          <?php } else { ?>
+            <div class="well well-sm">
               <p><center>Sales Consultant: <Strong><?php echo $username;?></Strong></center></p>
-                <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
-                <?php } ?>
-          </div>  
+              <input type="hidden" name="sales_consultant" value="<?php echo $username;?>">
+            </div>
+          <?php } ?>
           <div class="form-group">
             <?php
             $date = date('Y-m-d');
