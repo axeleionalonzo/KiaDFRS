@@ -13,6 +13,14 @@ password varchar(50),
 primary key(consultant_id)
 );
 
+create table consultant_request(
+cr_id serial,
+username varchar(50) unique,
+password varchar(50),
+
+primary key(cr_id)
+);
+
 create table term(
 term_id serial,
 term_name varchar(50),
@@ -32,6 +40,7 @@ report_id serial,
 term_id int,
 model_id int,
 status_id int,
+cr_id int,
 consultant_id int,
 status varchar(50),
 report_date date,
@@ -45,6 +54,7 @@ remarks varchar(250),
 
 primary key(report_id),
 foreign key(term_id) references term(term_id),
+foreign key(cr_id) references consultant_request(cr_id),
 foreign key(model_id) references model(model_id),
 foreign key(status_id) references status(status_id),
 foreign key(consultant_id) references consultant(consultant_id)

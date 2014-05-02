@@ -16,6 +16,7 @@ class Report extends CI_Controller {
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
         $consultants=$this->ReportModel->getConsultant();
+        $consultant_requests=$this->ConsultantModel->getConsultantRequestData();
         $all_status=$this->ReportModel->getStatus();
 
         $username = $this->session->userdata('username');
@@ -28,6 +29,7 @@ class Report extends CI_Controller {
         $data['terms']=$terms;
         $data['models']=$models;
         $data['consultants']=$consultants;
+        $data['consultant_requests']=$consultant_requests;
         $data['all_status']=$all_status;
         $this->load->view('report/reportlist', $data);
     }
@@ -62,6 +64,32 @@ class Report extends CI_Controller {
         $data['report']=$report;
         $this->load->view('report/reportview', $data);
     }
+    public function view_request($cr_id)
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+        $this->load->model('ConsultantModel');
+        $consultant_data=$this->ConsultantModel->getConsultantRequest($cr_id);
+
+        $data['consultant_data']=$consultant_data;
+        $this->load->view('consultant/consultant_requestview', $data);
+    }
+    public function accept($cr_id) 
+    {   
+        $this->load->model('ReportModel');
+        $this->load->model('ConsultantModel');
+        $accept=$this->ConsultantModel->getConsultantRequest($cr_id);
+
+
+        $data = array(
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password'))
+            );
+
+        $this->ReportModel->addConsultant($accept);
+        $this->index();
+    }
+
     public function insert()
     {   
         $this->is_logged_in();
@@ -169,10 +197,9 @@ class Report extends CI_Controller {
             redirect('report/home');
         }
     }
-
-    public function signup() 
-    {   
-        $this->load->model('ReportModel');
+    public function request() 
+    {
+        $this->load->model('ConsultantModel');
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant.username]|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
@@ -187,9 +214,22 @@ class Report extends CI_Controller {
                 'password' => md5($this->input->post('password'))
             );
 
+        $this->ConsultantModel->requestConsultant($data);
+        redirect('report/home');
+
+        }
+    }
+    public function signup() 
+    {   
+        $this->load->model('ReportModel');
+
+        $data = array(
+                'username' => $this->input->post('username'),
+                'password' => md5($this->input->post('password'))
+            );
+
         $this->ReportModel->addConsultant($data);
         redirect('report/home');
-        }
     }
 
     public function logout()  

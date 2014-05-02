@@ -84,7 +84,7 @@ $username=$query[0]['username'];
     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Online Prospect Management System</span></a>
     </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right">  
     <li class="active"><a href="#" data-toggle="modal" data-target="#myModalAdd">Make a Report</a></li>
     <li class="">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cars <b class="caret"></b></a>
@@ -104,7 +104,27 @@ $username=$query[0]['username'];
     <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Search</button>
     </form>
     </li>
-    <?php if($is_logged_in) { ?>
+    <?php if ($username=='Administrator') { ;?>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests <span class="badge"><?php echo count($consultant_requests); ?></span></a>
+      <ul class="dropdown-menu" aria-labelledby="download">
+      <?php for($i=0; $i<count($consultant_requests);$i++) { ?>
+        <?php $id = $consultant_requests[$i]->cr_id;?>
+        <li><a href="<?php echo base_url();?>index.php/report/view_request/<?php echo $id?>"><small><?php echo $consultant_requests[$i]->username;?></small></a></li>
+      <?php }?>
+      </ul>
+    </li>
+    <?php } elseif ($username=='Axel Eion') { ?>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests <span class="badge"><?php echo count($consultant_requests); ?></span></a>
+      <ul class="dropdown-menu" aria-labelledby="download">
+      <?php for($i=0; $i<count($consultant_requests);$i++) { ?>
+        <?php $id = $consultant_requests[$i]->cr_id;?>
+        <li><a href="<?php echo base_url();?>index.php/report/view_request/<?php echo $id?>"><small><?php echo $consultant_requests[$i]->username;?></small></a></li>
+      <?php }?>
+      </ul>
+    </li>
+    <?php } ?>
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><?php echo $query[0]['username']; ?> <span class="caret"></span></a>
       <ul class="dropdown-menu" aria-labelledby="download">
@@ -113,7 +133,6 @@ $username=$query[0]['username'];
       <li><a href="<?php echo base_url();?>index.php/report/logout">Log out</a></li>
       </ul>
     </li>
-    <?php }?>
     </ul>
     </div>
     </div>

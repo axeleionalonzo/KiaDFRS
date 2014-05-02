@@ -21,11 +21,31 @@ class ConsultantModel extends CI_Model {
         }
     }
 
+    function getConsultantRequest($cr_id){
+        $sql = "SELECT * FROM report WHERE cr_id = ?";
+        $query =$this->db->query($sql, array($cr_id)); 
+       
+        return $query->result();
+    }
+
     function getConsultantData($username) 
     {
         $this->db->where('username', $username);
         $query = $this->db->get('consultant');
         return $query->result_array();
+    }
+
+    function requestConsultant($data) 
+    {
+        $this->db->insert('consultant_request', $data);
+        return;
+    }
+
+    function getConsultantRequestData() 
+    {
+        $query = $this->db->get('consultant_request');
+
+        return $query->result();
     }
 }
 ?>
