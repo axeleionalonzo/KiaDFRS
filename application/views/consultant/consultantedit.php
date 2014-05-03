@@ -4,32 +4,26 @@
 </div>
 
 <?php echo form_open('report/updateConsultant');?>
+    <input type="hidden" name="consultant_id" value="<?php echo $consultant[0]->consultant_id?>">
     <fieldset>
       <legend>
       </legend>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Username</label>
+        <label for="username" class="col-lg-2 control-label">Username</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" value="<?php echo $query[0]['username']; ?>">
-          <span class="help-block"></font></span>
+          <input disabled="" type="text" class="form-control" value="<?php echo $query[0]['username']; ?>">
+          <span class="help-block"><font color="red"><?php echo form_error('username');?></font></span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Old Password</label>
-        <div class="col-lg-10">
-          <input type="password" class="form-control" value="" placeholder="Your current password">
-          <span class="help-block"></font></span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password" class="col-lg-2 control-label">New Password</label>
+        <label for="password" class="col-lg-2 control-label">Password</label>
         <div class="col-lg-10">
           <input name="password" type="password" class="form-control" id="password" placeholder="New Password">
           <span class="help-block"><font color="red"><?php echo form_error('password');?></font></span>
         </div>
       </div>
       <div class="form-group">
-        <label for="passconf" class="col-lg-2 control-label">Confirm New Password</label>
+        <label for="passconf" class="col-lg-2 control-label">Confirm Password</label>
         <div class="col-lg-10">
           <input name="passconf" type="password" class="form-control" id="passconf" placeholder="Match above password">
           <span class="help-block"><font color="red"><?php echo form_error('passconf');?></font></span>
@@ -38,8 +32,8 @@
 
     </fieldset>
     <div class="modal-footer">
-      <a href="<?php echo base_url();?>index.php/report/editConsultant/" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Save Changes</a>
-      <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <a href="<?php echo base_url();?>index.php/report/viewConsultant" type="button" class="btn btn-default">Back</a>
     </div>
 </form>
 </div>

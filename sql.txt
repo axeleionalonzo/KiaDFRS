@@ -81,3 +81,9 @@ VALUES ('CRS');
 
 INSERT INTO term (term_name)
 VALUES ('PO');
+
+INSERT INTO consultant (username, password)
+VALUES ('Administrator', md5('123'));
+
+INSERT INTO consultant (username, password)
+VALUES ('Axel Eion', md5('123'));

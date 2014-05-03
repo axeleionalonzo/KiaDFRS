@@ -50,6 +50,18 @@ class Report extends CI_Controller {
 
         $this->load->view('report/reportedit',array('all_status'=>$all_status, 'consultants'=>$consultants, 'models'=>$models,'terms'=>$terms,'report'=>$report));
     }
+    public function editConsultant($consultant_id)
+    {
+        $this->is_logged_in();
+        $this->load->model('ConsultantModel');
+        $consultant=$this->ConsultantModel->getConsultantById($consultant_id);
+        $username = $this->session->userdata('username');
+        $this->load->model('ReportModel');
+
+        $data['query'] = $this->ReportModel->getConsultantData($username);
+        $data['consultant']=$consultant;
+        $this->load->view('consultant/consultantedit', $data);
+    }
     public function view($report_id)
     {
         $this->is_logged_in();
@@ -130,6 +142,27 @@ class Report extends CI_Controller {
             $this->index();
         }               
     }
+    public function updateConsultant()
+    {
+        $this->is_logged_in();
+        $this->load->model('ConsultantModel');
+
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
+
+        if ($this->form_validation->run() == FALSE) {
+            
+            $this->index();
+        } else {
+
+        $data = array(
+                'password' => md5($this->input->post('password'))
+            );
+
+            $this->ConsultantModel->update_consultant($data);
+            $this->index();
+        }               
+    }
     public function deleteConsultant($consultant_id)
     {
         $this->load->model('ReportModel');
@@ -143,16 +176,6 @@ class Report extends CI_Controller {
         $this->ConsultantModel->deleteConsultant($cr_id);
 
         $this->index();
-    }
-    public function editConsultant()
-    {
-        $this->is_logged_in();
-        $username = $this->session->userdata('username');
-        $this->load->model('ReportModel');
-
-        $data['query'] = $this->ReportModel->getConsultantData($username);
-
-        $this->load->view('consultant/consultantedit', $data);
     }
     public function delete($report_id)
     {
@@ -201,7 +224,7 @@ class Report extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('home');
+            redirect('report/home');
         }
         else {
         $data = array(
@@ -223,7 +246,7 @@ class Report extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('home');
+            redirect('report/home');
         }
         else {
         $data = array(
@@ -232,7 +255,7 @@ class Report extends CI_Controller {
             );
 
         $this->ReportModel->addConsultant($data);
-        $this->index();
+        redirect('report/home');
         }
     }
 

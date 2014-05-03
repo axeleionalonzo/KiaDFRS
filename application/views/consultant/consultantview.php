@@ -20,8 +20,6 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <h4 class="modal-title" id="myModalLabel">Profile</h4>
 </div>
 
-
-    <?php echo form_open('report/updateConsultant');?>
     <fieldset>
       <legend>
       </legend>
@@ -43,10 +41,9 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     </fieldset>
     <div class="modal-footer">
       <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/editConsultant/" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
     </div>
-</form>
 </div>
 
     <!-- Modal Edit Model -->

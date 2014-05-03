@@ -15,55 +15,12 @@ $username=$query[0]['username'];
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
-    <style>
-      #map_canvas {
-      width: 100%;
-      height: 400px;
-      }
-    </style>
-
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-23019901-1']);
       _gaq.push(['_setDomainName', "bootswatch.com"]);
       _gaq.push(['_setAllowLinker', true]);
       _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-
-      function reloadPage()
-      {
-      location.reload();
-      }
-
-      function toggleFullScreen() {
-      if ((document.fullScreenElement && document.fullScreenElement !== null) ||
-      (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-      if (document.documentElement.requestFullScreen) {
-      document.documentElement.requestFullScreen();
-      } else if (document.documentElement.mozRequestFullScreen) {
-      document.documentElement.mozRequestFullScreen();
-      } else if (document.documentElement.webkitRequestFullScreen) {
-      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-      }
-      }
-      }
-
-      function initialize() {
-      var map_canvas = document.getElementById('map_canvas');
-      var map_options = {
-      center: new google.maps.LatLng(8.1336, 124.1430),
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-      var map = new google.maps.Map(map_canvas, map_options)
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
 </head>
@@ -148,6 +105,14 @@ $username=$query[0]['username'];
               <p>Looks like something went wrong with the <font color=\"red\">Creation of your Report</font>. Please try again and provide the Required Information.</p>
             </div></center>"; ?>
             <?php }?>
+            <?php if (form_error('username') || form_error('password') || form_error('passconf')) { ?>
+            <?php echo "
+            <center><div class=\"alert alert-dismissable alert-warning\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Oops..</h4>
+              <p>Looks like something went wrong with your <font color=\"red\">Updated Details</font>. Please try again and provide the Required Information.</p>
+            </div></center>"; ?>
+            <?php }?>
             <?php if (form_error('name')) { ?>
             <?php echo "
             <center><div class=\"alert alert-dismissable alert-warning\">
@@ -157,7 +122,7 @@ $username=$query[0]['username'];
             </div></center>"; ?>
             <?php }?>
 
-    <!-- separates the heaven and earth
+    <!-- separates heaven and earth
     <div class="page-header" id="banner">
     </div>
     -->
@@ -301,11 +266,9 @@ $username=$query[0]['username'];
               </div>
           </div>
           <div class="form-group">
-            <label for="address" class="col-lg-2 control-label">
-              <a href="#" type="button" class="nav nav-pills" onclick="toggleFullScreen()" data-toggle="modal" data-target="#myModalViewMap">Address</a>
-            </label>
+            <label for="address" class="col-lg-2 control-label">Address</label>
             <div class="col-lg-10">
-              <input name="address" type="text" class="form-control" id="address" placeholder="Click Address to view Map" value="">
+              <input name="address" type="text" class="form-control" id="address" placeholder="Client Address" value="">
               <span class="help-block"><font color="red"><?php echo form_error('address');?></font></span>
             </div>
           </div>
@@ -386,15 +349,6 @@ $username=$query[0]['username'];
       </div>
     </div>
 
-    <!-- Modal View Map -->
-    <div class="modal fade" id="myModalViewMap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div id="map_canvas"></div>
-        </div>
-      </div>
-    </div>
-
     <!-- Modal Add Model -->
     <div class="modal fade" id="myModalAddModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -414,9 +368,6 @@ $username=$query[0]['username'];
         <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
       </div>
     </div>
-
-    <!-- google map -->
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
     <!-- bootstrap -->
     <script src="<?php echo base_url();?>js/jquery-1.10.2.min.js"></script>

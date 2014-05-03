@@ -28,6 +28,13 @@ class ConsultantModel extends CI_Model {
         return $query->result();
     }
 
+    function getConsultantById($consultant_id){
+        $sql = "SELECT * FROM consultant WHERE consultant_id = ?";
+        $query =$this->db->query($sql, array($consultant_id)); 
+       
+        return $query->result();
+    }
+
     function getConsultantData($username) 
     {
         $this->db->where('username', $username);
@@ -52,6 +59,12 @@ class ConsultantModel extends CI_Model {
     {
         $this->db->where('cr_id', $cr_id);
         $this->db->delete('consultant_request');
+    }
+
+    function update_consultant($data)
+    {
+        $this->db->update('consultant', $data);
+        return;
     }
 }
 ?>

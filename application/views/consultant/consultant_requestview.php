@@ -46,7 +46,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <div class="modal-footer">
       <?php $id = $consultant_data[0]->cr_id?>
       <a href="<?php echo base_url();?>index.php/report/deleteRequest/<?php echo $id; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to reject this request?')">Reject</a>
-      <a href="<?php echo base_url();?>index.php/report/deleteRequest/<?php echo $id; ?>" type="button" class="btn btn-primary" onclick="$(this).closest('form').submit(); return false;">Accept</button>
+      <button type="submit" class="btn btn-primary">Accept</button>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
     </div>
 </form>
