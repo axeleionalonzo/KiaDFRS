@@ -71,25 +71,13 @@ class Report extends CI_Controller {
         $this->load->model('ConsultantModel');
         $consultant_data=$this->ConsultantModel->getConsultantRequest($cr_id);
 
+        $username = $this->session->userdata('username');
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+
+        $data['data']=$data;
         $data['consultant_data']=$consultant_data;
         $this->load->view('consultant/consultant_requestview', $data);
     }
-    public function accept($cr_id) 
-    {   
-        $this->load->model('ReportModel');
-        $this->load->model('ConsultantModel');
-        $accept=$this->ConsultantModel->getConsultantRequest($cr_id);
-
-
-        $data = array(
-                'username' => $this->input->post('username'),
-                'password' => md5($this->input->post('password'))
-            );
-
-        $this->ReportModel->addConsultant($accept);
-        $this->index();
-    }
-
     public function insert()
     {   
         $this->is_logged_in();
@@ -149,6 +137,13 @@ class Report extends CI_Controller {
 
         $this->logout();
     }
+    public function deleteRequest($cr_id)
+    {
+        $this->load->model('ConsultantModel');
+        $this->ConsultantModel->deleteConsultant($cr_id);
+
+        $this->index();
+    }
     public function editConsultant()
     {
         $this->is_logged_in();
@@ -173,7 +168,7 @@ class Report extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Back</font></a>';
+            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Sign in</font></a>';
             die();
         }
     }
@@ -211,7 +206,7 @@ class Report extends CI_Controller {
         else {
         $data = array(
                 'username' => $this->input->post('username'),
-                'password' => md5($this->input->post('password'))
+                'password' => $this->input->post('password')
             );
 
         $this->ConsultantModel->requestConsultant($data);
@@ -222,14 +217,23 @@ class Report extends CI_Controller {
     public function signup() 
     {   
         $this->load->model('ReportModel');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant.username]|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
 
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('home');
+        }
+        else {
         $data = array(
                 'username' => $this->input->post('username'),
                 'password' => md5($this->input->post('password'))
             );
 
         $this->ReportModel->addConsultant($data);
-        redirect('report/home');
+        $this->index();
+        }
     }
 
     public function logout()  

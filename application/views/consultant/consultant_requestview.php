@@ -15,14 +15,15 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 </head>
 <body>
 <div class="container">
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">Profile</h4>
 </div>
 
 
-    <?php echo form_open('report/accept');?>
-    <input type="hidden" name="cr_id" value="<?php echo $consultant_data[0]->cr_id?>">
+    <?php echo form_open('report/signup');?>
+    <input type="hidden" name="cr_id" value="<?php echo $consultant_data[0]->cr_id; ?>">
     <fieldset>
       <legend>
       </legend>
@@ -30,35 +31,26 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <label class="col-lg-2 control-label">Username</label>
         <div class="col-lg-10">
           <input disabled="" type="text" class="form-control" value="<?php echo $consultant_data[0]->username; ?>">
+          <input type="hidden" name="username" value="<?php echo $consultant_data[0]->username; ?>">
           <span class="help-block"></font></span>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Password</label>
         <div class="col-lg-10">
-          <input disabled="" type="password" class="form-control" value="<?php echo $consultant_data[0]->password; ?>">
-          <span class="help-block"></font></span>
+          <input type="hidden" name="password" value="<?php echo $consultant_data[0]->password;?>">
+          <input type="hidden" name="passconf" value="<?php echo $consultant_data[0]->password;?>">
         </div>
       </div>
 
     </fieldset>
     <div class="modal-footer">
-      <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/editConsultant/" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <?php $id = $consultant_data[0]->cr_id?>
+      <a href="<?php echo base_url();?>index.php/report/deleteRequest/<?php echo $id; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to reject this request?')">Reject</a>
+      <a href="<?php echo base_url();?>index.php/report/deleteRequest/<?php echo $id; ?>" type="button" class="btn btn-primary" onclick="$(this).closest('form').submit(); return false;">Accept</button>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
     </div>
 </form>
 </div>
-
-    <!-- Modal Edit Model -->
-    <div data-focus-on="input:first" class="modal fade" id="myModalEditConsultant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-
-        </div>
-      </div>
-    </div>
-
 
     <!-- bootstrap -->
     <script src="<?php echo base_url();?>js/jquery-1.10.2.min.js"></script>

@@ -79,7 +79,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">Sign up</h4>
           </div>
-          <?php echo form_open('report/request');?>
+            <?php echo form_open('report/request'); ?>
             <fieldset>
               <legend></legend>
               <div class="well well-sm">
