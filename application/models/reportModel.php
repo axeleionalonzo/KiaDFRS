@@ -18,7 +18,7 @@ class ReportModel extends CI_Model {
     
     function get_last_ten_entries()
     {
-        $query = $this->db->get('report', 100);
+        $query = $this->db->get('report', 50);
 
         return $query->result();
     }
