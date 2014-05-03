@@ -147,6 +147,7 @@ class Report extends CI_Controller {
         $this->is_logged_in();
         $this->load->model('ConsultantModel');
 
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
 
@@ -155,11 +156,7 @@ class Report extends CI_Controller {
             $this->index();
         } else {
 
-        $data = array(
-                'password' => md5($this->input->post('password'))
-            );
-
-            $this->ConsultantModel->update_consultant($data);
+            $this->ConsultantModel->update_consultant();
             $this->index();
         }               
     }
@@ -246,7 +243,7 @@ class Report extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            redirect('report/home');
+            $this->index();
         }
         else {
         $data = array(
@@ -255,7 +252,7 @@ class Report extends CI_Controller {
             );
 
         $this->ReportModel->addConsultant($data);
-        redirect('report/home');
+        $this->index();
         }
     }
 

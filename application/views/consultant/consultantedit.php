@@ -12,6 +12,7 @@
         <label for="username" class="col-lg-2 control-label">Username</label>
         <div class="col-lg-10">
           <input disabled="" type="text" class="form-control" value="<?php echo $query[0]['username']; ?>">
+          <input type="hidden" name="username" value="<?php echo $query[0]['username']; ?>">
           <span class="help-block"><font color="red"><?php echo form_error('username');?></font></span>
         </div>
       </div>

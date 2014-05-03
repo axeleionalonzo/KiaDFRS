@@ -61,10 +61,12 @@ class ConsultantModel extends CI_Model {
         $this->db->delete('consultant_request');
     }
 
-    function update_consultant($data)
+    function update_consultant()
     {
-        $this->db->update('consultant', $data);
-        return;
+        $this->username = $_POST['username'];
+        $this->password = md5($_POST['password']); // please read the below note
+
+        $this->db->update('consultant', $this, array('consultant_id' => $_POST['consultant_id']));
     }
 }
 ?>
