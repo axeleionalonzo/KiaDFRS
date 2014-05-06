@@ -18,9 +18,19 @@ class ReportModel extends CI_Model {
     
     function get_last_ten_entries()
     {
-        $query = $this->db->get('report', 50);
+        $query = $this->db->get('report order by report_date');
 
         return $query->result();
+    }
+
+    function record_count() {
+        //create query to show number row on database
+        return $this->db->count_all("report");
+    }
+  
+    function fetch_siswa($limit, $start) {
+        //create query with limit function
+        return $this->db->limit($limit, $start)->get("report");
     }
 
     function search($report)

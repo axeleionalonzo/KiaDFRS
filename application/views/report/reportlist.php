@@ -130,19 +130,6 @@ $username=$query[0]['username'];
     <!-- Navbar
     ================================================== -->
 
-    <?php
-    $orderBy = array('type', 'description', 'recorded_date', 'added_date');
-
-    $order = 'type';
-    if (isset($_GET['orderBy']) && in_array($_GET['orderBy'], $orderBy)) {
-    $order = $_GET['orderBy'];
-    }
-
-    $query = 'SELECT * FROM report ORDER BY '.$order;
-
-    // retrieve and show the data :)
-    ?>
-
     <!-- Tables
     ================================================== -->
     <div class="bs-docs-section">
@@ -156,7 +143,8 @@ $username=$query[0]['username'];
           <table class="table table-striped table-hover ">
           <thead>
             <tr>
-            <th><a href="<?php echo base_url();?>?orderBy=recorded_date">Report Date</a></th>
+            <th>#</th>
+            <th><a href="<?php echo base_url();?>">Report Date</a></th>
             <th>Client</th>
             <th>Address</th>
             <th>Contact #</th>
@@ -167,12 +155,14 @@ $username=$query[0]['username'];
           </thead>
           <tbody>
             <?php
+            $no = 1;
             for($i=0; $i<count($reports);$i++) { ?>
               <?php if(($reports[$i]->status)=='Car Released') {
                 echo "<tr>";
               } else {
                 echo "<tr class=\"danger\">";
               }?>
+              <td><?php echo $no; ?></td>
               <td><?php echo $reports[$i]->report_date;?></td>
               <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>"><?php echo $reports[$i]->client;?></a></td>
               <td><?php echo $reports[$i]->address;?></td>
@@ -180,7 +170,11 @@ $username=$query[0]['username'];
               <td><?php echo $reports[$i]->model_name;?></td>
               <td><?php echo $reports[$i]->term;?></td>
               <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
-            <?php }?>
+
+            <?php 
+              $no++; 
+            } 
+            ?>
           </tbody>
           </table>
           <center><ul class="pagination pagination-sm">
@@ -193,9 +187,63 @@ $username=$query[0]['username'];
             <li><a href="#">»</a></li>
           </ul></center>
         </div>
-        </div>
+       </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table table-hover">
+    <thead>
+        <tr>
+     <th><a href="<?php echo base_url();?>">Report Date</a></th>
+            <th>Client</th>
+            <th>Address</th>
+            <th>Contact #</th>
+            <th>Model</th>
+            <th>Term</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php
+            $no = 1;
+            for($i=0; $i<count($reports);$i++) { ?>
+    <tr>
+      <td><?php echo $no; ?></td>
+      <td><?php echo $reports[$i]->report_date;?></td>
+              <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>"><?php echo $reports[$i]->client;?></a></td>
+              <td><?php echo $reports[$i]->address;?></td>
+              <td><?php echo $reports[$i]->contactno;?></td>
+              <td><?php echo $reports[$i]->model_name;?></td>
+              <td><?php echo $reports[$i]->term;?></td>
+    </tr>
+    <?php 
+      $no++; 
+    } 
+    ?>
+    </tbody>
+    </table>
+    <?php echo $paginator; ?>
+
+
+
+</br>
+
+<a href="http://imron02.wordpress.com/2013/06/18/create-pagination-codeigniter/">check pagination here</a>
+
+
+
+
+
 
 
     <!-- Modal Add Report-->
@@ -364,8 +412,6 @@ $username=$query[0]['username'];
         <ul class="list-unstyled">
           <li class="pull-right"><a href="#top">Back to top</a></li>
         </ul>
-        <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.</p>
-        <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>. Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
       </div>
     </div>
 

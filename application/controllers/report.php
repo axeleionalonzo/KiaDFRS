@@ -12,6 +12,29 @@ class Report extends CI_Controller {
         } else {
             $reports=$this->ReportModel->get_last_ten_entries();
         }
+
+        /////////////////////////////////////////
+
+
+        //configurations pagination
+            $config = array();
+            $config["total_rows"] = $this->ReportModel->record_count(); //get count row from model
+            $config["per_page"] = 15; //get limit per page
+            $config["uri_segment"] = 3; //example http://localhost/codeigniter/c_home/index/15 --> codeigniter is uri_segment 0, c_home = 1, index = 2, 15 is uri_segment = 3
+            $config['first_link'] = 'First';
+            $config['last_link'] = 'End';
+            $config['next_link'] = 'Next &rarr;';
+            $config['prev_link'] = '&larr; Prev';
+ 
+            $this->pagination->initialize($config); //get all config pagination
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+            $data["hslquery"] = $this->ReportModel->fetch_siswa($config["per_page"], $page); //send query with parameter to model fetch_siswa
+            $data["paginator"] = $this->pagination->create_links(); //create pagination number
+ 
+            $data["total_rows"] = $this->ReportModel->record_count();
+
+
+        /////////////////////////////////////////
         
         $models=$this->ReportModel->getModel();
         $terms=$this->ReportModel->getTerm();
@@ -97,7 +120,7 @@ class Report extends CI_Controller {
 
         $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
         $this->form_validation->set_rules('status', 'Client Status', 'trim|required');
@@ -128,7 +151,7 @@ class Report extends CI_Controller {
 
         $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
         $this->form_validation->set_rules('status', 'Client Status', 'trim|required');
