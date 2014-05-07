@@ -3,18 +3,35 @@ class Model extends CI_Controller {
 
     public function index()
     {
+        $this->is_logged_in();
         $this->load->model('ModelModel');
         $this->load->model('ReportModel');
         $this->load->model('ConsultantModel');
+        $this->load->library('pagination');
+
+        $config['base_url'] = 'http://localhost/KiaDFRS/index.php/report/index';
+        $config['total_rows'] = $this->ReportModel->recordsCount();
+        $config['full_tag_open'] = '<ul class="pagination pagination-sm">';
+        $config['full_tag_close'] = '</ul>';
+        $config['next_link'] = '»';
+        $config['prev_link'] = '«';
+
+        $limit = $config['per_page'] = 20;
+        $start = $this->uri->segment(3);
+        $config['num_links'] = 40;
+
+        $this->pagination->initialize($config);
 
         $username = $this->session->userdata('username');
-        $reports=$this->ReportModel->get_last_ten_entries();
+        $reports=$this->ReportModel->get_last_ten_entries($limit, $start);
         $models=$this->ModelModel->get_last_ten_entries();
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
+        $consultant_requests=$this->ConsultantModel->getConsultantRequestData();
 
         $data['data']=$data;
         $data['reports']=$reports;
         $data['models']=$models;
+        $data['consultant_requests']=$consultant_requests;
         
         $this->load->view('report/reportlist', $data);      
     }
