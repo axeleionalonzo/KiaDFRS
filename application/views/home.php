@@ -52,13 +52,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <h4>Oops..</h4>
         <p>Looks like something went wrong with your <font color=\"red\">Username and Password Combination</font>. Please try again with the correct details.</p>
       </div></center></div>"; ?>
-    <?php } elseif (form_error('username') || form_error('password') || form_error('passconf')) {?>
+    <?php } elseif (form_error('username') || form_error('password') || form_error('passconf')) { ?>
       <?php echo "<div class=\"container\"><div class=\"alert alert-dismissable alert-warning\"></div><center><div class=\"alert alert-dismissable alert-warning\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
         <h4>Oops..</h4>
         <p>Looks like something went wrong with your <font color=\"red\">Registration Details</font>. Please try again and provide the Required Information.</p>
         </div></center></div>"; ?>
-    <?php }?>
+    <?php } ?>
 
 
 <div class="row clearfix">
@@ -117,7 +117,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
             <fieldset>
               <legend></legend>
               <div class="well well-sm">
-                <p><b>Sales Consultant</b></p>
+                <center><p><b>Sales Consultant</b></p></center>
               </div>
               <div class="form-group">
                 <label for="username" class="col-lg-2 control-label">Full Name</label>
@@ -162,7 +162,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <fieldset>
             <legend></legend>
             <div class="well well-sm">
-            <p><b>Sales Consultant</b></p>
+              <center><p><b>Sales Consultant</b></p></center>
             </div>
             <div class="form-group">
               <label for="username" class="col-lg-2 control-label">Full Name</label>

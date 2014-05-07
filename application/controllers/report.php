@@ -227,7 +227,7 @@ class Report extends CI_Controller {
     public function request() 
     {
         $this->load->model('ConsultantModel');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant.username]|xss_clean');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant_request.username]|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
 

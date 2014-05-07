@@ -156,25 +156,30 @@ $username=$query[0]['username'];
           <tbody>
             <?php
             $no = 1;
-            for($i=0; $i<count($reports);$i++) { ?>
-              <?php if(($reports[$i]->status)=='Car Released') {
-                echo "<tr>";
-              } else {
-                echo "<tr class=\"danger\">";
-              }?>
-              <td><?php echo $no; ?></td>
-              <td><?php echo $reports[$i]->report_date;?></td>
-              <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>"><?php echo $reports[$i]->client;?></a></td>
-              <td><?php echo $reports[$i]->address;?></td>
-              <td><?php echo $reports[$i]->contactno;?></td>
-              <td><?php echo $reports[$i]->model_name;?></td>
-              <td><?php echo $reports[$i]->term;?></td>
-              <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
+            if (count($reports)==0) {
+              echo "<tr>
+                    <td>No Reports Found</td>";
+              
+            } else {
+                for($i=0; $i<count($reports);$i++) { ?>
+                <?php if(($reports[$i]->status)=='Car Released') {
+                  echo "<tr>";
+                } else {
+                  echo "<tr class=\"danger\">";
+                }?>
+                <td><?php echo $no; ?></td>
+                <td><?php echo $reports[$i]->report_date;?></td>
+                <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>"><?php echo $reports[$i]->client;?></a></td>
+                <td><?php echo $reports[$i]->address;?></td>
+                <td><?php echo $reports[$i]->contactno;?></td>
+                <td><?php echo $reports[$i]->model_name;?></td>
+                <td><?php echo $reports[$i]->term;?></td>
+                <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
 
-            <?php 
-              $no++; 
+            <?php $no++; }
             } 
             ?>
+          </tr>
           </tbody>
           </table>
           <center>
@@ -184,7 +189,7 @@ $username=$query[0]['username'];
        </div>
       </div>
     </div>
-    
+
     <!-- Modal Add Report-->
     <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
