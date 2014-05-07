@@ -177,15 +177,9 @@ $username=$query[0]['username'];
             ?>
           </tbody>
           </table>
-          <center><ul class="pagination pagination-sm">
-            <li class="disabled"><a href="#">«</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">»</a></li>
-          </ul></center>
+          <center>
+            <?php echo $this->pagination->create_links(); ?>
+          </center>
         </div>
        </div>
       </div>
@@ -201,44 +195,13 @@ $username=$query[0]['username'];
 
 
 
-    <table class="table table-hover">
-    <thead>
-        <tr>
-     <th><a href="<?php echo base_url();?>">Report Date</a></th>
-            <th>Client</th>
-            <th>Address</th>
-            <th>Contact #</th>
-            <th>Model</th>
-            <th>Term</th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <?php
-            $no = 1;
-            for($i=0; $i<count($reports);$i++) { ?>
-    <tr>
-      <td><?php echo $no; ?></td>
-      <td><?php echo $reports[$i]->report_date;?></td>
-              <td><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>"><?php echo $reports[$i]->client;?></a></td>
-              <td><?php echo $reports[$i]->address;?></td>
-              <td><?php echo $reports[$i]->contactno;?></td>
-              <td><?php echo $reports[$i]->model_name;?></td>
-              <td><?php echo $reports[$i]->term;?></td>
-    </tr>
-    <?php 
-      $no++; 
-    } 
-    ?>
-    </tbody>
-    </table>
-    <?php echo $paginator; ?>
 
 
 
-</br>
 
-<a href="http://imron02.wordpress.com/2013/06/18/create-pagination-codeigniter/">check pagination here</a>
+
+
+
 
 
 

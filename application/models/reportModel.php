@@ -16,21 +16,17 @@ class ReportModel extends CI_Model {
         parent::__construct();
     }
     
-    function get_last_ten_entries()
+    function get_last_ten_entries($limit, $start)
     {
-        $query = $this->db->get('report order by report_date');
+        $this->db->order_by('report_date','desc');
+        $query = $this->db->get('report', $limit, $start);
 
         return $query->result();
     }
 
-    function record_count() {
+    function recordsCount() {
         //create query to show number row on database
-        return $this->db->count_all("report");
-    }
-  
-    function fetch_siswa($limit, $start) {
-        //create query with limit function
-        return $this->db->limit($limit, $start)->get("report");
+        return $this->db->count_all('report');
     }
 
     function search($report)
