@@ -5,6 +5,38 @@ name varchar(50),
 primary key(model_id)
 );
 
+create table monthly_installment(
+monthly_installment_id serial,
+month varchar(50),
+
+primary key(monthly_installment_id)
+);
+
+create table quotation(
+quotation_id serial,
+model_id int,
+monthly_installment_id int,
+client varchar(50),
+address varchar(50),
+quotation_date date,
+contactNo varchar(50),
+model varchar(50),
+unit_price varchar(50),
+amount_financed varchar(50),
+down_payment varchar(50),
+freight_and_handling varchar(50),
+comprehensive_insurance varchar(50),
+lto_registration varchar(50),
+chattel_mortgage_fee varchar(50),
+other_services varchar(50),
+total_cash_outlay varchar(50),
+monthly_installment varchar(50),
+
+primary key(quotation_id),
+foreign key(model_id) references model(model_id),
+foreign key(monthly_installment_id) references monthly_installment(monthly_installment_id)
+);
+
 create table consultant(
 consultant_id serial,
 username varchar(50) unique,
@@ -39,6 +71,7 @@ create table report(
 report_id serial,
 term_id int,
 model_id int,
+quotation_id int,
 status_id int,
 cr_id int,
 consultant_id int,
@@ -56,6 +89,7 @@ primary key(report_id),
 foreign key(term_id) references term(term_id),
 foreign key(cr_id) references consultant_request(cr_id),
 foreign key(model_id) references model(model_id),
+foreign key(quotation_id) references quotation(quotation_id),
 foreign key(status_id) references status(status_id),
 foreign key(consultant_id) references consultant(consultant_id)
 );
@@ -81,6 +115,21 @@ VALUES ('CRS');
 
 INSERT INTO term (term_name)
 VALUES ('PO');
+
+INSERT INTO monthly_installment (month)
+VALUES ('12 months');
+
+INSERT INTO monthly_installment (month)
+VALUES ('24 months');
+
+INSERT INTO monthly_installment (month)
+VALUES ('36 months');
+
+INSERT INTO monthly_installment (month)
+VALUES ('48 months');
+
+INSERT INTO monthly_installment (month)
+VALUES ('60 months');
 
 INSERT INTO consultant (username, password)
 VALUES ('Administrator', md5('123'));

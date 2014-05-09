@@ -68,19 +68,9 @@ class Model extends CI_Controller {
     {   
         $this->is_logged_in();
         $this->load->model('ModelModel');
-        $this->load->model('ReportModel');
-        $this->load->model('ConsultantModel');
-
-        $username = $this->session->userdata('username');
-        $reports=$this->ReportModel->get_last_ten_entries();
-        $models=$this->ModelModel->get_last_ten_entries();
-        $data['query'] = $this->ConsultantModel->getConsultantData($username);
 
         $this->form_validation->set_rules('name', 'Model Name', 'trim|required|is_unique[model.name]|xss_clean');
 
-        $data['data']=$data;
-        $data['reports']=$reports;
-        $data['models']=$models;
         if ($this->form_validation->run() == FALSE) {
             
             $this->index();
@@ -104,19 +94,9 @@ class Model extends CI_Controller {
     {
         $this->is_logged_in();
         $this->load->model('ModelModel');
-        $this->load->model('ReportModel');
-        $this->load->model('ConsultantModel');
-
-        $username = $this->session->userdata('username');
-        $reports=$this->ReportModel->get_last_ten_entries();
-        $models=$this->ModelModel->get_last_ten_entries();
-        $data['query'] = $this->ConsultantModel->getConsultantData($username);
 
         $this->form_validation->set_rules('name', 'Model Name', 'trim|required|is_unique[model.name]|xss_clean');
 
-        $data['data']=$data;
-        $data['reports']=$reports;
-        $data['models']=$models;
         if ($this->form_validation->run() == FALSE) {
             
             $this->index();
@@ -128,21 +108,11 @@ class Model extends CI_Controller {
     }
     public function delete($model_id)
     {
+        $this->is_logged_in();
         $this->load->model('ModelModel');
-        $this->load->model('ReportModel');
-        $this->load->model('ConsultantModel');
         $this->ModelModel->delete_entry($model_id);
-
-        $username = $this->session->userdata('username');
-        $reports=$this->ReportModel->get_last_ten_entries();
-        $models=$this->ModelModel->get_last_ten_entries();
-        $data['query'] = $this->ConsultantModel->getConsultantData($username);
-
-        $data['data']=$data;
-        $data['reports']=$reports;
-        $data['models']=$models;
         
-        $this->load->view('report/reportlist', $data);                   
+        $this->index();               
     }
 }
 ?>

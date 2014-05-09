@@ -169,7 +169,7 @@ $username=$query[0]['username'];
                 }?>
                 <td><?php echo $no; ?></td>
                 <td><?php echo $reports[$i]->report_date;?></td>
-                <td><div class="bs-component"><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="tooltip" data-placement="top" data-original-title="Consultant: <?php echo $reports[$i]->sales_consultant;?> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp (click to show more details)"><?php echo $reports[$i]->client;?></a></div></td>
+                <td><div class="bs-component"><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="tooltip" data-placement="top" data-original-title="Consultant: <?php echo $reports[$i]->sales_consultant;?> (click to show more details)"><?php echo $reports[$i]->client;?></a></div></td>
                 <td><?php echo $reports[$i]->address;?></td>
                 <td><?php echo $reports[$i]->contactno;?></td>
                 <td><?php echo $reports[$i]->model_name;?></td>

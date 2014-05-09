@@ -56,6 +56,12 @@ class ReportModel extends CI_Model {
         return;
     }
 
+    function getmonthly_installment(){
+        $query = $this->db->get('monthly_installment');
+
+        return $query->result();
+    }
+
     function getModel(){
         $query = $this->db->get('model');
 

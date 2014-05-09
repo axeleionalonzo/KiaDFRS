@@ -62,6 +62,18 @@ class Report extends CI_Controller {
 
         $this->load->view('report/reportedit',array('all_status'=>$all_status, 'consultants'=>$consultants, 'models'=>$models,'terms'=>$terms,'report'=>$report));
     }
+    public function editQuotation($quotation_id)
+    {   
+        $this->is_logged_in();
+        $this->load->model('QuotationModel');
+        $this->load->model('ReportModel');
+        $monthly_installment=$this->ReportModel->getmonthly_installment();
+        $quotation=$this->QuotationModel->get($quotation_id);
+
+        $data['quotation']=$quotation;
+        $data['monthly_installment']=$monthly_installment;
+        $this->load->view('quotation/quotationedit', $data);
+    }
     public function editConsultant($consultant_id)
     {
         $this->is_logged_in();
@@ -88,6 +100,23 @@ class Report extends CI_Controller {
         $data['report']=$report;
         $this->load->view('report/reportview', $data);
     }
+    public function viewQuotation($quotation_id)
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+        $this->load->model('QuotationModel');
+        $this->load->model('ConsultantModel');
+        $quotation=$this->QuotationModel->get($quotation_id);
+        $report=$this->ReportModel->get($quotation_id);
+
+        $username = $this->session->userdata('username');
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+
+        $data['data']=$data;
+        $data['report']=$report;
+        $data['quotation']=$quotation;
+        $this->load->view('quotation/quotationview', $data);
+    }
     public function view_request($cr_id)
     {
         $this->is_logged_in();
@@ -106,6 +135,7 @@ class Report extends CI_Controller {
     {   
         $this->is_logged_in();
         $this->load->model('ReportModel');
+        $this->load->model('QuotationModel');
 
         $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
@@ -119,6 +149,7 @@ class Report extends CI_Controller {
             $this->index();
         } else {
 
+            $this->QuotationModel->insert_entry();
             $this->ReportModel->insert_entry();
             $this->index();
         }
@@ -137,6 +168,7 @@ class Report extends CI_Controller {
     {
         $this->is_logged_in();
         $this->load->model('ReportModel');
+        $this->load->model('QuotationModel');
 
         $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
@@ -151,6 +183,26 @@ class Report extends CI_Controller {
         } else {
 
             $this->ReportModel->update_entry();
+            $this->QuotationModel->update_entry_from_report();
+            $this->index();
+        }               
+    }
+    public function updateQuotation()
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+        $this->load->model('QuotationModel');
+
+        $this->form_validation->set_rules('quotation_date', 'Date', 'trim|required');
+        $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
+        $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            
+            $this->index();
+        } else {
+
+            $this->QuotationModel->update_entry();
             $this->index();
         }               
     }
@@ -190,7 +242,9 @@ class Report extends CI_Controller {
     {
         $this->is_logged_in();
         $this->load->model('ReportModel');
+        $this->load->model('QuotationModel');
         $this->ReportModel->delete_entry($report_id);
+        $this->QuotationModel->delete_entry($report_id);
 
         $this->index();  
     }
