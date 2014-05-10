@@ -65,7 +65,8 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <div class="form-group">
         <label for="client" class="col-lg-2 control-label">Client</label>
         <div class="col-lg-10">
-          <input name="client" type="text" class="form-control" id="client" value="<?php echo $report[0]->client;?>">
+          <input name="client" type="hidden" class="form-control" id="client" value="<?php echo $report[0]->client;?>">
+          <input disabled="" name="client" type="text" class="form-control" id="client" value="<?php echo $report[0]->client;?>">
           <span class="help-block"><font color="red"><?php echo form_error('client');?></font></span>
         </div>
       </div>

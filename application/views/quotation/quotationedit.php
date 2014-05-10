@@ -133,6 +133,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         </div>
       </div>
       <div class="form-group">
+        <label for="monthly_rate" class="col-lg-2 control-label">Monthly Rate</label>
+        <div class="col-lg-10">
+          <input name="monthly_rate" type="text" class="form-control" id="monthly_rate" value="<?php echo $quotation[0]->monthly_rate;?>">
+          <span class="help-block"><font color="red"><?php echo form_error('monthly_rate');?></font></span>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="monthly_installment" class="col-lg-2 control-label">Monthly Installment</label>
         <div class="col-lg-10">
           <select name="monthly_installment" class="form-control" id="monthly_installment">
@@ -146,6 +153,16 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"><font color="red"><?php echo form_error('monthly_installment');?></font></span>
         </div>
       </div></small></small>
+      <?php
+          if ($quotation[0]->amount_financed >0) {
+            $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
+          } else {
+            $installment = 0;
+          }
+        ?>
+      <input name="monthly_installment_per" type="hidden" class="form-control" id="monthly_installment_per" value="<?php
+              echo $installment;
+              ?>">
        
     </fieldset>
     <div class="modal-footer">

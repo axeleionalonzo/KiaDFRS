@@ -25,13 +25,19 @@ class Model extends CI_Controller {
         $username = $this->session->userdata('username');
         $reports=$this->ReportModel->get_last_ten_entries($limit, $start);
         $models=$this->ModelModel->get_last_ten_entries();
-        $data['query'] = $this->ConsultantModel->getConsultantData($username);
+        $terms=$this->ReportModel->getTerm();
+        $all_status=$this->ReportModel->getStatus();
+        $consultants=$this->ReportModel->getConsultant();
         $consultant_requests=$this->ConsultantModel->getConsultantRequestData();
+        $data['query'] = $this->ConsultantModel->getConsultantData($username);
 
         $data['data']=$data;
         $data['reports']=$reports;
         $data['models']=$models;
+        $data['terms']=$terms;
         $data['consultant_requests']=$consultant_requests;
+        $data['all_status']=$all_status;
+        $data['consultants']=$consultants;
         
         $this->load->view('report/reportlist', $data);      
     }

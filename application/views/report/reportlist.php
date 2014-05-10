@@ -50,8 +50,13 @@ $username=$query[0]['username'];
         <?php $id = $models[$i]->model_id;?>
         <li><a href="<?php echo base_url();?>index.php/model/view/<?php echo $id?>"><small><?php echo $models[$i]->name;?></small></a></li>
       <?php }?>
+      <?php if ($username=='Administrator') { ;?>
         <li class="divider"></li>
         <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
+      <?php } elseif ($username=='Axel Eion') { ?>
+        <li class="divider"></li>
+        <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
+      <?php }?>
     </ul>
     </li>
     <li><form action="<?php echo base_url();?>index.php/" method="post" class="navbar-form navbar-left" role="search">
@@ -111,6 +116,14 @@ $username=$query[0]['username'];
               <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
               <h4>Oops..</h4>
               <p>Looks like something went wrong with your <font color=\"red\">Updated Details</font>. Please try again and provide the Required Information.</p>
+            </div></center>"; ?>
+            <?php }?>
+            <?php if (form_error('monthly_rate') || form_error('monthly_installment') || form_error('down_payment') || form_error('amount_financed') || form_error('unit_price') || form_error('model') || form_error('contactno') || form_error('address') || form_error('quotation_date')) { ?>
+            <?php echo "
+            <center><div class=\"alert alert-dismissable alert-warning\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Oops..</h4>
+              <p>Looks like something went wrong with your <font color=\"red\">Quotation Details</font>. Please try again and provide the Required Information.</p>
             </div></center>"; ?>
             <?php }?>
             <?php if (form_error('name')) { ?>
@@ -254,6 +267,7 @@ $username=$query[0]['username'];
             <label for="client" class="col-lg-2 control-label">Client</label>
               <div class="col-lg-10">
               <input name="client" type="text" class="form-control" id="client" placeholder="Client Full Name" value="">
+              <span class="help-block">Client Name cannot be edited later.</span>
               <span class="help-block"><font color="red"><?php echo form_error('client');?></font></span>
               </div>
           </div>

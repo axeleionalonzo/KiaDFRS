@@ -145,9 +145,16 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           </div>
         </div>
         <div class="form-group">
+          <label class="col-lg-2 control-label">Monthly Rate</label>
+          <div class="col-lg-10">
+            <input disabled="" type="text" class="form-control" value="<?php echo $quotation[0]->monthly_rate;?>">
+            <span class="help-block"></font></span>
+          </div>
+        </div>
+        <div class="form-group">
           <label class="col-lg-2 control-label">Monthly Installment</label>
           <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $quotation[0]->monthly_installment;?>">
+            <input disabled="" type="text" class="form-control" value="<?php echo $quotation[0]->monthly_installment;?>: <?php echo $quotation[0]->monthly_installment_per;?>">
             <span class="help-block"></font></span>
           </div>
         </div>

@@ -172,7 +172,7 @@ class Report extends CI_Controller {
 
         $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
-        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|is_unique[report.client]|xss_clean');
+        $this->form_validation->set_rules('client', 'Client Name', 'trim|required|xss_clean');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
         $this->form_validation->set_rules('status', 'Client Status', 'trim|required');
@@ -196,6 +196,12 @@ class Report extends CI_Controller {
         $this->form_validation->set_rules('quotation_date', 'Date', 'trim|required');
         $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
         $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
+        $this->form_validation->set_rules('model', 'Model', 'trim|required');
+        $this->form_validation->set_rules('unit_price', 'Unit Price', 'trim|required');
+        $this->form_validation->set_rules('amount_financed', 'Amount Financed', 'trim|required');
+        $this->form_validation->set_rules('down_payment', 'Down Payment', 'trim|required');
+        $this->form_validation->set_rules('monthly_installment', 'Monthly Installment', 'trim|required');
+        $this->form_validation->set_rules('monthly_rate', 'Monthly Rate', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             
@@ -292,7 +298,7 @@ class Report extends CI_Controller {
         else {
         $data = array(
                 'username' => $this->input->post('username'),
-                'password' => $this->input->post('password')
+                'password' => md5($this->input->post('password'))
             );
 
         $this->ConsultantModel->requestConsultant($data);
@@ -314,7 +320,7 @@ class Report extends CI_Controller {
         else {
         $data = array(
                 'username' => $this->input->post('username'),
-                'password' => md5($this->input->post('password'))
+                'password' => $this->input->post('password')
             );
 
         $this->ReportModel->addConsultant($data);
