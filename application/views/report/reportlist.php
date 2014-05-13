@@ -148,16 +148,14 @@ $username=$query[0]['username'];
     <div class="bs-docs-section">
       <div class="row">
         <div class="col-lg-12">
-        <div class="page-header">
-          <h1 id="tables">List of Reports</h1>
-        </div>
 
+          <h3>Reports</h3>
         <div class="bs-component">
-          <table class="table table-striped table-hover ">
+          <table class="table table-bordered table-hover ">
           <thead>
             <tr>
             <th>#</th>
-            <th><a href="<?php echo base_url();?>">Report Date</a></th>
+            <th><a href="<?php echo base_url();?>">Date</a></th>
             <th>Client</th>
             <th>Address</th>
             <th>Contact #</th>
