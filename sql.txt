@@ -31,7 +31,6 @@ chattel_mortgage_fee varchar(50),
 other_services varchar(50),
 total_cash_outlay varchar(50),
 monthly_installment varchar(50),
-monthly_installment_per varchar(50),
 monthly_rate varchar(50),
 
 primary key(quotation_id),

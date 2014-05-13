@@ -7,26 +7,25 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 <html lang="en">
 <head>
       <meta charset="utf-8">
-    <title>Report List</title>
+    <title>Quotation</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
       <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     <script>
-      function printDiv(divName) {
-      var printContents = document.getElementById(divName).innerHTML; 
-       var originalContents = document.body.innerHTML; 
-       document.body.innerHTML = printContents;
-       window.print();
-       document.body.innerHTML = originalContents;
-       }
+    printDivCSS = new String ('<link href="<?php echo base_url();?>css/print.css" media="print" rel="stylesheet" type="text/css">')
+    function printDiv(divId) {
+        window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+        window.frames["print_frame"].window.focus();
+        window.frames["print_frame"].window.print();
+    }
     </script>
 
 </head>
 <body>
 
 <div class="container">
-
+<div id="div1">
     <input type="hidden" name="quotation_id" value="<?php echo $quotation[0]->quotation_id?>">
     <div class="row clearfix">
       <div class="col-md-12 column">
@@ -62,7 +61,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <center><label class="col-lg-3 control-label">Date:</label><?php echo $quotation[0]->quotation_date;?></center>
         </p>
         <p>
-        <center><label class="col-lg-3 control-label">Contact&nbspNo.:</label><?php echo $quotation[0]->contactno;?></center>
+        <center><label class="col-lg-3 control-label">Contact&nbspNo:</label><?php echo $quotation[0]->contactno;?></center>
         </p>
         </div>
         </div>
@@ -176,7 +175,15 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         </p>
         </div>
         <div class="col-md-6 column">
-        <?php echo $quotation[0]->monthly_rate;?>%</center>
+        <?php echo $quotation[0]->monthly_rate;?>
+        <?php
+            if ($quotation[0]->amount_financed >0) {
+              echo "% ";
+            } else {
+              echo "";
+            }
+          ?>
+        </center>
         </div>
         </div>
         <div class="row clearfix">
@@ -185,8 +192,22 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <center><label class="col-lg-3 control-label">Monthly&nbspInstallment:</label>
         </p>
         </div>
+        <?php
+          if ($quotation[0]->amount_financed >0) {
+            $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
+          } else {
+            $installment = 0;
+          }
+        ?>
         <div class="col-md-6 column">
-        <?php echo $quotation[0]->monthly_installment;?>: <?php echo $quotation[0]->monthly_installment_per;?> per month</center>
+        <?php echo $installment;?>
+        <?php
+          if ($quotation[0]->amount_financed >0) {
+            echo " per month for ";
+          } else {
+            echo "";
+          }
+        ?><?php echo $quotation[0]->monthly_installment;?></center>
         </div>
         </div>
         </div>
@@ -205,11 +226,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     </div>
     </div>
 </div>
-
+</div>
 
 <div class="row clearfix">
 <div class="modal-footer">
-<input type="button" value="Print" class="btn btn-primary" onclick="printDiv(example);" />
+<a type="button" class="btn btn-primary" href="javascript:printDiv('div1')">Print</a>
+<iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+
 
 <?php if (($query[0]['username'])==($report[0]->sales_consultant)) { ?>
 <?php $id = $report[0]->report_id;?>

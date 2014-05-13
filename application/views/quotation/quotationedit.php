@@ -153,16 +153,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"><font color="red"><?php echo form_error('monthly_installment');?></font></span>
         </div>
       </div></small></small>
-      <?php
-          if ($quotation[0]->amount_financed >0) {
-            $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
-          } else {
-            $installment = 0;
-          }
-        ?>
-      <input name="monthly_installment_per" type="hidden" class="form-control" id="monthly_installment_per" value="<?php
-              echo $installment;
-              ?>">
+      
        
     </fieldset>
     <div class="modal-footer">
