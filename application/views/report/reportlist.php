@@ -80,9 +80,13 @@ $username=$query[0]['username'];
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests <span class="badge"><?php echo count($consultant_requests); ?></span></a>
       <ul class="dropdown-menu" aria-labelledby="download">
+      <?php if (count($consultant_requests)==0) { ;?>
+      <li><a href="#"><small>No Request Found</small></a></li>
+      <?php } else { ?>
       <?php for($i=0; $i<count($consultant_requests);$i++) { ?>
         <?php $id = $consultant_requests[$i]->cr_id;?>
         <li><a href="<?php echo base_url();?>index.php/report/view_request/<?php echo $id?>"><small><?php echo $consultant_requests[$i]->username;?></small></a></li>
+      <?php }?>
       <?php }?>
       </ul>
     </li>
