@@ -200,7 +200,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           }
         ?>
         <div class="col-md-6 column">
-        <?php echo $installment;?>
+        <?php echo round($installment,2);?>
         <?php
           if ($quotation[0]->amount_financed >0) {
             echo " per month for ";
