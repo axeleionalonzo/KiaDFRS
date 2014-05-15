@@ -148,11 +148,16 @@ class Report extends CI_Controller {
             
             $this->index();
         } else {
-
             $this->QuotationModel->insert_entry();
             $this->ReportModel->insert_entry();
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully created a report! You can view the full report by clicking the Client's Name!</p>
+            </div></center></div>";
             $this->index();
         }
+        
     }
     public function viewConsultant()
     {
@@ -181,9 +186,13 @@ class Report extends CI_Controller {
             
             $this->index();
         } else {
-
             $this->ReportModel->update_entry();
             $this->QuotationModel->update_entry_from_report();
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully updated a report!</p>
+            </div></center></div>";
             $this->index();
         }               
     }
@@ -207,8 +216,12 @@ class Report extends CI_Controller {
             
             $this->index();
         } else {
-
             $this->QuotationModel->update_entry();
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully updated a Quotation!</p>
+            </div></center></div>";
             $this->index();
         }               
     }
@@ -225,8 +238,12 @@ class Report extends CI_Controller {
             
             $this->index();
         } else {
-
             $this->ConsultantModel->update_consultant();
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully updated your Account details!</p>
+            </div></center></div>";
             $this->index();
         }               
     }
@@ -234,14 +251,22 @@ class Report extends CI_Controller {
     {
         $this->load->model('ReportModel');
         $this->ReportModel->deleteConsultant($consultant_id);
-
+        echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+            <h4>Congratulations!</h4>
+            <p>You just successfully deleted your Account! Create a new Account by Signing up!</p>
+            </div></center></div>";
         $this->logout();
     }
     public function deleteRequest($cr_id)
     {
         $this->load->model('ConsultantModel');
         $this->ConsultantModel->deleteConsultant($cr_id);
-
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully Rejected the request!</p>
+            </div></center></div>";
         $this->index();
     }
     public function delete($report_id)
@@ -294,20 +319,25 @@ class Report extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             redirect('report/home');
-        }
-        else {
+        } else {
         $data = array(
                 'username' => $this->input->post('username'),
                 'password' => md5($this->input->post('password'))
             );
 
         $this->ConsultantModel->requestConsultant($data);
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully Created your account! Please wait or contact the System Administrator to approve your Request!</p>
+            </div></center></div>";
         redirect('report/home');
 
         }
     }
     public function signup() 
     {   
+        $this->is_logged_in();
         $this->load->model('ReportModel');
         $this->load->model('ConsultantModel');
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant.username]|xss_clean');
@@ -327,6 +357,11 @@ class Report extends CI_Controller {
         $id = $this->input->post('cr_id');
         $this->ReportModel->addConsultant($data);
         $this->ConsultantModel->deleteConsultant($id);
+            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+              <h4>Congratulations!</h4>
+              <p>You just successfully accepted the request! You can now inform the Consultant that his/her account is ready to use!</p>
+            </div></center></div>";
         $this->index();
         }
     }

@@ -105,7 +105,7 @@ $username=$query[0]['username'];
     </div>
 
     <div class="container">
-    <div class="alert alert-dismissable alert-warning"></div>
+      <br><br><br>
             <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno') || form_error('status')) { ?>
             <?php echo "
             <center><div class=\"alert alert-dismissable alert-warning\">

@@ -47,13 +47,14 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     </div>
 
     <?php if ($this->session->flashdata('flashError')) { ?>
-      <?php echo "<div class=\"container\"><div class=\"alert alert-dismissable alert-warning\"></div><center><div class=\"alert alert-dismissable alert-warning\">
+      <?php echo "<div class=\"container\"><br><br><br><center><div class=\"alert alert-dismissable alert-warning\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
         <h4>Oops..</h4>
         <p>Looks like something went wrong with your <font color=\"red\">Username and Password Combination</font>. Please try again with the correct details.</p>
       </div></center></div>"; ?>
-    <?php } elseif (form_error('username') || form_error('password') || form_error('passconf')) { ?>
-      <?php echo "<div class=\"container\"><div class=\"alert alert-dismissable alert-warning\"></div><center><div class=\"alert alert-dismissable alert-warning\">
+    <?php } ?>
+    <?php if (form_error('username') || form_error('password') || form_error('passconf')) { ?>
+      <?php echo "<div class=\"container\"><br><br><br><center><div class=\"alert alert-dismissable alert-warning\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
         <h4>Oops..</h4>
         <p>Looks like something went wrong with your <font color=\"red\">Registration Details</font>. Please try again and provide the Required Information.</p>
