@@ -32,6 +32,8 @@ class Model extends CI_Controller {
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
         $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
 
+
+        $data['rank']='<?php $model = new Model (); $params = $report -> rank($consultants[$i]->username); ?><span class="badge"><?php echo count($params); ?></span>';
         $data['data']=$data;
         $data['reports']=$reports;
         $data['models']=$models;
@@ -55,6 +57,13 @@ class Model extends CI_Controller {
         $data['data']=$data;
         $data['model']=$model;
         $this->load->view('model/modelview', $data);
+    }
+    public function rank($username) 
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+
+        return $ranks=$this->ReportModel->getrecordby($username);
     }
     public function add()
     {
@@ -120,13 +129,6 @@ class Model extends CI_Controller {
         $this->ModelModel->delete_entry($model_id);
         
         $this->index();               
-    }
-    public function rank($username) 
-    {
-        $this->is_logged_in();
-        $this->load->model('ReportModel');
-
-        return $ranks=$this->ReportModel->getrecordby($username);
     }
 }
 ?>

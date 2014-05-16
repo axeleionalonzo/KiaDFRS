@@ -235,10 +235,8 @@ $username=$query[0]['username'];
           for($i=0; $i<count($consultants);$i++) { ?>
           <a href="#" class="list-group-item"><?php echo $consultants[$i]->username; ?>
             <?php
-            $report = new Report ();
-            $params = $report -> rank($consultants[$i]->username);
+              $rank;
             ?>
-            <span class="badge"><?php echo count($params); ?></span>
               </a>
           <?php } ?>
         </div>

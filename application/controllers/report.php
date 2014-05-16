@@ -37,6 +37,7 @@ class Report extends CI_Controller {
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
         $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
 
+        $data['rank']='<?php $report = new Report (); $params = $report -> rank($consultants[$i]->username); ?><span class="badge"><?php echo count($params); ?></span>';
         $data['data']=$data;
         $data['reports']=$reports;
         $data['terms']=$terms;
