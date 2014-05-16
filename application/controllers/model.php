@@ -121,5 +121,12 @@ class Model extends CI_Controller {
         
         $this->index();               
     }
+    public function rank($username) 
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+
+        return $ranks=$this->ReportModel->getrecordby($username);
+    }
 }
 ?>
