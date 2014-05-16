@@ -30,6 +30,7 @@ class Model extends CI_Controller {
         $consultants=$this->ReportModel->getConsultant();
         $consultant_requests=$this->ConsultantModel->getConsultantRequestData();
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
+        $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
 
         $data['data']=$data;
         $data['reports']=$reports;
@@ -38,7 +39,7 @@ class Model extends CI_Controller {
         $data['consultant_requests']=$consultant_requests;
         $data['all_status']=$all_status;
         $data['consultants']=$consultants;
-        
+        $data['recordsbyconsultatnt']=$recordsbyconsultatnt;
         $this->load->view('report/reportlist', $data);      
     }
     public function view($model_id)

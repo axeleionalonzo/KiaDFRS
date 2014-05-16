@@ -44,6 +44,13 @@ class ReportModel extends CI_Model {
         return $query->result();
     }
 
+    function getrecordby($sales_consultant){
+        $sql = "SELECT * FROM report WHERE sales_consultant = ?";
+        $query =$this->db->query($sql, array($sales_consultant)); 
+       
+        return $query->result();
+    }
+
     function getConsultant(){
         $query = $this->db->get('consultant');
 
@@ -54,6 +61,12 @@ class ReportModel extends CI_Model {
     {
         $this->db->insert('consultant', $data);
         return;
+    }
+
+    function putConsultantReport()
+    {
+        $this->numofreports = $numofreports++;
+        $this->db->update('consultant', $this);
     }
 
     function getmonthly_installment(){

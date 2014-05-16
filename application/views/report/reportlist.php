@@ -43,22 +43,6 @@ $username=$query[0]['username'];
     </ul>
     <ul class="nav navbar-nav navbar-right">  
     <li class="active"><a href="#" data-toggle="modal" data-target="#myModalAdd">Make a Report</a></li>
-    <li class="">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cars <b class="caret"></b></a>
-    <ul class="dropdown-menu">
-      <?php for($i=0; $i<count($models);$i++) { ?>
-        <?php $id = $models[$i]->model_id;?>
-        <li><a href="<?php echo base_url();?>index.php/model/view/<?php echo $id?>"><small><?php echo $models[$i]->name;?></small></a></li>
-      <?php }?>
-      <?php if ($username=='Administrator') { ;?>
-        <li class="divider"></li>
-        <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
-      <?php } elseif ($username=='Axel Eion') { ?>
-        <li class="divider"></li>
-        <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
-      <?php }?>
-    </ul>
-    </li>
     <li><form action="<?php echo base_url();?>index.php/" method="post" class="navbar-form navbar-left" role="search">
     <div class="form-group">
     <input type="text" name="report" class="form-control" placeholder="Keyword Here">
@@ -68,17 +52,32 @@ $username=$query[0]['username'];
     </li>
     <?php if ($username=='Administrator') { ;?>
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests <span class="badge"><?php echo count($consultant_requests); ?></span></a>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests 
+      <?php if (count($consultant_requests)>0) { ;?>
+        <span class="badge"><?php echo count($consultant_requests); ?></span>
+      <?php } else { ?>
+        <span class="badge"></span>
+      <?php }?>
       <ul class="dropdown-menu" aria-labelledby="download">
+      <?php if (count($consultant_requests)==0) { ;?>
+      <li><a href="#"><small>No Request Found</small></a></li>
+      <?php } else { ?>
       <?php for($i=0; $i<count($consultant_requests);$i++) { ?>
         <?php $id = $consultant_requests[$i]->cr_id;?>
         <li><a href="<?php echo base_url();?>index.php/report/view_request/<?php echo $id?>"><small><?php echo $consultant_requests[$i]->username;?></small></a></li>
+      <?php }?>
       <?php }?>
       </ul>
     </li>
     <?php } elseif ($username=='Axel Eion') { ?>
     <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests <span class="badge"><?php echo count($consultant_requests); ?></span></a>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Requests 
+      <?php if (count($consultant_requests)>0) { ;?>
+        <span class="badge"><?php echo count($consultant_requests); ?></span>
+      <?php } else { ?>
+        <span class="badge"></span>
+      <?php }?>
+      </a>
       <ul class="dropdown-menu" aria-labelledby="download">
       <?php if (count($consultant_requests)==0) { ;?>
       <li><a href="#"><small>No Request Found</small></a></li>
@@ -149,61 +148,104 @@ $username=$query[0]['username'];
 
     <!-- Tables
     ================================================== -->
-    <div class="bs-docs-section">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <h3>Reports</h3>
-        <div class="bs-component">
-          <table class="table table-bordered table-hover ">
-          <thead>
-            <tr>
-            <th>#</th>
-            <th><a href="<?php echo base_url();?>">Date</a></th>
-            <th>Client</th>
-            <th>Address</th>
-            <th>Contact #</th>
-            <th>Model</th>
-            <th>Term</th>
-            <!-- <th>Remarks</th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $no = 1;
-            if (count($reports)==0) {
-              echo "<tr>
-                    <td>No Reports Found</td>";
-              
-            } else {
-                for($i=0; $i<count($reports);$i++) { ?>
-                <?php if(($reports[$i]->status)=='Car Released') {
-                  echo "<tr>";
+    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+      <li class="active"><a href="#home" data-toggle="tab">Reports</a></li>
+      <li class=""><a href="#profile" data-toggle="tab">Profiles</a></li>
+      <li class="">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cars <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <?php for($i=0; $i<count($models);$i++) { ?>
+          <?php $id = $models[$i]->model_id;?>
+          <li><a href="<?php echo base_url();?>index.php/model/view/<?php echo $id?>"><small><?php echo $models[$i]->name;?></small></a></li>
+        <?php }?>
+        <?php if ($username=='Administrator') { ;?>
+          <li class="divider"></li>
+          <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
+        <?php } elseif ($username=='Axel Eion') { ?>
+          <li class="divider"></li>
+          <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
+        <?php }?>
+      </ul>
+      </li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="home">
+        <div class="bs-docs-section">
+          <div class="row">
+            <div class="col-lg-12">
+            <div class="bs-component">
+              <table class="table table-bordered table-hover ">
+              <thead>
+                <tr>
+                <th>#</th>
+                <th><a href="<?php echo base_url();?>">Date</a></th>
+                <th>Client</th>
+                <th>Address</th>
+                <th>Contact #</th>
+                <th>Model</th>
+                <th>Term</th>
+                <!-- <th>Remarks</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 1;
+                if (count($reports)==0) {
+                  echo "<tr>
+                        <td>No Reports Found</td>";
+                  
                 } else {
-                  echo "<tr class=\"danger\">";
-                }?>
-                <td><?php echo $no; ?></td>
-                <td><?php echo $reports[$i]->report_date;?></td>
-                <td><div class="bs-component"><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="tooltip" data-placement="top" data-original-title="Consultant: <?php echo $reports[$i]->sales_consultant;?> (click to show more details)"><?php echo $reports[$i]->client;?></a></div></td>
-                <td><?php echo $reports[$i]->address;?></td>
-                <td><?php echo $reports[$i]->contactno;?></td>
-                <td><?php echo $reports[$i]->model_name;?></td>
-                <td><?php echo $reports[$i]->term;?></td>
-                <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
+                    for($i=0; $i<count($reports);$i++) { ?>
+                    <?php if(($reports[$i]->status)=='Car Released') {
+                      echo "<tr>";
+                    } else {
+                      echo "<tr class=\"danger\">";
+                    }?>
+                    <td><?php echo $no; ?></td>
+                    <td><?php echo $reports[$i]->report_date;?></td>
+                    <td><div class="bs-component"><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="tooltip" data-placement="top" data-original-title="Consultant: <?php echo $reports[$i]->sales_consultant;?>"><?php echo $reports[$i]->client;?></a></div></td>
+                    <td><?php echo $reports[$i]->address;?></td>
+                    <td><?php echo $reports[$i]->contactno;?></td>
+                    <td><?php echo $reports[$i]->model_name;?></td>
+                    <td><?php echo $reports[$i]->term;?></td>
+                    <!-- <td><?php echo $reports[$i]->remarks;?></td> -->
 
-            <?php $no++; }
-            } 
-            ?>
-          </tr>
-          </tbody>
-          </table>
-          <center>
-            <?php echo $this->pagination->create_links(); ?>
-          </center>
+                <?php $no++; }
+                } 
+                ?>
+              </tr>
+              </tbody>
+              </table>
+              <center>
+                <?php echo $this->pagination->create_links(); ?>
+              </center>
+            </div>
+           </div>
+          </div>
         </div>
-       </div>
       </div>
-    </div>
+      <div class="tab-pane fade" id="profile">
+        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+
+        <div class="list-group">
+        <a href="#" class="list-group-item active">
+                Top Consultant
+              </a>
+        <?php 
+          for($i=0; $i<count($consultants);$i++) { ?>
+          <a href="#" class="list-group-item"><?php echo $consultants[$i]->username; ?>
+            <?php
+            $report = new Report ();
+            $params = $report -> rank($consultants[$i]->username);
+            ?>
+            <span class="badge"><?php echo count($params); ?></span>
+              </a>
+          <?php } ?>
+        </div>
+      </div>
+
+
+    
 
     <!-- Modal Add Report-->
     <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -371,6 +413,7 @@ $username=$query[0]['username'];
       <div class="col-lg-12">
         <ul class="list-unstyled">
           <li class="pull-right"><a href="#top">Back to top</a></li>
+          <center>© Kia PMS 2014</li></center>
         </ul>
       </div>
     </div>

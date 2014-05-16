@@ -35,6 +35,7 @@ class Report extends CI_Controller {
 
         $username = $this->session->userdata('username');
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
+        $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
 
         $data['data']=$data;
         $data['reports']=$reports;
@@ -43,11 +44,19 @@ class Report extends CI_Controller {
         $data['consultants']=$consultants;
         $data['consultant_requests']=$consultant_requests;
         $data['all_status']=$all_status;
+        $data['recordsbyconsultatnt']=$recordsbyconsultatnt;
         $this->load->view('report/reportlist', $data);
     }
     public function home() 
     {
         $this->load->view('home');
+    }
+    public function rank($username) 
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+
+        return $ranks=$this->ReportModel->getrecordby($username);
     }
     public function edit($report_id)
     {   
@@ -165,8 +174,10 @@ class Report extends CI_Controller {
         $username = $this->session->userdata('username');
         $this->load->model('ReportModel');
 
-        $data['query'] = $this->ReportModel->getConsultantData($username);
+        $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
 
+        $data['query'] = $this->ReportModel->getConsultantData($username);
+        $data['recordsbyconsultatnt']=$recordsbyconsultatnt;
         $this->load->view('consultant/consultantview', $data);
     }
     public function update()
