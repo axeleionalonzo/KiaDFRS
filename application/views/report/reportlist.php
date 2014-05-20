@@ -14,6 +14,8 @@ $username=$query[0]['username'];
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url();?>img/glyphicons-halflings.png">
+    <link href="<?php echo base_url();?>img/glyphicons-halflings-white.png">
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -28,7 +30,7 @@ $username=$query[0]['username'];
     <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
     <div class="navbar-header">
-    <a href="<?php echo base_url();?>index.php" class="navbar-brand">Home</a>
+    <a href="<?php echo base_url();?>index.php/report/home" class="navbar-brand">Home</a>
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -38,7 +40,7 @@ $username=$query[0]['username'];
     <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav">
     <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Online Prospect Management System</span></a>
+    <a href="<?php echo base_url();?>index.php/report" id="themes">Online Prospect Management System</span></a>
     </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">  
@@ -227,20 +229,50 @@ $username=$query[0]['username'];
       <div class="tab-pane fade" id="profile">
         <p></p>
 
-        <div class="list-group">
-        <a href="#" class="list-group-item active">
-                Top Consultant
-              </a>
-        <?php 
-          for($i=0; $i<count($consultants);$i++) { ?>
-          <a href="#" class="list-group-item"><?php echo $consultants[$i]->username; ?>
-            <?php
-              $rank;
-            ?>
-              </a>
+    <div class="row clearfix">
+  <div class="col-md-3 column">
+  <div></div>
+  </div>
+    <div class="col-md-6 column">
+      <div class="carousel slide" id="carousel-469909">
+        <ol class="carousel-indicators">
+          <li data-slide-to="0" data-target="#carousel-469909" class="active">
+          </li>
+          <?php $slide=1;?>
+          <?php for($i=1; $i<count($consultants);$i++) { ?>
+          <li data-slide-to="<?php echo $slide;?>" data-target="#carousel-469909">
+          </li>
+          <?php $slide++;?>
+          <?php } ?>
+        </ol>
+
+        <div class="carousel-inner">
+          <div class="item active">
+            <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
+            <div class="carousel-caption">
+              <h4>
+                <?php echo $consultants[0]->username; ?>
+              </h4>
+            </div>
+          </div>
+          <?php for($i=1; $i<count($consultants);$i++) { ?> 
+          <div class="item">
+             <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
+            <div class="carousel-caption">
+              <h4>
+                <?php echo $consultants[$i]->username; ?>
+              </h4>
+            </div>
+          </div>
           <?php } ?>
         </div>
+          <a class="left carousel-control" href="#carousel-469909" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-469909" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
+    </div>
+    <div class="col-md-3 column">
+  <div></div>
+  </div>
+  </div>
 
 
     

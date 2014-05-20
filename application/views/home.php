@@ -12,16 +12,12 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url();?>img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url();?>img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url();?>img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="<?php echo base_url();?>img/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="<?php echo base_url();?>index.php" class="navbar-brand">Home</a>
+        <a href="<?php echo base_url();?>index.php/report/home" class="navbar-brand">Home</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -31,7 +27,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
     <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Online Prospect Management System</span></a>
+    <a href="<?php echo base_url();?>index.php/report" id="themes">Online Prospect Management System</span></a>
     </li>
     </ul>
           <ul class="nav navbar-nav navbar-right">
