@@ -14,8 +14,6 @@ $username=$query[0]['username'];
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <link href="<?php echo base_url();?>img/glyphicons-halflings.png">
-    <link href="<?php echo base_url();?>img/glyphicons-halflings-white.png">
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -226,52 +224,84 @@ $username=$query[0]['username'];
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="profile">
-        <p></p>
-
+    <div class="tab-pane fade" id="profile">
+      <?php
+      $top=0;
+      $temp="";
+      $report = new $control (); 
+      for($i=0; $i<count($consultants);$i++) {
+        $params = $report -> rank($consultants[$i]->username);
+        if ($params>$top) {
+          $temp=$consultants[$i]->username;
+          $top=$params;
+        }
+      }
+        ?>
+      <center><h3>Top Consultant: <strong><?php echo $temp;?></strong></h3></center>
     <div class="row clearfix">
-  <div class="col-md-3 column">
-  <div></div>
-  </div>
-    <div class="col-md-6 column">
-      <div class="carousel slide" id="carousel-469909">
-        <ol class="carousel-indicators">
-          <li data-slide-to="0" data-target="#carousel-469909" class="active">
-          </li>
-          <?php $slide=1;?>
-          <?php for($i=1; $i<count($consultants);$i++) { ?>
-          <li data-slide-to="<?php echo $slide;?>" data-target="#carousel-469909">
-          </li>
-          <?php $slide++;?>
-          <?php } ?>
-        </ol>
+      <div class="col-md-3 column">
+        <div></div>
+      </div>
+        <div class="col-md-6 column">
+          <div class="carousel slide" id="carousel-469909">
+            <ol class="carousel-indicators">
+              <li data-slide-to="0" data-target="#carousel-469909" class="active">
+              </li>
+              <?php $slide=1;?>
+              <?php for($i=1; $i<count($consultants);$i++) { ?>
+              <li data-slide-to="<?php echo $slide;?>" data-target="#carousel-469909">
+              </li>
+              <?php $slide++;?>
+              <?php } ?>
+            </ol>
 
-        <div class="carousel-inner">
-          <div class="item active">
-            <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
-            <div class="carousel-caption">
-              <h4>
-                <?php echo $consultants[0]->username; ?>
-              </h4>
+            <div class="carousel-inner">
+              <div class="item active">
+                <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
+                <div class="carousel-caption">
+                  <?php 
+                  $report = new $control (); 
+                  $params = $report -> rank($consultants[0]->username); 
+                  ?>
+                  <h4>
+                    <?php echo $consultants[0]->username; ?>
+                    <?php if (count($params)>0) { ?>
+                      <span class="badge"><?php echo count($params); ?></span>
+                    <?php } else { ?>
+                      <span class="badge"></span>
+                    <?php }?>
+                  </h4>
+                  
+                </div>
+              </div>
+              <?php for($i=1; $i<count($consultants);$i++) { ?> 
+              <div class="item">
+                 <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
+                <div class="carousel-caption">
+                  <?php 
+                  $report = new $control (); 
+                  $params = $report -> rank($consultants[$i]->username); 
+                  ?>
+                  <h4>
+                    <?php echo $consultants[$i]->username; ?>
+                    <?php if (count($params)>0) { ?>
+                      <span class="badge"><?php echo count($params); ?></span>
+                    <?php } else { ?>
+                      <span class="badge"></span>
+                    <?php }?>
+                  </h4>
+                  
+                </div>
+              </div>
+              <?php } ?>
             </div>
+              <a class="left carousel-control" href="#carousel-469909" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-469909" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
           </div>
-          <?php for($i=1; $i<count($consultants);$i++) { ?> 
-          <div class="item">
-             <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
-            <div class="carousel-caption">
-              <h4>
-                <?php echo $consultants[$i]->username; ?>
-              </h4>
-            </div>
-          </div>
-          <?php } ?>
         </div>
-          <a class="left carousel-control" href="#carousel-469909" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-469909" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        <div class="col-md-3 column">
+      <div></div>
       </div>
     </div>
-    <div class="col-md-3 column">
-  <div></div>
-  </div>
   </div>
 
 
@@ -443,7 +473,7 @@ $username=$query[0]['username'];
       <div class="col-lg-12">
         <ul class="list-unstyled">
           <li class="pull-right"><a href="#top">Back to top</a></li>
-          <center>© Kia PMS 2014</li></center>
+          <center><br><li>© Kia PMS 2014</li></center>
         </ul>
       </div>
     </div>

@@ -33,7 +33,7 @@ class Model extends CI_Controller {
         $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
 
 
-        $data['rank']='<?php $model = new Model (); $params = $report -> rank($consultants[$i]->username); ?><span class="badge"><?php echo count($params); ?></span>';
+        $data['control']='Model';
         $data['data']=$data;
         $data['reports']=$reports;
         $data['models']=$models;

@@ -16,13 +16,26 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 <body>
 <div class="container">
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">Profile</h4>
 </div>
 
     <fieldset>
       <legend>
       </legend>
+
+      <div class="row clearfix">
+      <div class="col-md-3 column">
+        <div class="form-group">
+           <label for="exampleInputFile">Profile Picture</label>
+          <p>
+            <img src="<?php echo base_url();?>img/default_profile.jpg" height="214" width="214"/>
+          </p>
+            <form enctype="multipart/form-data" action="image.php" method="POST">
+              <input type="file" id="exampleInputFile" />
+            </form>
+        </div>
+      </div>
+      <div class="col-md-9 column"><br><br><br><br><br>
       <div class="form-group">
         <label class="col-lg-2 control-label">Username</label>
         <div class="col-lg-10">
@@ -44,7 +57,9 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"></font></span>
         </div>
       </div>
-
+      </div>
+      </div>
+      
     </fieldset>
     <div class="modal-footer">
       <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
