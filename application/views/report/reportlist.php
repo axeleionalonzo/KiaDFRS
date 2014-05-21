@@ -105,6 +105,11 @@ $username=$query[0]['username'];
 
     <div class="container">
       <br><br><br>
+            <center><div class="alert alert-dismissable alert-info">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <h4>NOTICE!</h4>
+              <p>Kia OPMS is currently on <Strong>Alpha Test</Strong>. While browsing, you make experience several flashing and  corruption of data, this is because the site is currently under construction. Feel free to explore with the features anyway.</p>
+            </div></center>
             <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno') || form_error('status')) { ?>
             <?php echo "
             <center><div class=\"alert alert-dismissable alert-warning\">
@@ -137,6 +142,7 @@ $username=$query[0]['username'];
               <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. A car with that model has already been created. Please try again.</p>
             </div></center>"; ?>
             <?php }?>
+            
 
     <!-- separates heaven and earth
     <div class="page-header" id="banner">
@@ -237,72 +243,36 @@ $username=$query[0]['username'];
         }
       }
         ?>
-      <center><h3>Top Consultant: <strong><?php echo $temp;?></strong></h3></center>
     <div class="row clearfix">
       <div class="col-md-3 column">
         <div></div>
       </div>
         <div class="col-md-6 column">
-          <div class="carousel slide" id="carousel-469909">
-            <ol class="carousel-indicators">
-              <li data-slide-to="0" data-target="#carousel-469909" class="active">
-              </li>
-              <?php $slide=1;?>
-              <?php for($i=1; $i<count($consultants);$i++) { ?>
-              <li data-slide-to="<?php echo $slide;?>" data-target="#carousel-469909">
-              </li>
-              <?php $slide++;?>
-              <?php } ?>
-            </ol>
-
-            <div class="carousel-inner">
-              <div class="item active">
-                <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
-                <div class="carousel-caption">
-                  <?php 
-                  $report = new $control (); 
-                  $params = $report -> rank($consultants[0]->username); 
-                  ?>
-                  <h4>
-                    <?php echo $consultants[0]->username; ?>
-                    <?php if (count($params)>0) { ?>
-                      <span class="badge"><?php echo count($params); ?></span>
-                    <?php } else { ?>
-                      <span class="badge"></span>
-                    <?php }?>
-                  </h4>
-                  
-                </div>
-              </div>
-              <?php for($i=1; $i<count($consultants);$i++) { ?> 
-              <div class="item">
-                 <img alt="" src="<?php echo base_url();?>img/profile.jpg" />
-                <div class="carousel-caption">
-                  <?php 
-                  $report = new $control (); 
-                  $params = $report -> rank($consultants[$i]->username); 
-                  ?>
-                  <h4>
-                    <?php echo $consultants[$i]->username; ?>
-                    <?php if (count($params)>0) { ?>
-                      <span class="badge"><?php echo count($params); ?></span>
-                    <?php } else { ?>
-                      <span class="badge"></span>
-                    <?php }?>
-                  </h4>
-                  
-                </div>
-              </div>
-              <?php } ?>
-            </div>
-              <a class="left carousel-control" href="#carousel-469909" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-469909" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+          <div class="list-group">
+            <a href="#" class="list-group-item active">
+            <center>Top Consultant: <strong><?php echo $temp;?></center>
+            </a>
+            <?php for($i=0; $i<count($consultants);$i++) { ?>
+            <?php
+              $report = new $control (); 
+              $params = $report -> rank($consultants[$i]->username); 
+            ?>
+            <a href="#" class="list-group-item"><?php echo $consultants[$i]->username; ?>
+            <?php if (count($params)>0) { ?>
+              <span class="badge"><?php echo count($params); ?></span>
+              <?php } else { ?>
+              <span class="badge"></span>
+              <?php }?>
+            </a>
+            <?php }?>
           </div>
         </div>
         <div class="col-md-3 column">
-      <div></div>
-      </div>
+          <div></div>
+        </div>
     </div>
   </div>
+
 
 
     

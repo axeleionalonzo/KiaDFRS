@@ -7,7 +7,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Report List</title>
+    <title>KIA OPMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">

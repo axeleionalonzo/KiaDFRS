@@ -8,7 +8,7 @@ class Report extends CI_Controller {
         $this->load->model('ConsultantModel');
         $this->load->library('pagination');
 
-        $config['base_url'] = 'http://localhost/KiaDFRS/index.php/report/index';
+        $config['base_url'] = 'http://greencar-99c5fe/KiaDFRS/index.php/report/index';
         $config['total_rows'] = $this->ReportModel->recordsCount();
         $config['full_tag_open'] = '<ul class="pagination pagination-sm">';
         $config['full_tag_close'] = '</ul>';
@@ -214,10 +214,6 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         $this->load->model('QuotationModel');
 
-        $this->form_validation->set_rules('quotation_date', 'Date', 'trim|required');
-        $this->form_validation->set_rules('address', 'Client Address', 'trim|required');
-        $this->form_validation->set_rules('contactno', 'Client Contact #', 'trim|required');
-        $this->form_validation->set_rules('model', 'Model', 'trim|required');
         $this->form_validation->set_rules('unit_price', 'Unit Price', 'trim|required');
         $this->form_validation->set_rules('amount_financed', 'Amount Financed', 'trim|required');
         $this->form_validation->set_rules('down_payment', 'Down Payment', 'trim|required');
@@ -297,7 +293,7 @@ class Report extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Sign in</font></a>';
+            echo 'You don\'t have permission to access this page. <a href="http://greencar-99c5fe/KiaDFRS/index.php/report/home"></br><font color="red">Sign in</font></a>';
             die();
         }
     }
