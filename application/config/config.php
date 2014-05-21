@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://greencar-99c5fe/KiaDFRS/';
+//$config['base_url']	= 'http://greencar-99c5fe/KiaDFRS/';
+$config['base_url']	= 'http://localhost/KiaDFRS/';
 
 /*
 |--------------------------------------------------------------------------

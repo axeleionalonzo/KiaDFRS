@@ -9,7 +9,7 @@ class Model extends CI_Controller {
         $this->load->model('ConsultantModel');
         $this->load->library('pagination');
 
-        $config['base_url'] = 'http://greencar-99c5fe/KiaDFRS/index.php/report/index';
+        $config['base_url'] = 'http://localhost/KiaDFRS/index.php/report/index';
         $config['total_rows'] = $this->ReportModel->recordsCount();
         $config['full_tag_open'] = '<ul class="pagination pagination-sm">';
         $config['full_tag_close'] = '</ul>';
@@ -102,7 +102,7 @@ class Model extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="http://greencar-99c5fe/KiaDFRS/index.php/report/home"></br><font color="red">Back</font></a>';
+            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Back</font></a>';
             die();
         }
     }
