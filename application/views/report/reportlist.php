@@ -105,10 +105,9 @@ $username=$query[0]['username'];
 
     <div class="container">
       <br><br><br>
-            <center><div class="alert alert-dismissable alert-info">
-              <button type="button" class="close" data-dismiss="alert">×</button>
+            <center><div class="well">
               <h4>NOTICE!</h4>
-              <p>Kia OPMS is currently on <Strong>Alpha Test</Strong>. While browsing, you make experience several flashing and  corruption of data, this is because the site is currently under construction. Feel free to explore with the features anyway.</p>
+              <p>Kia OPMS is currently on <Strong>Alpha Test</Strong>. While browsing, you make experience several flashing and  corruption of data, this is because the site is currently under construction. Alpha Version is intended for external testing of OPMS in order to identify bugs and configurations that causes problems, as well as collect feedbacks and suggestions from the users. Feel free to EXPLORE, REPORT, and SUGGEST.</p>
             </div></center>
             <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno') || form_error('status')) { ?>
             <?php echo "
@@ -443,7 +442,7 @@ $username=$query[0]['username'];
       <div class="col-lg-12">
         <ul class="list-unstyled">
           <li class="pull-right"><a href="#top">Back to top</a></li>
-          <center><br><li>© Kia PMS 2014</li></center>
+          <center><br><li>© Kia OPMS 2014</li></center>
         </ul>
       </div>
     </div>
