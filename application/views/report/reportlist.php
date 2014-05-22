@@ -187,8 +187,6 @@ $username=$query[0]['username'];
             </ul>
           </li>
         </ul>
-
-
         <div id="myTabContent" class="tab-content">
           <div class="tab-pane fade active in" id="home">
             <div class="bs-docs-section">
@@ -253,6 +251,28 @@ $username=$query[0]['username'];
           </div>
 
           <div class="tab-pane fade" id="profile">
+            <div class="row clearfix">
+              <div class="col-md-3 column">
+              </div>
+              <div class="col-md-6 column">
+                <div class="list-group">
+                    <?php for($i=0; $i<count($consultants);$i++) { ?>
+                      
+                        <?php 
+                          if ($consultants[$i]->username=="Administrator") {
+                            } elseif ($consultants[$i]->username=="Axel Eion") {
+                            } else { ?>
+                              <a href="#" class="list-group-item">
+                              <?php echo $consultants[$i]->username; 
+                            }
+                        ?>
+                      </a>
+                    <?php }?>
+                </div>
+              </div>
+              <div class="col-md-3 column">
+              </div>
+            </div>
           </div>
           
         </div>

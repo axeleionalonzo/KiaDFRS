@@ -41,7 +41,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         </div>
       </div>
     </div>
-
+    
     <?php if ($this->session->flashdata('flashError')) { ?>
       <?php echo "<div class=\"container\"><br><br><br><center><div class=\"alert alert-dismissable alert-warning\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>

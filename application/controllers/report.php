@@ -8,7 +8,7 @@ class Report extends CI_Controller {
         $this->load->model('ConsultantModel');
         $this->load->library('pagination');
 
-        $config['base_url'] = 'http://localhost/KiaDFRS/index.php/report/index';
+        $config['base_url'] = 'http://greencar-99c5fe/KiaDFRS/index.php/report/index';
         $config['total_rows'] = $this->ReportModel->recordsCount();
         $config['full_tag_open'] = '<ul class="pagination pagination-sm">';
         $config['full_tag_close'] = '</ul>';
@@ -293,7 +293,7 @@ class Report extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="http://localhost/KiaDFRS/index.php/report/home"></br><font color="red">Sign in</font></a>';
+            echo 'You don\'t have permission to access this page. <a href="http://greencar-99c5fe/KiaDFRS/index.php/report/home"></br><font color="red">Sign in</font></a>';
             die();
         }
     }
@@ -326,7 +326,7 @@ class Report extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE)
         {
-            redirect('report/home');
+            $this->load->view('home');
         } else {
         $data = array(
                 'username' => $this->input->post('username'),
@@ -337,9 +337,9 @@ class Report extends CI_Controller {
             echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
               <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
               <h4>Congratulations!</h4>
-              <p>You just successfully Created your account! Please wait or contact the System Administrator to approve your Request!</p>
+              <p>You just successfully Request an account! Please wait or contact the System Administrator to approve your Request!</p>
             </div></center></div>";
-        redirect('report/home');
+        $this->load->view('home');
 
         }
     }
@@ -384,7 +384,7 @@ class Report extends CI_Controller {
             }
         }
         $this->session->sess_destroy();
-        redirect('report/home');
+        $this->load->view('home');
     }
 }
 ?>
