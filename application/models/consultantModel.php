@@ -35,6 +35,12 @@ class ConsultantModel extends CI_Model {
         return $query->result();
     }
 
+    function getConsultantName($consultant_id){
+        $sql = "SELECT username FROM consultant WHERE consultant_id = ?";
+        $query =$this->db->query($sql, array($consultant_id));
+        return $query->result();
+    }
+
     function getConsultantData($username) 
     {
         $this->db->where('username', $username);

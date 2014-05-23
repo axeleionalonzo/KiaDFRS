@@ -262,7 +262,7 @@ $username=$query[0]['username'];
                           if ($consultants[$i]->username=="Administrator") {
                             } elseif ($consultants[$i]->username=="Axel Eion") {
                             } else { ?>
-                              <a href="#" class="list-group-item">
+                              <a href="<?php echo base_url();?>index.php/report/viewconsultantby/<?php echo $consultants[$i]->username;?>" class="list-group-item">
                               <?php echo $consultants[$i]->username; 
                             }
                         ?>

@@ -110,6 +110,20 @@ class Report extends CI_Controller {
         $data['report']=$report;
         $this->load->view('report/reportview', $data);
     }
+    public function viewconsultantby($username)
+    {
+        $this->is_logged_in();
+        $this->load->model('ReportModel');
+        $this->load->model('ConsultantModel');
+
+        $trimed = str_replace("%20"," ",$username);
+        $recordsbyconsultatnt=$this->ReportModel->getrecordby($trimed);
+
+        $data['username'] = $trimed;
+        $data['query'] = $this->ReportModel->getConsultantData($trimed);
+        $data['recordsbyconsultatnt']=$recordsbyconsultatnt;
+        $this->load->view('consultant/consultantview', $data);
+    }
     public function viewQuotation($quotation_id)
     {
         $this->is_logged_in();

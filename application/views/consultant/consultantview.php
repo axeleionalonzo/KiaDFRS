@@ -62,9 +62,21 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       
     </fieldset>
     <div class="modal-footer">
+      <?php if (($query[0]['username'])==($username)) { ?>
       <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <?php } elseif (($query[0]['username'])==('Administrator')) {?>
+      <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <?php } elseif (($query[0]['username'])==('Axel Eion')) {?>
+      <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <?php } else {?>
+      <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
+      <?php } ?>
     </div>
 </div>
 
