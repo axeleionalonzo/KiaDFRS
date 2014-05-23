@@ -52,6 +52,10 @@ class Report extends CI_Controller {
     {
         $this->load->view('home');
     }
+    public function upload() 
+    {
+        $this->load->view('consultant/upload');
+    }
     public function rank($username) 
     {
         $this->is_logged_in();
@@ -279,6 +283,17 @@ class Report extends CI_Controller {
             <p>You just successfully deleted your Account! Create a new Account by Signing up!</p>
             </div></center></div>";
         $this->logout();
+    }
+    public function deleteConsultantbyADMIN($consultant_id)
+    {
+        $this->load->model('ReportModel');
+        $this->ReportModel->deleteConsultant($consultant_id);
+        echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+            <h4>Congratulations!</h4>
+            <p>You just successfully removed the Consultant's Account!</p>
+            </div></center></div>";
+        $this->index();
     }
     public function deleteRequest($cr_id)
     {

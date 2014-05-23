@@ -58,7 +58,7 @@ class QuotationModel extends CI_Model {
         $this->monthly_installment = $_POST['monthly_installment'];
         $this->monthly_rate = $_POST['monthly_rate'];
 
-        $this->db->update('quotation', $this, array('' => $_POST['quotation_id']));
+        $this->db->update('quotation', $this, array('quotation_id' => $_POST['quotation_id']));
     }
 
     function update_entry_from_report()

@@ -12,33 +12,6 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
-    <script type="text/javascript" src="//www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load('visualization', '1', {packages: ['corechart']});
-    </script>
-    <script type="text/javascript">
-      function drawVisualization() {
-        // Create and populate the data table.
-        var data = google.visualization.arrayToDataTable([
-          ['x', 'Reports'],
-          ['may 1',   1],
-          ['may 4',   2],
-          ['may 5',   4],
-          ['may 7',   2,]
-        ]);
-      
-        // Create and draw the visualization.
-        new google.visualization.LineChart(document.getElementById('visualization')).
-            draw(data, {curveType: "function",
-                        width: 500, height: 400,
-                        vAxis: {maxValue: 10}}
-                );
-      }
-      
-
-      google.setOnLoadCallback(drawVisualization);
-    </script>
-
 </head>
 <body>
 <div class="container">
@@ -89,13 +62,11 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         </div>
       </div>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Progress</label>
+        <label class="col-lg-2 control-label">Productivity</label>
         <div class="col-lg-10">
-          <?php for ($i=0;$i<count($recordsbyconsultatnt);$i++) { 
-            //echo $recordsbyconsultatnt[$i]->client;
-            //echo $recordsbyconsultatnt[$i]->report_date;
-          }?>
-          <div id="visualization" style="width: 500px; height: 400px;"></div>
+          <div class="progress progress-striped active">
+          <div class="progress-bar progress-bar-info" style="width: <?php echo count($recordsbyconsultatnt); ?>%"></div>
+          </div>
         </div>
       </div>
       </div>
@@ -107,13 +78,11 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
-      <?php } elseif (($query[0]['username'])==('Administrator')) {?>
-      <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <?php } elseif (($username)==('Administrator')) {?>
+      <a href="<?php echo base_url();?>index.php/report/deleteConsultantbyADMIN/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('are you sure to delete')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
-      <?php } elseif (($query[0]['username'])==('Axel Eion')) {?>
-      <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <?php } elseif (($username)==('Axel Eion')) {?>
+      <a href="<?php echo base_url();?>index.php/report/deleteConsultantbyADMIN/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('are you sure to delete')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } else {?>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>

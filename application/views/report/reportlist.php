@@ -114,7 +114,7 @@ $username=$query[0]['username'];
         <div class="well">
 
         <h4>NOTICE!</h4>
-          <p>Kia OPMS is currently on <Strong>Alpha Test</Strong>. While browsing, you make experience several flashing and corruption of data, this is because the site is currently under construction. Alpha Version is intended for external testing of OPMS in order to identify bugs and configurations that causes problems, as well as collect feedbacks and suggestions from the users. Feel free to EXPLORE, REPORT, and SUGGEST.</p>
+          <p>Kia OPMS is currently on <strong>Alpha Test</strong>. While browsing, you make experience several flashing and corruption of data, this is because the site is currently under construction. Alpha Version is intended for external testing of OPMS in order to identify bugs and configurations that causes problems, as well as collect feedbacks and suggestions from the users. Feel free to EXPLORE, REPORT, and SUGGEST.</p>
 
         </div>
         </center>
@@ -263,10 +263,9 @@ $username=$query[0]['username'];
                             } elseif ($consultants[$i]->username=="Axel Eion") {
                             } else { ?>
                               <a href="<?php echo base_url();?>index.php/report/viewconsultantby/<?php echo $consultants[$i]->username;?>" class="list-group-item">
-                              <?php echo $consultants[$i]->username; 
-                            }
-                        ?>
-                      </a>
+                              <?php echo $consultants[$i]->username;
+                            }?>
+                        </a>
                     <?php }?>
                 </div>
               </div>
