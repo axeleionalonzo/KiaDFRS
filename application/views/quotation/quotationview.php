@@ -53,7 +53,6 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                         </td>
                     </tbody>
                 </table>
-                
 
                 &nbspModel: <?php echo $quotation[0]->model;?><br><br>
 
@@ -65,20 +64,20 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                     }
                 ?>
 
-                &nbspUnit&nbspPrice: <?php echo $price;?><br>
-                &nbspAmount&nbspFinanced: <?php echo $quotation[0]->amount_financed;?><br>
-                &nbspDown&nbspPayment: <?php echo $quotation[0]->down_payment;?><br>
-                &nbspFreight&nbspand&nbspHandling: <?php echo $quotation[0]->freight_and_handling;?><br>
-                &nbspComprehensive,&nbspInsurance: <?php echo $quotation[0]->comprehensive_insurance;?><br>
-                &nbspLTO&nbspRegistration: <?php echo $quotation[0]->lto_registration;?><br>
-                &nbspChattel&nbspMotgage&nbspFee: <?php echo $quotation[0]->chattel_mortgage_fee;?><br>
+                &nbspUnit&nbspPrice: ₱ <?php echo number_format($price, 2);?><br>
+                &nbspAmount&nbspFinanced: ₱ <?php echo number_format($quotation[0]->amount_financed, 2);?><br>
+                &nbspDown&nbspPayment: ₱ <?php echo number_format($quotation[0]->down_payment, 2);?><br>
+                &nbspFreight&nbspand&nbspHandling: ₱ <?php echo number_format($quotation[0]->freight_and_handling, 2);?><br>
+                &nbspComprehensive,&nbspInsurance: ₱ <?php echo number_format($quotation[0]->comprehensive_insurance, 2);?><br>
+                &nbspLTO&nbspRegistration: ₱ <?php echo number_format($quotation[0]->lto_registration, 2);?><br>
+                &nbspChattel&nbspMotgage&nbspFee: ₱ <?php echo number_format($quotation[0]->chattel_mortgage_fee, 2);?><br>
                 &nbspOther&nbspServices: <?php echo $quotation[0]->other_services;?><br>
 
                 <?php
                 $total = $quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee;
                 ?>
 
-                &nbspTotal&nbspCash&nbspOutlay: <?php echo $total;?><br><br>
+                &nbspTotal&nbspCash&nbspOutlay: ₱ <?php echo number_format($total, 2);?><br><br>
                 &nbspMonthly&nbspRate: <?php echo $quotation[0]->monthly_rate;?>
                 <?php
                     if ($quotation[0]->amount_financed >0) {
@@ -96,7 +95,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                     $installment = 0;
                   }
                 ?>
-                <?php echo round($installment,2);?>
+                ₱ <?php echo number_format($installment, 2);?>
                 <?php
                   if ($quotation[0]->amount_financed >0) {
                     echo " for ";
