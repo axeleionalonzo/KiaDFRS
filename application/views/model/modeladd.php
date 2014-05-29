@@ -19,6 +19,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"><font color="red"><?php echo form_error('name');?></font></span>
         </div>
       </div>
+      <div class="form-group">
+        <label for="price" class="col-lg-2 control-label">Price</label>
+        <div class="col-lg-10">
+          <input name="price" type="text" class="form-control" id="price" value="">
+          <span class="help-block"><font color="red"><?php echo form_error('price');?></font></span>
+        </div>
+      </div>
     </fieldset>
     <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

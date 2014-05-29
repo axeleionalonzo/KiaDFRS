@@ -33,6 +33,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"></font></span>
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">Price</label>
+        <div class="col-lg-10">
+          <input disabled="" type="text" class="form-control" value="<?php echo $model[0]->price?>">
+          <span class="help-block"></font></span>
+        </div>
+      </div>
 
     </fieldset>
     <div class="modal-footer">

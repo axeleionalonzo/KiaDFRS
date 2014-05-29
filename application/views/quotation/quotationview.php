@@ -20,7 +20,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         window.frames["print_frame"].window.print();
     }
     </script>
-
+    
 </head>
 <body>
 
@@ -30,15 +30,19 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <div class="row clearfix">
       <div class="col-md-12 column">
         <h3 class="text-center">
-          KIA MOTORS ILIGAN
+          <center>KIA MOTORS ILIGAN<br></center>
         </h3>
+          <center>GREENCARS MINDANAO CORPORATION<br>
+            Tibanga Highway, Iligan City<br>
+            Telefax No. (063) 221 - 0574</center>
+        
       </div>
     </div>
 
     <div class="row clearfix">
       <div class="col-md-12 column">
         <h4 class="text-center">
-          QUOTATION
+          <center>QUOTATION</center>
         </h4>
       </div>
     </div>
@@ -50,132 +54,105 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <div class="row clearfix">
         <div class="col-md-8 column">
         <p>
-        <label class="col-lg-3 control-label">Customer:</label><?php echo $quotation[0]->client;?>
+        <strong>Customer: </strong> <?php echo $quotation[0]->client;?>
         </p>
         <p>
-        <label class="col-lg-3 control-label">Address:</label><?php echo $quotation[0]->address;?>
+        <strong>Address: </strong> <?php echo $quotation[0]->address;?>
         </p>
         </div>
         <div class="col-md-4 column">
         <p>
-        <center><label class="col-lg-3 control-label">Date:</label><?php echo $quotation[0]->quotation_date;?>
+        <strong>Date: </strong><?php echo $quotation[0]->quotation_date;?>
         </p>
         <p>
-        <label class="col-lg-3 control-label">Contact&nbspNo:</label><?php echo $quotation[0]->contactno;?></center>
+        <strong>Contact&nbspNo: </strong> <?php echo $quotation[0]->contactno;?>
         </p>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Model:</label>
+        <strong>Model: </strong> <?php echo $quotation[0]->model;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->model;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
+        <?php
+            for ($i=0; $i<count($models);$i++) { 
+                if ($quotation[0]->model==$models[$i]->name) {
+                    $price=$models[$i]->price;
+                }
+            }
+        ?>
         <p>
-        <label class="col-lg-3 control-label">Unit&nbspPrice:</label>
+        <strong>Unit&nbspPrice: </strong> <?php echo $price;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->unit_price;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Amount&nbspFinanced:</label>
+        <strong>Amount&nbspFinanced: </strong> <?php echo $quotation[0]->amount_financed;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->amount_financed;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Down&nbspPayment:</label>
+        <strong>Down&nbspPayment: </strong> <?php echo $quotation[0]->down_payment;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->down_payment;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Freight&nbspand&nbspHandling:</label>
+        <strong>Freight&nbspand&nbspHandling: </strong> <?php echo $quotation[0]->freight_and_handling;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->freight_and_handling;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Comprehensive,&nbspInsurance:</label>
+        <strong>Comprehensive,&nbspInsurance: </strong> <?php echo $quotation[0]->comprehensive_insurance;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->comprehensive_insurance;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">LTO&nbspRegistration:</label>
+        <strong>LTO&nbspRegistration: </strong> <?php echo $quotation[0]->lto_registration;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->lto_registration;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Chattel&nbspMotgage&nbspFee:</label>
+        <strong>Chattel&nbspMotgage&nbspFee: </strong> <?php echo $quotation[0]->chattel_mortgage_fee;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->chattel_mortgage_fee;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Other&nbspServices:</label>
+        <strong>Other&nbspServices: </strong> <?php echo $quotation[0]->other_services;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->other_services;?>
         </div>
         </div>
         <div class="row clearfix">
         <?php
         $total = $quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee;
         ?>
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Total&nbspCash&nbspOutlay:</label>
+        <strong>Total&nbspCash&nbspOutlay: </strong> <?php echo $total;?>
         </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $total;?>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Monthly&nbspRate:</label>
-        </p>
-        </div>
-        <div class="col-md-6 column">
-        <?php echo $quotation[0]->monthly_rate;?>
+        <strong>Monthly&nbspRate: </strong> <?php echo $quotation[0]->monthly_rate;?>
         <?php
             if ($quotation[0]->amount_financed >0) {
               echo "% ";
@@ -183,15 +160,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
               echo "";
             }
           ?>
-        
+        </p>
         </div>
         </div>
         <div class="row clearfix">
-        <div class="col-md-6 column">
+        <div class="col-md-12 column">
         <p>
-        <label class="col-lg-3 control-label">Monthly&nbspInstallment:</label>
-        </p>
-        </div>
+        <strong>Monthly&nbspInstallment: </strong> 
         <?php
           if ($quotation[0]->amount_financed >0) {
             $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
@@ -199,7 +174,6 @@ $is_logged_in = $this->session->userdata('is_logged_in');
             $installment = 0;
           }
         ?>
-        <div class="col-md-6 column">
         <?php echo round($installment,2);?>
         <?php
           if ($quotation[0]->amount_financed >0) {
@@ -208,18 +182,22 @@ $is_logged_in = $this->session->userdata('is_logged_in');
             echo "";
           }
         ?><?php echo $quotation[0]->monthly_installment;?>
+        </p>
         </div>
         </div>
+
         </div>
 
         <div class="panel-footer">
         <div class="row clearfix">
-        <div class="col-md-9 column">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-4 column">
         <p>
-        <center><label class="col-lg-3 control-label">Prepared By:</label> <?php echo $report[0]->sales_consultant;?></center>
+        <strong><center>Prepared By: </strong>  <?php echo $report[0]->sales_consultant;?></center>
         </p>
         </div>
-        <div class="col-md-3 column">
+        <div class="col-md-4 column">
         </div>
         </div>
     </div>
@@ -230,8 +208,8 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 
 <div class="row clearfix">
 <div class="modal-footer">
-<a type="button" class="btn btn-primary" href="javascript:printDiv('div1')">Print</a>
-<iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+<a type="button" class="btn btn-primary" href="javascript: printDiv('div1')">Print</a>
+<iframe name="print_frame" width="0" height="0" frameborder="0" src="about: blank"></iframe>
 
 
 <?php if (($query[0]['username'])==($report[0]->sales_consultant)) { ?>
@@ -255,7 +233,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 </div>
 
 <!-- Modal Edit Quotation -->
-<div data-focus-on="input:first" class="modal fade" id="myModaleditQuotation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div data-focus-on="input: </strong>first" class="modal fade" id="myModaleditQuotation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
 

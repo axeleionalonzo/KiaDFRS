@@ -86,6 +86,7 @@ class Model extends CI_Controller {
         $this->load->model('ModelModel');
 
         $this->form_validation->set_rules('name', 'Model Name', 'trim|required|is_unique[model.name]|xss_clean');
+        $this->form_validation->set_rules('price', 'Unit Price', 'trim|required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             
@@ -111,7 +112,7 @@ class Model extends CI_Controller {
         $this->is_logged_in();
         $this->load->model('ModelModel');
 
-        $this->form_validation->set_rules('name', 'Model Name', 'trim|required|is_unique[model.name]|xss_clean');
+        $this->form_validation->set_rules('price', 'Unit Price', 'trim|required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             

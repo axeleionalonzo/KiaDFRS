@@ -48,9 +48,8 @@ $username=$query[0]['username'];
               <li>
                 <form action="<?php echo base_url();?>index.php/" method="post" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                  <input type="text" name="report" class="form-control" placeholder="Keyword Here">
+                  <input type="text" name="report" class="form-control" placeholder="Search Anything Here">
                 </div>
-                <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Search</button>
                 </form>
               </li>
               <?php if ($username=='Administrator') { ;?>
@@ -149,6 +148,14 @@ $username=$query[0]['username'];
           <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
           <h4>Oops..</h4>
           <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. A car with that model has already been created. Please try again.</p>
+          </div></center>"; ?>
+        <?php }?>
+        <?php if (form_error('price')) { ?>
+          <?php echo "
+          <center><div class=\"alert alert-dismissable alert-warning\">
+          <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+          <h4>Oops..</h4>
+          <p>Looks like something went wrong with the <font color=\"red\">Creation of Car Model</font>. Please Specify a price for the model and try again.</p>
           </div></center>"; ?>
         <?php }?>
 

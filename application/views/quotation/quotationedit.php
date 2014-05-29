@@ -65,10 +65,19 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"><font color="red"><?php echo form_error('model');?></font></span>
         </div>
       </div>
+        <?php
+            for ($i=0; $i<count($models);$i++) { 
+                if ($quotation[0]->model==$models[$i]->name) {
+                    $unit_price=$models[$i]->price;
+                }
+            }
+
+        ?>
       <div class="form-group">
         <label for="unit_price" class="col-lg-2 control-label">Unit Price</label>
         <div class="col-lg-10">
-          <input name="unit_price" type="text" class="form-control" id="unit_price" value="<?php echo $quotation[0]->unit_price;?>">
+          <input name="unit_price" type="hidden" class="form-control" id="unit_price" value="<?php echo $unit_price;?>">
+          <input disabled="" name="unit_price" type="text" class="form-control" id="unit_price" value="<?php echo $unit_price;?>">
           <span class="help-block"><font color="red"><?php echo form_error('unit_price');?></font></span>
         </div>
       </div>
@@ -124,14 +133,10 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <?php
         $total = $quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee;
       ?>
-      <div class="form-group">
-        <label for="total_cash_outlay" class="col-lg-2 control-label">Total Cash Outlay</label>
-        <div class="col-lg-10">
-          <input disabled="" name="total_cash_outlay" type="text" class="form-control" id="total_cash_outlay" value="<?php echo $total; ?>">
+
           <input name="total_cash_outlay" type="hidden" class="form-control" id="total_cash_outlay" value="<?php echo $total; ?>">
           <span class="help-block"><font color="red"><?php echo form_error('total_cash_outlay');?></font></span>
-        </div>
-      </div>
+
       <div class="form-group">
         <label for="monthly_rate" class="col-lg-2 control-label">Monthly Rate</label>
         <div class="col-lg-10">

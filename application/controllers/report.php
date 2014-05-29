@@ -81,10 +81,13 @@ class Report extends CI_Controller {
         $this->is_logged_in();
         $this->load->model('QuotationModel');
         $this->load->model('ReportModel');
+        $this->load->model('ModelModel');
         $monthly_installment=$this->ReportModel->getmonthly_installment();
         $quotation=$this->QuotationModel->get($quotation_id);
+        $models=$this->ModelModel->get_last_ten_entries();
 
         $data['quotation']=$quotation;
+        $data['models']=$models;
         $data['monthly_installment']=$monthly_installment;
         $this->load->view('quotation/quotationedit', $data);
     }
@@ -134,12 +137,15 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
         $this->load->model('QuotationModel');
         $this->load->model('ConsultantModel');
+        $this->load->model('ModelModel');
         $quotation=$this->QuotationModel->get($quotation_id);
         $report=$this->ReportModel->get($quotation_id);
+        $models=$this->ModelModel->get_last_ten_entries();
 
         $username = $this->session->userdata('username');
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
 
+        $data['models']=$models;
         $data['data']=$data;
         $data['report']=$report;
         $data['quotation']=$quotation;

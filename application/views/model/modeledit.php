@@ -19,8 +19,16 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <div class="form-group">
         <label for="name" class="col-lg-2 control-label">Model</label>
         <div class="col-lg-10">
-          <input name="name" type="text" class="form-control" id="name" value="<?php echo $model[0]->name;?>">
+          <input name="name" type="hidden" class="form-control" id="name" value="<?php echo $model[0]->name?>">
+          <input disabled="" type="text" class="form-control" value="<?php echo $model[0]->name?>">
           <span class="help-block"><font color="red"><?php echo form_error('name');?></font></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price" class="col-lg-2 control-label">Price</label>
+        <div class="col-lg-10">
+          <input name="price" type="text" class="form-control" id="price" value="<?php echo $model[0]->price;?>">
+          <span class="help-block"><font color="red"><?php echo form_error('price');?></font></span>
         </div>
       </div>
        
