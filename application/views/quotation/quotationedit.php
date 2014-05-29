@@ -133,7 +133,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <?php
         $total = $quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee;
       ?>
-
+      
           <input name="total_cash_outlay" type="hidden" class="form-control" id="total_cash_outlay" value="<?php echo $total; ?>">
           <span class="help-block"><font color="red"><?php echo form_error('total_cash_outlay');?></font></span>
 
