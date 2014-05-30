@@ -77,7 +77,8 @@ $is_logged_in = $this->session->userdata('is_logged_in');
               }
             }
         }
-
+        //temp is the number of reports made by all consultants
+        //temp should be the number of reports made by the top consultant only
         echo $temp;
         $rank = (count($recordsbyconsultatnt) / $temp ) * 100;
         echo $rank;
