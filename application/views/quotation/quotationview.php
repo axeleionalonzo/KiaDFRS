@@ -20,6 +20,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
             window.frames["print_frame"].window.print();
         }
     </script>
+
+    <style>
+    img 
+    {
+    float:left;
+    }
+    </style>
     
 </head>
     <body>
@@ -28,33 +35,46 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <div class="container">
     
     <div id="div1">
-        <img align="middle" src="<?php echo base_url();?>img/header.JPG" >
 
-        <div class="panel panel-default">
-            <div class="panel-body">
+        <div class="row clearfix">
+          <div class="col-md-12 column">
+            <h3 class="text-center">
+              KIA MOTORS ILIGAN<br>
+            </h3>
+            <center>
+              GREENCARS MINDANAO CORPORATION<br>
+                Tibanga Highway, Iligan City<br>
+                Telefax No. (063) 221 - 0574
+            </center>
+          </div>
+        </div>
 
-                <table class="table">
-                    <tbody>
-                        <td>
-                            Customer:<br>
-                            Date:
-                        </td>
-                        <td>
-                            <?php echo $quotation[0]->client;?><br>
-                            <?php echo $quotation[0]->quotation_date;?>
-                        </td>
-                        <td>
-                            Address:<br>
-                            Contact&nbspNo:
-                        </td>
-                        <td>
-                            <?php echo $quotation[0]->address;?><br>
-                            <?php echo $quotation[0]->contactno;?>
-                        </td>
-                    </tbody>
-                </table>
+        <div class="row clearfix">
+          <div class="col-md-12 column">
+            <h4 class="text-center">
+              <center>QUOTATION</center>
+            </h4>
+          </div>
+        </div>
 
-                &nbspModel: <?php echo $quotation[0]->model;?><br><br>
+        <table class="table table-bordered">
+            <tbody>
+            <td>
+
+                <table style="width:100%">
+                    <tr>
+                      <td>Customer:</td>
+                      <td><?php echo $quotation[0]->client;?></td>        
+                      <td>Date: </td>
+                      <td><?php echo $quotation[0]->quotation_date;?></td>
+                    </tr>
+                    <tr>
+                      <td>Address:</td>
+                      <td><?php echo $quotation[0]->address;?></td>      
+                      <td>Contact&nbspNo:</td>
+                      <td><?php echo $quotation[0]->contactno;?></td>
+                    </tr>
+                </table>                
 
                 <?php
                     for ($i=0; $i<count($models);$i++) { 
@@ -64,48 +84,104 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                     }
                 ?>
 
-                &nbspUnit&nbspPrice: ₱ <?php echo number_format($price, 2);?><br>
-                &nbspAmount&nbspFinanced: ₱ <?php echo number_format($quotation[0]->amount_financed, 2);?><br>
-                &nbspDown&nbspPayment: ₱ <?php echo number_format($quotation[0]->down_payment, 2);?><br>
-                &nbspFreight&nbspand&nbspHandling: ₱ <?php echo number_format($quotation[0]->freight_and_handling, 2);?><br>
-                &nbspComprehensive,&nbspInsurance: ₱ <?php echo number_format($quotation[0]->comprehensive_insurance, 2);?><br>
-                &nbspLTO&nbspRegistration: ₱ <?php echo number_format($quotation[0]->lto_registration, 2);?><br>
-                &nbspChattel&nbspMotgage&nbspFee: ₱ <?php echo number_format($quotation[0]->chattel_mortgage_fee, 2);?><br>
-                &nbspOther&nbspServices: <?php echo $quotation[0]->other_services;?><br>
+                <table style="width:100%">
+                    <tr>
+                      <td><br></td>
+                      <td><br></td>
+                    </tr>
+                    <tr>
+                      <td>Model:</td>
+                      <td><?php echo $quotation[0]->model;?></td>
+                    </tr>
+                    <tr>
+                      <td><br></td>
+                      <td><br></td>
+                    </tr>
+                    <tr>
+                      <td>Unit&nbspPrice:</td>
+                      <td>₱ <?php echo number_format($price, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>Amount&nbspFinanced:</td>
+                      <td>₱ <?php echo number_format($quotation[0]->amount_financed, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>Down&nbspPayment:</td>
+                      <td>₱ <?php echo number_format($quotation[0]->down_payment, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>Freight&nbspand&nbspHandling:</td>
+                      <td>₱ <?php echo number_format($quotation[0]->freight_and_handling, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>Comprehensive,&nbspInsurance:</td>
+                      <td>₱ <?php echo number_format($quotation[0]->comprehensive_insurance, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>LTO&nbspRegistration:</td>
+                      <td>₱ <?php echo number_format($quotation[0]->lto_registration, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>Chattel&nbspMotgage&nbspFee:</td>
+                      <td>₱ <?php echo number_format($quotation[0]->chattel_mortgage_fee, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td>Other&nbspServices:</td>
+                      <td><?php echo $quotation[0]->other_services;?></td>
+                    </tr>
 
-                <?php
-                $total = $quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee;
-                ?>
-
-                &nbspTotal&nbspCash&nbspOutlay: ₱ <?php echo number_format($total, 2);?><br><br>
-                &nbspMonthly&nbspRate: <?php echo $quotation[0]->monthly_rate;?>
-                <?php
-                    if ($quotation[0]->amount_financed >0) {
-                      echo "% ";
-                    } else {
-                      echo "";
-                    }
-                  ?><br>
-
-                &nbspMonthly&nbspInstallment: 
-                <?php
-                  if ($quotation[0]->amount_financed >0) {
-                    $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
-                  } else {
-                    $installment = 0;
-                  }
-                ?>
-                ₱ <?php echo number_format($installment, 2);?>
-                <?php
-                  if ($quotation[0]->amount_financed >0) {
-                    echo " for ";
-                  } else {
-                    echo "";
-                  }
-                ?><?php echo $quotation[0]->monthly_installment;?><br>
+                    <?php
+                    $total = $quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee;
+                    ?>
+                    <tr>
+                      <td><br></td>
+                      <td><br></td>
+                    </tr>
+                    <tr>
+                      <td>Total&nbspCash&nbspOutlay:</td>
+                      <td>₱ <?php echo number_format($total, 2);?></td>
+                    </tr>
+                    <tr>
+                      <td><br></td>
+                      <td><br></td>
+                    </tr>
+                    <tr>
+                      <td>Monthly&nbspRate:</td>
+                      <td><?php echo $quotation[0]->monthly_rate;?>
+                            <?php
+                                if ($quotation[0]->amount_financed >0) {
+                                  echo "% ";
+                                } else {
+                                  echo "";
+                                }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>Monthly&nbspInstallment:</td>
+                      <td>
+                      <?php
+                          if ($quotation[0]->amount_financed >0) {
+                            $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
+                          } else {
+                            $installment = 0;
+                          }
+                        ?>
+                        ₱ <?php echo number_format($installment, 2);?>
+                        <?php
+                          if ($quotation[0]->amount_financed >0) {
+                            echo " for ";
+                          } else {
+                            echo "";
+                          }
+                        ?><?php echo $quotation[0]->monthly_installment;?>
+                        </td>
+                    </tr>
+                </table>
 
                 <br>
-                &nbspNote: <small>Prices are subject to change without prior notice and shall be based on the prevailing selling price at the time of delivery.</small>
+
+                Note: <small>Prices are subject to change without prior notice and shall be based on the prevailing selling price at the time of delivery.</small>
                 <table class="table table-bordered">
                     <tbody>
                         <td>Prepared by: <?php echo $report[0]->sales_consultant;?>
@@ -116,8 +192,10 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                         </td>
                     </tbody>
                 </table>
-            </div>
-        </div>
+            
+            </td>
+            </tbody>
+        </table>
 
     </div>
 
