@@ -51,6 +51,13 @@ class ReportModel extends CI_Model {
         return $query->result();
     }
 
+    function getallrecords()
+    {
+        $query = $this->db->get('report');
+
+        return $query->result();
+    }
+
     function getConsultant(){
         $query = $this->db->get('consultant');
 

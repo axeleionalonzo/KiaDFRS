@@ -61,6 +61,18 @@ $is_logged_in = $this->session->userdata('is_logged_in');
           <span class="help-block"></font></span>
         </div>
       </div>
+      <?php
+        for($i=0; $i<count($consultants);$i++){
+          $consultants[$i]->username=0;
+
+        }
+        for ($i=0;$i<count($productivity);$i++) { 
+          if (($productivity[$i]->sales_consultant)==($query[0]['username'])) {
+            $top++;
+          }
+        }
+        echo $top;
+      ?>
       <div class="form-group">
         <label class="col-lg-2 control-label">Productivity</label>
         <div class="col-lg-10">
@@ -75,14 +87,14 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     </fieldset>
     <div class="modal-footer">
       <?php if (($query[0]['username'])==($username)) { ?>
-      <a href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
+      <a style="float:left;" href="<?php echo base_url();?>index.php/report/deleteConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Account?')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/editConsultant/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalEditConsultant">Change Password</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } elseif (($username)==('Administrator')) {?>
-      <a href="<?php echo base_url();?>index.php/report/deleteConsultantbyADMIN/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('are you sure to delete')">Delete</a>
+      <a style="float:left;" href="<?php echo base_url();?>index.php/report/deleteConsultantbyADMIN/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Account?')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } elseif (($username)==('Axel Eion')) {?>
-      <a href="<?php echo base_url();?>index.php/report/deleteConsultantbyADMIN/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('are you sure to delete')">Delete</a>
+      <a style="float:left;" href="<?php echo base_url();?>index.php/report/deleteConsultantbyADMIN/<?php echo $query[0]['consultant_id']; ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Account?')">Delete</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } else {?>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>

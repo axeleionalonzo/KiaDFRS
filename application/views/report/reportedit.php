@@ -6,9 +6,17 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 ?>
 <html lang="en">
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">Edit a Report</h4>
 </div>
+
+    <?php if (form_error('report_date') || form_error('client') || form_error('address') || form_error('contactno') || form_error('status')) { ?>
+        <?php echo "
+        <center><div class=\"alert alert-dismissable alert-warning\">
+        <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
+        <h4>Oops..</h4>
+        <p>Looks like something went wrong with the <font color=\"red\">Update of your Report</font>. Please try again and provide the Required Information.</p>
+        </div></center>"; ?>
+    <?php }?>
 
 
     <?php echo form_open('report/update');?>
@@ -139,7 +147,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     </fieldset>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="submit" class="btn btn-success">Save changes</button>
     </div>
 </form>
 </html>

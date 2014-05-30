@@ -24,11 +24,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
               <p>Looks like something went wrong with the <font color=\"red\">Creation of your Report</font>. Please try again and provide the Required Information.</p>
             </div></center>"; ?>
             <?php }?>
-  
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="myModalLabel">Full Report</h4>
-</div>
+
 <?php echo form_open('report/update');?>
     <input type="hidden" name="report_id" value="<?php echo $report[0]->report_id?>">
     <fieldset>
@@ -110,20 +106,20 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <?php if (($query[0]['username'])==($report[0]->sales_consultant)) { ?>
       <?php $id = $report[0]->report_id;?>
       <a href="<?php echo base_url();?>index.php/report/viewQuotation/<?php echo $id;?>" type="button" class="btn btn-info">Quotation</a>
-      <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
+      <a style="float: left;" href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Report?')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } elseif (($query[0]['username'])==('Administrator')) {?>
       <?php $id = $report[0]->report_id;?>
       <a href="<?php echo base_url();?>index.php/report/viewQuotation/<?php echo $id;?>" type="button" class="btn btn-info">Quotation</a>
-      <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
+      <a style="float: left;" href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Report?')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } elseif (($query[0]['username'])==('Axel Eion')) {?>
       <?php $id = $report[0]->report_id;?>
       <a href="<?php echo base_url();?>index.php/report/viewQuotation/<?php echo $id;?>" type="button" class="btn btn-info">Quotation</a>
-      <a href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
+      <a style="float: left;" href="<?php echo base_url();?>index.php/report/delete/<?php echo $id;?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Report?')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/report/edit/<?php echo $id;?>" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModaledit">Edit Report</a>
       <a href="<?php echo base_url();?>index.php/report/" type="button" class="btn btn-default">Back</a>
       <?php } else {?>
       <?php $id = $report[0]->report_id;?>

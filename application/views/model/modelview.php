@@ -16,27 +16,26 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 <body>
 <div class="container">
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title" id="myModalLabel">View Car Model</h4>
 </div>
 
 
     <?php echo form_open('model/update');?>
-    <input type="hidden" name="model_id" value="<?php echo $model[0]->model_id?>">
+    <input type="hidden" name="model_id" value="<?php echo $model[0]->model_id;?>">
     <fieldset>
       <legend>
       </legend>
       <div class="form-group">
         <label class="col-lg-2 control-label">Model</label>
         <div class="col-lg-10">
-          <input disabled="" type="text" class="form-control" value="<?php echo $model[0]->name?>">
+          <input disabled="" type="text" class="form-control" value="<?php echo $model[0]->name;?>">
           <span class="help-block"></font></span>
         </div>
       </div>
       <div class="form-group">
         <label class="col-lg-2 control-label">Price</label>
         <div class="col-lg-10">
-          <input disabled="" type="text" class="form-control" value="<?php echo $model[0]->price?>">
+          <input disabled="" type="text" class="form-control" value="<?php if (is_numeric($model[0]->price)) { ?> ₱ <?php echo number_format($model[0]->price, 2); } else { echo "---"; } ?>">
           <span class="help-block"></font></span>
         </div>
       </div>
@@ -45,13 +44,13 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <div class="modal-footer">
       <?php if (($query[0]['username'])==('Administrator')) {?>
       <?php $id = $model[0]->model_id;?>
-      <a href="<?php echo base_url();?>index.php/model/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/model/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditModel">Edit model</a>
+      <a style="float: left;" href="<?php echo base_url();?>index.php/model/delete/<?php echo $id;?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Model?')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/model/edit/<?php echo $id;?>" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalEditModel">Edit model</a>
       <a href="<?php echo base_url();?>index.php/model/" type="button" class="btn btn-default">Back</a>
       <?php } elseif (($query[0]['username'])==('Axel Eion')) {?>
       <?php $id = $model[0]->model_id;?>
-      <a href="<?php echo base_url();?>index.php/model/delete/<?php echo $id;?>" type="button" class="btn btn-default" onclick="return confirm('are you sure to delete')">Delete</a>
-      <a href="<?php echo base_url();?>index.php/model/edit/<?php echo $id;?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalEditModel">Edit model</a>
+      <a style="float: left;" href="<?php echo base_url();?>index.php/model/delete/<?php echo $id;?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure to Delete this Model?')">Delete</a>
+      <a href="<?php echo base_url();?>index.php/model/edit/<?php echo $id;?>" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModalEditModel">Edit model</a>
       <a href="<?php echo base_url();?>index.php/model/" type="button" class="btn btn-default">Back</a>
       <?php } else {?>
       <a href="<?php echo base_url();?>index.php/model/" type="button" class="btn btn-default">Back</a>

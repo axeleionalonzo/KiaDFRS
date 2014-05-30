@@ -33,8 +33,8 @@
 
     </fieldset>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-primary">Save Changes</button>
       <a href="<?php echo base_url();?>index.php/report/viewConsultant" type="button" class="btn btn-default">Back</a>
+      <button type="submit" class="btn btn-success">Save Changes</button>
     </div>
 </form>
 </div>

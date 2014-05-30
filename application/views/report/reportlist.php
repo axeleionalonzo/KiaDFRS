@@ -134,14 +134,6 @@ $username=$query[0]['username'];
           <p>Looks like something went wrong with your <font color=\"red\">Updated Details</font>. Please try again and provide the Required Information.</p>
           </div></center>"; ?>
         <?php }?>
-        <?php if (form_error('monthly_rate') || form_error('monthly_installment') || form_error('down_payment') || form_error('amount_financed') || form_error('unit_price') || form_error('model') || form_error('contactno') || form_error('address') || form_error('quotation_date')) { ?>
-          <?php echo "
-          <center><div class=\"alert alert-dismissable alert-warning\">
-          <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-          <h4>Oops..</h4>
-          <p>Looks like something went wrong with your <font color=\"red\">Quotation Details</font>. Please try again and provide the Required Information.</p>
-          </div></center>"; ?>
-        <?php }?>
         <?php if (form_error('name')) { ?>
           <?php echo "
           <center><div class=\"alert alert-dismissable alert-warning\">

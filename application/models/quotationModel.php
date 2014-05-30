@@ -54,6 +54,7 @@ class QuotationModel extends CI_Model {
         $this->lto_registration = $_POST['lto_registration'];
         $this->chattel_mortgage_fee = $_POST['chattel_mortgage_fee'];
         $this->other_services = $_POST['other_services'];
+        $this->discount = $_POST['discount'];
         $this->total_cash_outlay = $_POST['total_cash_outlay'];
         $this->monthly_installment = $_POST['monthly_installment'];
         $this->monthly_rate = $_POST['monthly_rate'];

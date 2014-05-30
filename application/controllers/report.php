@@ -52,10 +52,6 @@ class Report extends CI_Controller {
     {
         $this->load->view('home');
     }
-    public function upload() 
-    {
-        $this->load->view('consultant/upload');
-    }
     public function rank($username) 
     {
         $this->is_logged_in();
@@ -72,7 +68,6 @@ class Report extends CI_Controller {
         $terms=$this->ReportModel->getTerm();
         $consultants=$this->ReportModel->getConsultant();
         $all_status=$this->ReportModel->getStatus();
-
 
         $this->load->view('report/reportedit',array('all_status'=>$all_status, 'consultants'=>$consultants, 'models'=>$models,'terms'=>$terms,'report'=>$report));
     }
@@ -125,11 +120,15 @@ class Report extends CI_Controller {
 
         $trimed = str_replace("%20"," ",$username);
         $recordsbyconsultatnt=$this->ReportModel->getrecordby($trimed);
+        $productivity=$this->ReportModel->getallrecords();
+        $consultants=$this->ReportModel->getConsultant();
 
         $data['username'] = $trimed;
         $data['query'] = $this->ReportModel->getConsultantData($trimed);
         $data['recordsbyconsultatnt']=$recordsbyconsultatnt;
-        $this->load->view('consultant/consultantview', $data);
+        $data['productivity']=$productivity;
+        $data['consultants']=$consultants;
+        $this->load->view('consultant/consultantview', $data);        
     }
     public function viewQuotation($quotation_id)
     {
@@ -184,11 +183,6 @@ class Report extends CI_Controller {
         } else {
             $this->QuotationModel->insert_entry();
             $this->ReportModel->insert_entry();
-            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
-              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-              <h4>Congratulations!</h4>
-              <p>You just successfully created a report! You can view the full report by clicking the Client's Name!</p>
-            </div></center></div>";
             $this->index();
         }
         
@@ -200,9 +194,13 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
 
         $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
+        $productivity=$this->ReportModel->getallrecords();
+        $consultants=$this->ReportModel->getConsultant();
 
         $data['query'] = $this->ReportModel->getConsultantData($username);
         $data['recordsbyconsultatnt']=$recordsbyconsultatnt;
+        $data['productivity']=$productivity;
+        $data['consultants']=$consultants;
         $this->load->view('consultant/consultantview', $data);
     }
     public function update()
@@ -210,6 +208,7 @@ class Report extends CI_Controller {
         $this->is_logged_in();
         $this->load->model('ReportModel');
         $this->load->model('QuotationModel');
+        $report_id = $_POST['report_id'];
 
         $this->form_validation->set_rules('sales_consultant', 'Sales Consultant', 'trim|required|xss_clean');
         $this->form_validation->set_rules('report_date', 'Report Date', 'trim|required');
@@ -220,23 +219,20 @@ class Report extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             
-            $this->index();
+            $this->view($report_id);
         } else {
             $this->ReportModel->update_entry();
             $this->QuotationModel->update_entry_from_report();
-            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
-              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-              <h4>Congratulations!</h4>
-              <p>You just successfully updated a report!</p>
-            </div></center></div>";
-            $this->index();
+            $this->view($report_id);
         }               
     }
     public function updateQuotation()
     {
         $this->is_logged_in();
-        $this->load->model('ReportModel');
         $this->load->model('QuotationModel');
+        $quotation_id = $_POST['quotation_id'];
+
+        $quotation=$this->QuotationModel->get($quotation_id);
 
         $this->form_validation->set_rules('unit_price', 'Unit Price', 'trim|required');
         $this->form_validation->set_rules('amount_financed', 'Amount Financed', 'trim|required');
@@ -246,15 +242,10 @@ class Report extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             
-            $this->index();
+            $this->viewQuotation($quotation_id);
         } else {
             $this->QuotationModel->update_entry();
-            echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
-              <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
-              <h4>Congratulations!</h4>
-              <p>You just successfully updated a Quotation!</p>
-            </div></center></div>";
-            $this->index();
+            $this->viewQuotation($quotation_id);
         }               
     }
     public function updateConsultant()
@@ -355,7 +346,7 @@ class Report extends CI_Controller {
     public function request() 
     {
         $this->load->model('ConsultantModel');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant_request.username]|xss_clean');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]|is_unique[consultant_request.username]|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
 
@@ -372,7 +363,7 @@ class Report extends CI_Controller {
             echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
               <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
               <h4>Congratulations!</h4>
-              <p>You just successfully Request an account! Please wait or contact the System Administrator to approve your Request!</p>
+              <p>You just successfully Requested an account! Please wait or contact the System Administrator to approve your Request!</p>
             </div></center></div>";
         $this->load->view('home');
 
@@ -383,7 +374,7 @@ class Report extends CI_Controller {
         $this->is_logged_in();
         $this->load->model('ReportModel');
         $this->load->model('ConsultantModel');
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[20]|is_unique[consultant.username]|xss_clean');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[6]|max_length[70]|is_unique[consultant.username]|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
 
@@ -403,7 +394,7 @@ class Report extends CI_Controller {
             echo "<div class=\"container\"><center><div class=\"alert alert-dismissable alert-success\"></div><div class=\"alert alert-dismissable alert-success\">
               <button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>
               <h4>Congratulations!</h4>
-              <p>You just successfully accepted the request! You can now inform the Consultant that his/her account is ready to use!</p>
+              <p>You just successfully accepted the request! You can now inform the Consultant that the Account is ready to use!</p>
             </div></center></div>";
         $this->index();
         }
