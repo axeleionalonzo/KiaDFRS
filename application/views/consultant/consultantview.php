@@ -69,19 +69,30 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         for($j=0; $j<count($consultants);$j++){
             for ($i=0;$i<count($productivity);$i++) { 
               if (($productivity[$i]->sales_consultant)==($consultants[$j]->username)) {
-                echo $productivity[$i]->sales_consultant . "<br>";
-                  $top=$consultants[$j]->username;
+                  echo getRank($consultants[$j]->username);
+                  $temp++;
                   if ($top==$consultants[$j]->username) {
                     $temp++;
                   }
               }
             }
         }
+
+        function getRank($username)
+        {
+          $count=0;
+          $candidates = array('' => '');
+          if (in_array($username,$candidates)) {
+            
+          } else {
+            $candidate = array($username => $count++);
+            $candidates[][] = $candidate;
+          }
+          return $count;
+        }
         //temp is the number of reports made by all consultants
         //temp should be the number of reports made by the top consultant only
-        echo $temp;
         $rank = (count($recordsbyconsultatnt) / $temp ) * 100;
-        echo $rank;
       ?>
       <div class="form-group">
         <label class="col-lg-2 control-label">Productivity</label>
