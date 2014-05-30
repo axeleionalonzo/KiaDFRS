@@ -62,22 +62,31 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         </div>
       </div>
       <?php
-        for($i=0; $i<count($consultants);$i++){
-          $consultants[$i]->username=0;
 
+        $temp=0;
+        $top="";
+
+        for($j=0; $j<count($consultants);$j++){
+            for ($i=0;$i<count($productivity);$i++) { 
+              if (($productivity[$i]->sales_consultant)==($consultants[$j]->username)) {
+                echo $productivity[$i]->sales_consultant . "<br>";
+                  $top=$consultants[$j]->username;
+                  if ($top==$consultants[$j]->username) {
+                    $temp++;
+                  }
+              }
+            }
         }
-        for ($i=0;$i<count($productivity);$i++) { 
-          if (($productivity[$i]->sales_consultant)==($query[0]['username'])) {
-            $top++;
-          }
-        }
-        echo $top;
+
+        echo $temp;
+        $rank = (count($recordsbyconsultatnt) / $temp ) * 100;
+        echo $rank;
       ?>
       <div class="form-group">
         <label class="col-lg-2 control-label">Productivity</label>
         <div class="col-lg-10">
           <div class="progress progress-striped active">
-          <div class="progress-bar progress-bar-info" style="width: <?php echo count($recordsbyconsultatnt); ?>%"></div>
+          <div class="progress-bar progress-bar-info" style="width: <?php echo $rank; ?>%"></div>
           </div>
         </div>
       </div>
