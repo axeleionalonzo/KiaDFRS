@@ -45,26 +45,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 
     <div id="div1">
 
-        <div class="row clearfix">
-          <div class="col-md-12 column">
-            <h3 class="text-center">
-              KIA MOTORS ILIGAN<br>
-            </h3>
-            <center>
-              GREENCARS MINDANAO CORPORATION<br>
-                Tibanga Highway, Iligan City<br>
-                Telefax No. (063) 221 - 0574
-            </center>
-          </div>
-        </div>
-
-        <div class="row clearfix">
-          <div class="col-md-12 column">
-            <h4 class="text-center">
-              <center>QUOTATION</center>
-            </h4>
-          </div>
-        </div>
+        <img src="<?php echo base_url();?>img/Header.PNG" >
 
         <table class="table table-bordered">
             <tbody>
