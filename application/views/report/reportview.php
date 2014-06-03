@@ -59,7 +59,9 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                   </div>
                   <div class="col-md-3 column">Date:
                   </div>
-                  <div class="col-md-3 column"><?php echo $report[0]->report_date;?>
+                  <?php $date = date_create_from_format('Y-m-d', $report[0]->report_date);
+                  ?>
+                  <div class="col-md-3 column"><?php echo $date->format('F d, Y');?>
                   </div>
                 </div>
 

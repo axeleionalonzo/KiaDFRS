@@ -166,7 +166,6 @@ $username=$query[0]['username'];
       <!-- Navbar
       ================================================== -->
 
-
       <div class="container">
 
         <!-- Tables
@@ -224,7 +223,9 @@ $username=$query[0]['username'];
                               } ?>
 
                                 <td><?php echo $no; ?></td>
-                                <td><?php echo $reports[$i]->report_date;?></td>
+                                <?php $date = date_create_from_format('Y-m-d', $reports[$i]->report_date);
+                                ?>
+                                <td><?php echo $date->format('F d, Y');?></td>
                                 <td><div class="bs-component"><a href="<?php echo base_url();?>index.php/report/view/<?php echo $reports[$i]->report_id;?>" data-toggle="tooltip" data-placement="top" data-original-title="Consultant: <?php echo $reports[$i]->sales_consultant;?>"><?php echo $reports[$i]->client;?></a></div></td>
                                 <td><?php echo $reports[$i]->address;?></td>
                                 <td><?php echo $reports[$i]->contactno;?></td>

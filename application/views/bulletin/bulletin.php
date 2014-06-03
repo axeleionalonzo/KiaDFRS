@@ -16,8 +16,8 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       <div class="form-group">
         <label for="description" class="col-lg-2 control-label">Bulletin</label>
         <div class="col-lg-10">
-          <textarea name="description" class="form-control" rows="3" id="textArea"><?php echo $bulletin[0]->description;?></textarea>
-          <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+          <textarea name="description" class="form-control" rows="4" id="textArea"><?php echo $bulletin[0]->description;?></textarea>
+          <span class="help-block">Drag lower right corner of the text area to resize.</span>
           <span class="help-block"><font color="red"><?php echo form_error('description');?></font></span>
         </div>
       </div>

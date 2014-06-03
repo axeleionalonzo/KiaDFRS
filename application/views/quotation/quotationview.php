@@ -10,10 +10,9 @@ $is_logged_in = $this->session->userdata('is_logged_in');
     <title>Quotation</title>
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <link href="<?php echo base_url();?>css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-      <link href="<?php echo base_url();?>css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     <script>
-        printDivCSS = new String ('<link href="<?php echo base_url();?>css/print.css" media="print" rel="stylesheet" type="text/css" />')
+        printDivCSS = new String ('<link href="<?php echo base_url();?>css/print.css" media="all" rel="stylesheet" type="text/css" />')
         function printDiv(divId) {
             window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
             window.frames["print_frame"].window.focus();
@@ -55,13 +54,15 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                 <table style="width:100%">
                     <tr>
                       <td>Customer:</td>
-                      <td><?php echo $quotation[0]->client;?></td>        
+                      <td><?php echo $quotation[0]->client;?></td>
                       <td>Date: </td>
-                      <td><?php echo $quotation[0]->quotation_date;?></td>
+                      <?php $date = date_create_from_format('Y-m-d', $quotation[0]->quotation_date);
+                      ?>
+                      <td><?php echo $date->format('F d, Y');?></td>
                     </tr>
                     <tr>
                       <td>Address:</td>
-                      <td><?php echo $quotation[0]->address;?></td>      
+                      <td><?php echo $quotation[0]->address;?></td>
                       <td>Contact&nbspNo:</td>
                       <td><?php echo $quotation[0]->contactno;?></td>
                     </tr>
@@ -125,12 +126,15 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       </td>
                     </tr>
                     <tr>
-                      <td>Freight&nbspand&nbspHandling:</td>
+                      <td>Other Charges:</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp&nbspFreight&nbspand&nbspHandling:</td>
                       <td><?php echo $quotation[0]->freight_and_handling;?>
                       </td>
                     </tr>
                     <tr>
-                      <td>Comprehensive,&nbspInsurance:</td>
+                      <td>&nbsp&nbspComprehensive,&nbspInsurance:</td>
                       <td>
                           <?php
                           if (is_numeric($quotation[0]->comprehensive_insurance)) { ?>
@@ -142,7 +146,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       </td>
                     </tr>
                     <tr>
-                      <td>LTO&nbspRegistration:</td>
+                      <td>&nbsp&nbspLTO&nbspRegistration:</td>
                       <td>
                           <?php
                           if (is_numeric($quotation[0]->lto_registration)) { ?>
@@ -154,7 +158,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       </td>
                     </tr>
                     <tr>
-                      <td>Chattel&nbspMotgage&nbspFee:</td>
+                      <td>&nbsp&nbspChattel&nbspMotgage&nbspFee:</td>
                       <td>
                           <?php
                           if (is_numeric($quotation[0]->chattel_mortgage_fee)) { ?>
@@ -170,6 +174,10 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       <td><?php echo $quotation[0]->other_services;?></td>
                     </tr>
                     <tr>
+                      <td><br></td>
+                      <td><br></td>
+                    </tr>
+                    <tr>
                       <td>Discount</td>
                       <td>
                           <?php
@@ -180,10 +188,6 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                           }
                           ?>
                       </td>
-                    </tr>
-                    <tr>
-                      <td><br></td>
-                      <td><br></td>
                     </tr>
                     
 
@@ -245,9 +249,9 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                     <tbody>
                         <td>Prepared by: <?php echo $report[0]->sales_consultant;?>
                         </td>
-                        <td>Approved by: 
+                        <td>Approved by: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         </td>
-                        <td>Conformed: 
+                        <td>Conformed: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         </td>
                     </tbody>
                 </table>

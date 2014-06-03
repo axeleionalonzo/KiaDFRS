@@ -36,7 +36,7 @@ freight_and_handling varchar(50),
 comprehensive_insurance varchar(50),
 lto_registration varchar(50),
 chattel_mortgage_fee varchar(50),
-other_services varchar(50),
+other_services varchar(250),
 discount varchar(50),
 total_cash_outlay varchar(50),
 monthly_installment varchar(50),
@@ -148,4 +148,4 @@ INSERT INTO consultant (username, password)
 VALUES ('Axel Eion', md5('123'));
 
 INSERT INTO bulletin (description)
-VALUES ('---');
+VALUES ('No post to show.');
