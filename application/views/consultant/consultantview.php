@@ -55,7 +55,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
       </div>
       <?php } ?>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Reports Made</label>
+        <label class="col-lg-2 control-label">Reports</label>
         <div class="col-lg-10">
           <input disabled="" type="text" class="form-control" value="<?php echo count($recordsbyconsultatnt); ?>">
           <span class="help-block"></font></span>
@@ -69,7 +69,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         for($j=0; $j<count($consultants);$j++){
             for ($i=0;$i<count($productivity);$i++) { 
               if (($productivity[$i]->sales_consultant)==($consultants[$j]->username)) {
-                  echo getRank($consultants[$j]->username);
+                  getRank($consultants[$j]->username);
                   $temp++;
                   if ($top==$consultants[$j]->username) {
                     $temp++;
@@ -95,7 +95,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         $rank = (count($recordsbyconsultatnt) / $temp ) * 100;
       ?>
       <div class="form-group">
-        <label class="col-lg-2 control-label">Productivity</label>
+        <label class="col-lg-2 control-label">Contribution</label>
         <div class="col-lg-10">
           <div class="progress progress-striped active">
           <div class="progress-bar progress-bar-info" style="width: <?php echo $rank; ?>%"></div>

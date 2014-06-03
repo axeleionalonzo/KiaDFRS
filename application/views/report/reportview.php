@@ -28,77 +28,107 @@ $is_logged_in = $this->session->userdata('is_logged_in');
 <?php echo form_open('report/update');?>
     <input type="hidden" name="report_id" value="<?php echo $report[0]->report_id?>">
     <fieldset>
-        <legend>
-        </legend>
-        <div class="well well-sm">
-            <?php if (($report[0]->sales_consultant)=='Administrator') { ?>
-          <p><center><Strong>Superuser: Administrator</Strong></center></p>
-            <?php } elseif (($report[0]->sales_consultant)=='Axel Eion') { ?>
-          <p><center><Strong>Superuser: Administrator</Strong></center></p>
-            <?php } else { ?>
-          <p><center>Sales Consultant: <b><big><?php echo $report[0]->sales_consultant;?></big></b></center></p>
-            <?php } ?>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Date</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->report_date;?>">
-            <span class="help-block"></font></span>
+        
+        <div class="row clearfix">
+          <div class="col-md-12 column">
+            <h3 class="text-center">
+              <center>KIA MOTORS ILIGAN<br></center>
+            </h3>
+              <center>GREENCARS MINDANAO CORPORATION<br>
+                Tibanga Highway, Iligan City<br>
+                Telefax No. (063) 221 - 0574</center>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Client</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->client;?>">
-            <span class="help-block"></font></span>
+
+        <div class="row clearfix">
+          <div class="col-md-12 column">
+            <h4 class="text-center">
+              <center>REPORT</center>
+            </h4>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Address</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->address;?>">
-            <span class="help-block"></font></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Contact #</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->contactno;?>">
-            <span class="help-block"></font></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Model</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->model_name;?>">
-            <span class="help-block"></font></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Term</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->term;?>">
-            <span class="help-block"></font></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Remarks</label>
-          <div class="col-lg-10">
-            <input disabled="" type="text" class="form-control" value="<?php echo $report[0]->remarks;?>">
-            <span class="help-block"></font></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-2 control-label">Status</label>
-          <div class="col-lg-10">
-            <?php if (($report[0]->status)=='Car Released') { ?>
-            <big><font color="CornflowerBlue"><b><input disabled="" type="text" class="form-control" value="<?php echo $report[0]->status;?>"></b></font></big>
-            <?php } else { ?>
-            <font color="red"><b><input disabled="" type="text" class="form-control" value="<?php echo $report[0]->status;?>"></b></font>
-            <?php }?>
-            <span class="help-block"></font></span>
-          </div>
-        </div>
+
+        <table class="table table-bordered">
+            <tbody>
+            <td>
+
+                <div class="row clearfix">
+                  <div class="col-md-3 column">Customer:
+                  </div>
+                  <div class="col-md-3 column"><?php echo $report[0]->client;?>
+                  </div>
+                  <div class="col-md-3 column">Date:
+                  </div>
+                  <div class="col-md-3 column"><?php echo $report[0]->report_date;?>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-3 column">Address:
+                  </div>
+                  <div class="col-md-3 column"><?php echo $report[0]->address;?>
+                  </div>
+                  <div class="col-md-3 column">Contact&nbspNo:
+                  </div>
+                  <div class="col-md-3 column"><?php echo $report[0]->contactno;?>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row clearfix">
+                  <div class="col-md-6 column">Model:
+                  </div>
+                  <div class="col-md-6 column"><?php echo $report[0]->model_name;?>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row clearfix">
+                  <div class="col-md-6 column">Term:
+                  </div>
+                  <div class="col-md-6 column"><?php echo $report[0]->term;?>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-6 column">Remarks:
+                  </div>
+                  <div class="col-md-6 column"><?php echo $report[0]->remarks;?>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-6 column">Status:
+                  </div>
+                  <div class="col-md-6 column">
+                    <?php if (($report[0]->status)=='Car Released') { ?>
+                          <big><font color="CornflowerBlue"><b><?php echo $report[0]->status;?></b></font></big>
+                          <?php } else { ?>
+                          <font color="red"><b><?php echo $report[0]->status;?></b></font>
+                          <?php }?>
+                  </div>
+                </div>
+
+                <br><br>
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <td>
+
+                          <div class="row clearfix">
+                            <div class="col-md-12 column"><center>Prepared by: <?php echo $report[0]->sales_consultant;?></center>
+                            </div>
+                          </div>
+
+                        </td>
+                    </tbody>
+                </table>
+
+            </td>
+            </tbody>
+        </table>
 
     </fieldset>
 

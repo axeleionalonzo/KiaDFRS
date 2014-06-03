@@ -44,9 +44,10 @@ $is_logged_in = $this->session->userdata('is_logged_in');
      <?php }?>
 
     <div id="div1">
-
+      <div>
         <img src="<?php echo base_url();?>img/Header.PNG" >
-
+        <br><br>
+      </div>
         <table class="table table-bordered">
             <tbody>
             <td>
@@ -64,7 +65,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       <td>Contact&nbspNo:</td>
                       <td><?php echo $quotation[0]->contactno;?></td>
                     </tr>
-                </table>                
+                </table>
 
                 <?php
                     for ($i=0; $i<count($models);$i++) { 

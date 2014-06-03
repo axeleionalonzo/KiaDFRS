@@ -5,11 +5,12 @@ class Model extends CI_Controller {
     {
         $this->is_logged_in();
         $this->load->model('ModelModel');
+        $this->load->model('BulletinModel');
         $this->load->model('ReportModel');
         $this->load->model('ConsultantModel');
         $this->load->library('pagination');
 
-        $config['base_url'] = 'http://192.168.1.33/KiaDFRS/index.php/report/index';
+        $config['base_url'] = 'http://greencar-99c5fe/KiaDFRS/index.php/report/index';
         $config['total_rows'] = $this->ReportModel->recordsCount();
         $config['full_tag_open'] = '<ul class="pagination pagination-sm">';
         $config['full_tag_close'] = '</ul>';
@@ -31,10 +32,12 @@ class Model extends CI_Controller {
         $consultant_requests=$this->ConsultantModel->getConsultantRequestData();
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
         $recordsbyconsultatnt=$this->ReportModel->getrecordby($username);
+        $bulletin=$this->BulletinModel->getbulletin();
 
 
         $data['control']='Model';
         $data['data']=$data;
+        $data['bulletin']=$bulletin;
         $data['reports']=$reports;
         $data['models']=$models;
         $data['terms']=$terms;
@@ -103,7 +106,7 @@ class Model extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="http://192.168.1.33/KiaDFRS/index.php/report/home"></br><font color="red">Back</font></a>';
+            echo 'You don\'t have permission to access this page. <a href="report/home"></br><font color="red">Back</font></a>';
             die();
         }
     }

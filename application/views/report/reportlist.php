@@ -96,6 +96,11 @@ $username=$query[0]['username'];
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><?php echo $query[0]['username']; ?> <span class="caret"></span></a>
                 <ul class="dropdown-menu" aria-labelledby="download">
                   <li><a href="<?php echo base_url();?>index.php/report/viewConsultant">Manage Profile</a></li>
+                  <?php if ($username=='Administrator') { ;?>
+                    <li><a href="<?php echo base_url();?>index.php/report/addbulletin" data-toggle="modal" data-target="#myModalAddBulletin">Post Bulletin</a></li>
+                  <?php } elseif ($username=='Axel Eion') { ?>
+                    <li><a href="<?php echo base_url();?>index.php/report/addbulletin" data-toggle="modal" data-target="#myModalAddBulletin">Post Bulletin</a></li>
+                  <?php } ?>
                   <li class="divider"></li>
                   <li><a href="<?php echo base_url();?>index.php/report/logout">Log out</a></li>
                 </ul>
@@ -112,8 +117,8 @@ $username=$query[0]['username'];
         <center>
         <div class="well">
 
-        <h4>NOTICE!</h4>
-          <p>Kia OPMS is currently on <strong>Alpha Test</strong>. While browsing, you make experience several flashing and corruption of data, this is because the site is currently under construction. Alpha Version is intended for external testing of OPMS in order to identify bugs and configurations that causes problems, as well as collect feedbacks and suggestions from the users. Feel free to EXPLORE, REPORT, and SUGGEST.</p>
+        <h4>The Bulletin</h4>
+          <p><?php echo $bulletin[0]->description;?></p>
 
         </div>
         </center>
@@ -176,13 +181,8 @@ $username=$query[0]['username'];
                 <?php $id = $models[$i]->model_id; ?>
                 <li><a href="<?php echo base_url();?>index.php/model/view/<?php echo $id?>"><small><?php echo $models[$i]->name;?></small></a></li>
               <?php }?>
-              <?php if ($username=='Administrator') { ;?>
                 <li class="divider"></li>
                 <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
-              <?php } elseif ($username=='Axel Eion') { ?>
-                <li class="divider"></li>
-                <li><a href="<?php echo base_url();?>index.php/model/add" data-toggle="modal" data-target="#myModalAddModel"><i><b>Add New Car Model</b></i></a></li>
-              <?php } ?>
             </ul>
           </li>
         </ul>
@@ -422,6 +422,15 @@ $username=$query[0]['username'];
 
         <!-- Modal Add Model -->
         <div class="modal fade" id="myModalAddModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Add Model -->
+        <div class="modal fade" id="myModalAddBulletin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
 

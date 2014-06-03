@@ -143,6 +143,7 @@ class ReportModel extends CI_Model {
 
         $this->db->update('report', $this, array('report_id' => $_POST['report_id']));
     }
+
     function delete_entry($report_id)
     {
         $this->db->delete('report', array('report_id' => $report_id));

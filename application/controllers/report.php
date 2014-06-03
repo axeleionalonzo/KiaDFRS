@@ -5,10 +5,11 @@ class Report extends CI_Controller {
     {
         $this->is_logged_in();
         $this->load->model('ReportModel');
+        $this->load->model('BulletinModel');
         $this->load->model('ConsultantModel');
         $this->load->library('pagination');
 
-        $config['base_url'] = 'http://192.168.1.33/KiaDFRS/index.php/report/index';
+        $config['base_url'] = 'http://greencar-99c5fe/KiaDFRS/index.php/report/index';
         $config['total_rows'] = $this->ReportModel->recordsCount();
         $config['full_tag_open'] = '<ul class="pagination pagination-sm">';
         $config['full_tag_close'] = '</ul>';
@@ -32,6 +33,7 @@ class Report extends CI_Controller {
         $consultants=$this->ReportModel->getConsultant();
         $consultant_requests=$this->ConsultantModel->getConsultantRequestData();
         $all_status=$this->ReportModel->getStatus();
+        $bulletin=$this->BulletinModel->getbulletin();
 
         $username = $this->session->userdata('username');
         $data['query'] = $this->ConsultantModel->getConsultantData($username);
@@ -39,6 +41,7 @@ class Report extends CI_Controller {
 
         $data['control']='Report';
         $data['data']=$data;
+        $data['bulletin']=$bulletin;
         $data['reports']=$reports;
         $data['terms']=$terms;
         $data['models']=$models;
@@ -58,6 +61,32 @@ class Report extends CI_Controller {
         $this->load->model('ReportModel');
 
         return $ranks=$this->ReportModel->getrecordby($username);
+    }
+    public function addbulletin()
+    {   
+        $this->is_logged_in();
+        $this->load->model('BulletinModel');
+
+        $bulletin=$this->BulletinModel->getbulletin();
+
+        $data['bulletin']=$bulletin;
+        $this->load->view('bulletin/bulletin', $data);
+    }
+    public function updatebulletin()
+    {   
+        $this->is_logged_in();
+        $this->load->model('BulletinModel');
+
+        $this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
+
+        if ($this->form_validation->run() == FALSE) {
+            
+            $this->index();
+        } else {
+
+            $this->BulletinModel->update_bulletin();
+            $this->index(); 
+        }  
     }
     public function edit($report_id)
     {   
@@ -319,7 +348,7 @@ class Report extends CI_Controller {
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo 'You don\'t have permission to access this page. <a href="http://192.168.1.33/KiaDFRS/index.php/report/home"></br><font color="red">Sign in</font></a>';
+            echo 'You don\'t have permission to access this page. <a href="report/home"></br><font color="red">Sign in</font></a>';
             die();
         }
     }

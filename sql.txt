@@ -6,6 +6,13 @@ price varchar(50),
 primary key(model_id)
 );
 
+create table bulletin(
+bulletin_id serial,
+description varchar(500),
+
+primary key(bulletin_id)
+);
+
 create table monthly_installment(
 monthly_installment_id serial,
 month varchar(50),
@@ -139,3 +146,6 @@ VALUES ('Administrator', md5('123'));
 
 INSERT INTO consultant (username, password)
 VALUES ('Axel Eion', md5('123'));
+
+INSERT INTO bulletin (description)
+VALUES ('---');
