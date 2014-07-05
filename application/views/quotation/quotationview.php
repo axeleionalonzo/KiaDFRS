@@ -203,7 +203,12 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       </div>
                       <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
                       </div>
-                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column"><?php echo $quotation[0]->freight_and_handling;?>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php if ($quotation[0]->freight_and_handling==NULL) {
+                            echo "&nbsp";
+                          } else {
+                            echo $quotation[0]->freight_and_handling;
+                          } ?>
                       </div>
                       <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
                       </div>
@@ -295,7 +300,7 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                       </div>
                       <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-5 column">
                         <?php if ($quotation[0]->other_services==NULL) {
-                            echo "---";
+                            echo "&nbsp";
                           } else {
                             echo $quotation[0]->other_services;
                           } ?>
