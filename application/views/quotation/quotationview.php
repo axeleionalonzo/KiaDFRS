@@ -50,23 +50,41 @@ $is_logged_in = $this->session->userdata('is_logged_in');
         <table class="table table-bordered">
             <tbody>
             <td>
-
-                <table style="width:100%">
-                    <tr>
-                      <td>Customer:</td>
-                      <td><?php echo $quotation[0]->client;?></td>
-                      <td>Date: </td>
-                      <?php $date = date_create_from_format('Y-m-d', $quotation[0]->quotation_date);
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-1 column">Customer:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column"><?php echo $quotation[0]->client;?>
+                      </div>
+                      <div class="col-xs-2 column">
+                      </div><?php $date = date_create_from_format('Y-m-d', $quotation[0]->quotation_date);
                       ?>
-                      <td><?php echo $date->format('F d, Y');?></td>
-                    </tr>
-                    <tr>
-                      <td>Address:</td>
-                      <td><?php echo $quotation[0]->address;?></td>
-                      <td>Contact&nbspNo:</td>
-                      <td><?php echo $quotation[0]->contactno;?></td>
-                    </tr>
-                </table>
+                      <div class="col-xs-1 column">Date: 
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column"><?php echo $date->format('F d, Y');?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-1 column">Address:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column"><?php echo $quotation[0]->address;?>
+                      </div>
+                      <div class="col-xs-2 column">
+                      </div><?php $date = date_create_from_format('Y-m-d', $quotation[0]->quotation_date);
+                      ?>
+                      <div class="col-xs-1 column">Contact&nbspNo:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column"><?php echo $quotation[0]->contactno;?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <?php
                     for ($i=0; $i<count($models);$i++) { 
@@ -76,22 +94,35 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                     }
                 ?>
 
-                <table style="width:100%">
-                    <tr>
-                      <td><br></td>
-                      <td><br></td>
-                    </tr>
-                    <tr>
-                      <td>Model:</td>
-                      <td><?php echo $quotation[0]->model;?></td>
-                    </tr>
-                    <tr>
-                      <td><br></td>
-                      <td><br></td>
-                    </tr>
-                    <tr>
-                      <td>Unit&nbspPrice:</td>
-                      <td>
+                <br>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Model:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column"><?php echo $quotation[0]->model;?>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Unit&nbspPrice:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
                         <?php
                           if (is_numeric($price)) { ?>
                           ₱ <?php echo number_format($price, 2);
@@ -99,11 +130,23 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Amount&nbspFinanced:</td>
-                      <td>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Amount&nbspFinanced:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
                         <?php
                           if (is_numeric($quotation[0]->amount_financed)) { ?>
                           ₱ <?php echo number_format($quotation[0]->amount_financed, 2);
@@ -111,11 +154,23 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Down&nbspPayment:</td>
-                      <td>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Down&nbspPayment:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
                         <?php
                           if (is_numeric($quotation[0]->down_payment)) { ?>
                           ₱ <?php echo number_format($quotation[0]->down_payment, 2);
@@ -123,90 +178,194 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Other Charges:</td>
-                    </tr>
-                    <tr>
-                      <td>&nbsp&nbspFreight&nbspand&nbspHandling:</td>
-                      <td><?php echo $quotation[0]->freight_and_handling;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>&nbsp&nbspComprehensive,&nbspInsurance:</td>
-                      <td>
-                          <?php
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-12 column">Other Charges:
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">&nbsp&nbspFreight&nbspand&nbspHandling:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column"><?php echo $quotation[0]->freight_and_handling;?>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">&nbsp&nbspComprehensive,&nbspInsurance:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php
                           if (is_numeric($quotation[0]->comprehensive_insurance)) { ?>
                           ₱ <?php echo number_format($quotation[0]->comprehensive_insurance, 2);
                           } else {
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>&nbsp&nbspLTO&nbspRegistration:</td>
-                      <td>
-                          <?php
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">&nbsp&nbspLTO&nbspRegistration:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php
                           if (is_numeric($quotation[0]->lto_registration)) { ?>
                           ₱ <?php echo number_format($quotation[0]->lto_registration, 2);
                           } else {
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>&nbsp&nbspChattel&nbspMotgage&nbspFee:</td>
-                      <td>
-                          <?php
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">&nbsp&nbspChattel&nbspMotgage&nbspFee:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php
                           if (is_numeric($quotation[0]->chattel_mortgage_fee)) { ?>
                           ₱ <?php echo number_format($quotation[0]->chattel_mortgage_fee, 2);
                           } else {
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Other&nbspServices:</td>
-                      <td><?php echo $quotation[0]->other_services;?></td>
-                    </tr>
-                    <tr>
-                      <td><br></td>
-                      <td><br></td>
-                    </tr>
-                    <tr>
-                      <td>Discount</td>
-                      <td>
-                          <?php
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Other&nbspServices:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-2 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-5 column">
+                        <?php if ($quotation[0]->other_services==NULL) {
+                            echo "---";
+                          } else {
+                            echo $quotation[0]->other_services;
+                          } ?>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Discount:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php
                           if (is_numeric($quotation[0]->discount)) { ?>
                           ₱ <?php echo number_format($quotation[0]->discount, 2);
                           } else {
                            echo "---";
                           }
                           ?>
-                      </td>
-                    </tr>
-                    
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                    <?php
-                    $total = ($quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee) - $quotation[0]->discount;
-                    ?>
-                    
-                    <tr>
-                      <td>Total&nbspCash&nbspOutlay:</td>
-                      <td>₱ <?php echo number_format($total, 2);?></td>
-                    </tr>
-                    <tr>
-                      <td><br></td>
-                      <td><br></td>
-                    </tr>
-                    <tr>
-                      <td>Bank&nbspRate:</td>
-                      <td>
-                      <?php
+                <?php
+                  $total = ($quotation[0]->down_payment + $quotation[0]->freight_and_handling + $quotation[0]->comprehensive_insurance + $quotation[0]->lto_registration + $quotation[0]->chattel_mortgage_fee) - $quotation[0]->discount;
+                  ?>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Total&nbspCash&nbspOutlay:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">₱ <?php echo number_format($total, 2);?>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Bank&nbspRate:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php
                           if (is_numeric($quotation[0]->monthly_rate)) { ?>
                           <?php echo number_format($quotation[0]->monthly_rate, 4);
                             if ($quotation[0]->amount_financed >0) {
@@ -218,12 +377,24 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                            echo "---";
                           }
                       ?>  
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Monthly&nbspInstallment:</td>
-                      <td>
-                      <?php
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-md-12 column">
+                    <div class="row clearfix">
+                      <div class="col-xs-2 column">Monthly&nbspInstallment:
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-3 column">&nbsp
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-4 column">
+                        <?php
                           if ($quotation[0]->amount_financed >0) {
                             $installment = ($quotation[0]->amount_financed * $quotation[0]->monthly_rate) / $quotation[0]->monthly_installment;
                           } else {
@@ -238,9 +409,14 @@ $is_logged_in = $this->session->userdata('is_logged_in');
                             echo "";
                           }
                         ?><?php echo $quotation[0]->monthly_installment;?>
-                        </td>
-                    </tr>
-                </table>
+                      </div>
+                      <div style="border-bottom: 1px solid #E0E0E0;" class="col-xs-1 column">&nbsp
+                      </div>
+                      <div class="col-xs-4 column">
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <br>
 
